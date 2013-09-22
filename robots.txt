@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://paykin.github.io//blog/sitemap.xml 
+Sitemap: http://test.paykin.info/sitemap.xml 

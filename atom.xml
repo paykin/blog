@@ -2,12 +2,12 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Programming Notes]]></title>
-  <link href="http://paykin.github.io//blog/atom.xml" rel="self"/>
-  <link href="http://paykin.github.io//blog/"/>
-  <updated>2013-09-22T21:33:34+03:00</updated>
-  <id>http://paykin.github.io//blog/</id>
+  <link href="http://test.paykin.info/atom.xml" rel="self"/>
+  <link href="http://test.paykin.info/"/>
+  <updated>2013-09-22T21:39:56+03:00</updated>
+  <id>http://test.paykin.info/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Dmitry]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
