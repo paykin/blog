@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[My Octopress Blog]]></title>
+  <link href="http://paykin.github.io//github/atom.xml" rel="self"/>
+  <link href="http://paykin.github.io//github/"/>
+  <updated>2013-09-22T20:48:53+03:00</updated>
+  <id>http://paykin.github.io//github/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+</feed>
