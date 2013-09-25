@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Programming Notes]]></title>
-  <link href="http://test.paykin.info/atom.xml" rel="self"/>
+  <title><![CDATA[Category: cat1 | Programming Notes]]></title>
+  <link href="http://test.paykin.info/blog/categories/cat1/atom.xml" rel="self"/>
   <link href="http://test.paykin.info/"/>
   <updated>2013-09-25T09:54:57+03:00</updated>
   <id>http://test.paykin.info/</id>
