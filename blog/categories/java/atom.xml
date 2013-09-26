@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Java | Programming Notes]]></title>
+  <link href="http://test.paykin.info/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://test.paykin.info/"/>
+  <updated>2013-09-26T18:00:46+03:00</updated>
+  <id>http://test.paykin.info/</id>
+  <author>
+    <name><![CDATA[Dmitry]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Forcing JBoss 7 to apply changes to JSP's immediately]]></title>
+    <link href="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/"/>
+    <updated>2011-10-27T00:00:00+02:00</updated>
+    <id>http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp</id>
+    <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:
+``` xml</p>
+
+<pre><code>&lt;configuration&gt;
+    &lt;jsp-configuration development="true"/&gt;
+&lt;/configuration&gt;
+...
+</code></pre>
+
+<p>```
+And now JBoss behaves as you expect it in development mode: all changes to JSP files are loaded automatically as soon as you change the JSP file.</p>
+]]></content>
+  </entry>
+  
+</feed>

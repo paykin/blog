@@ -115,6 +115,55 @@ drwxr-xr-x 14 root root 4096 Aug 15  2009 stage
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/10/27/jboss-7-changes-jsp/">Forcing JBoss 7 to Apply Changes to JSP&#8217;s Immediately</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-27T00:00:00+02:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;jsp-configuration</span> <span class="na">development=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And now JBoss behaves as you expect it in development mode: all changes to JSP files are loaded automatically as soon as you change the JSP file.</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
@@ -129,6 +178,10 @@ drwxr-xr-x 14 root root 4096 Aug 15  2009 stage
     
       <li class="post">
         <a href="/blog/2013/09/25/new-post/">New Post</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/10/27/jboss-7-changes-jsp/">Forcing JBoss 7 to Apply Changes to JSP&#8217;s Immediately</a>
       </li>
     
   </ul>
