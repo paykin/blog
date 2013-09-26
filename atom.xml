@@ -2,12 +2,12 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Programming Notes]]></title>
-  <link href="http://test.paykin.info/atom.xml" rel="self"/>
-  <link href="http://test.paykin.info/"/>
-  <updated>2013-09-26T19:51:20+03:00</updated>
-  <id>http://test.paykin.info/</id>
+  <link href="http://java.paykin.info/atom.xml" rel="self"/>
+  <link href="http://java.paykin.info/"/>
+  <updated>2013-09-26T19:54:30+03:00</updated>
+  <id>http://java.paykin.info/</id>
   <author>
-    <name><![CDATA[Dmitry]]></name>
+    <name><![CDATA[Dmitry Paykin]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[New Post]]></title>
-    <link href="http://test.paykin.info/new-post/"/>
+    <link href="http://java.paykin.info/new-post/"/>
     <updated>2013-09-25T09:51:00+03:00</updated>
-    <id>http://test.paykin.info/new-post</id>
+    <id>http://java.paykin.info/new-post</id>
     <content type="html"><![CDATA[<p>Title!</p>
 
 <p>bo<em>ody</em></p>
@@ -35,9 +35,9 @@ drwxr-xr-x 14 root root 4096 Aug 15  2009 stage
   
   <entry>
     <title type="html"><![CDATA[Liferay portlets deployment in IntelliJ IDEA]]></title>
-    <link href="http://test.paykin.info/liferay-portlet-intellij-idea/"/>
+    <link href="http://java.paykin.info/liferay-portlet-intellij-idea/"/>
     <updated>2013-04-29T00:00:00+03:00</updated>
-    <id>http://test.paykin.info/liferay-portlet-intellij-idea</id>
+    <id>http://java.paykin.info/liferay-portlet-intellij-idea</id>
     <content type="html"><![CDATA[<p>You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:
 &lt;ol&gt;</p>
 
@@ -75,9 +75,9 @@ Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
   
   <entry>
     <title type="html"><![CDATA[Integrating HornetQ with Camel and Spring]]></title>
-    <link href="http://test.paykin.info/hornetq-camel-spring/"/>
+    <link href="http://java.paykin.info/hornetq-camel-spring/"/>
     <updated>2012-12-13T00:00:00+02:00</updated>
-    <id>http://test.paykin.info/hornetq-camel-spring</id>
+    <id>http://java.paykin.info/hornetq-camel-spring</id>
     <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
 In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:</p>
 
@@ -215,9 +215,9 @@ In order to work with HornetQ with Camel and Spring first you have to add Hornet
   
   <entry>
     <title type="html"><![CDATA[Spell checking with suggestions with Hibernate Search 4 and Lucene 3.6]]></title>
-    <link href="http://test.paykin.info/spell-check-suggestions-hibernate-search-lucene/"/>
+    <link href="http://java.paykin.info/spell-check-suggestions-hibernate-search-lucene/"/>
     <updated>2012-04-26T00:00:00+03:00</updated>
-    <id>http://test.paykin.info/spell-check-suggestions-hibernate-search-lucene</id>
+    <id>http://java.paykin.info/spell-check-suggestions-hibernate-search-lucene</id>
     <content type="html"><![CDATA[<p>In latest releases of Hibernate Search 4 and Lucene 3.6 there was some changes in SpellChecker API&rsquo;s.
 Here is example of the new API that allows to use spell checking with suggested words:</p>
 
@@ -271,9 +271,9 @@ The example creates new index directory dedicated to spell checking. It adds ter
   
   <entry>
     <title type="html"><![CDATA[Portlets with Wicket 1.5.x in Liferay portal]]></title>
-    <link href="http://test.paykin.info/wicket_liferay_portlets/"/>
+    <link href="http://java.paykin.info/wicket_liferay_portlets/"/>
     <updated>2012-04-10T00:00:00+03:00</updated>
-    <id>http://test.paykin.info/wicket_liferay_portlets</id>
+    <id>http://java.paykin.info/wicket_liferay_portlets</id>
     <content type="html"><![CDATA[<p>After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed:</p>
 
 <p>portlet.xml should look like</p>
@@ -393,9 +393,9 @@ web.xml also changed, notice filter class:</p>
   
   <entry>
     <title type="html"><![CDATA[Create datasource programmatically on JBoss 7]]></title>
-    <link href="http://test.paykin.info/add-datasource-programaticaly-cli-jboss-7/"/>
+    <link href="http://java.paykin.info/add-datasource-programaticaly-cli-jboss-7/"/>
     <updated>2011-11-24T00:00:00+02:00</updated>
-    <id>http://test.paykin.info/add-datasource-programaticaly-cli-jboss-7</id>
+    <id>http://java.paykin.info/add-datasource-programaticaly-cli-jboss-7</id>
     <content type="html"><![CDATA[<p>In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -502,9 +502,9 @@ web.xml also changed, notice filter class:</p>
   
   <entry>
     <title type="html"><![CDATA[Cleaning eclipse with -clean argument]]></title>
-    <link href="http://test.paykin.info/cleaning-eclipse-with-clean-argument/"/>
+    <link href="http://java.paykin.info/cleaning-eclipse-with-clean-argument/"/>
     <updated>2011-11-13T00:00:00+02:00</updated>
-    <id>http://test.paykin.info/cleaning-eclipse-with-clean-argument</id>
+    <id>http://java.paykin.info/cleaning-eclipse-with-clean-argument</id>
     <content type="html"><![CDATA[<p>For those of you who work a lot with Eclipse,
 you probably run into all sorts of strange errors in Eclipse that
 not really related to your code, and then you get the feeling that Eclipse has gone mad.</p>
@@ -517,9 +517,9 @@ After you upload the eclipse you can delete it until the next time you will need
   
   <entry>
     <title type="html"><![CDATA[Forcing JBoss 7 to apply changes to JSP's immediately]]></title>
-    <link href="http://test.paykin.info/jboss-7-changes-jsp/"/>
+    <link href="http://java.paykin.info/jboss-7-changes-jsp/"/>
     <updated>2011-10-27T00:00:00+02:00</updated>
-    <id>http://test.paykin.info/jboss-7-changes-jsp</id>
+    <id>http://java.paykin.info/jboss-7-changes-jsp</id>
     <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -539,9 +539,9 @@ After you upload the eclipse you can delete it until the next time you will need
   
   <entry>
     <title type="html"><![CDATA[Android browser recognizes CSS media type after page reloading]]></title>
-    <link href="http://test.paykin.info/android-css-media-reloading/"/>
+    <link href="http://java.paykin.info/android-css-media-reloading/"/>
     <updated>2011-10-20T00:00:00+02:00</updated>
-    <id>http://test.paykin.info/android-css-media-reloading</id>
+    <id>http://java.paykin.info/android-css-media-reloading</id>
     <content type="html"><![CDATA[<p>While trying to optimize site for mobile devices you have to add viewport meta tag:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -594,9 +594,9 @@ I solved it using JavaScript:</p>
   
   <entry>
     <title type="html"><![CDATA[Enums in JSF]]></title>
-    <link href="http://test.paykin.info/enums-in-jsf/"/>
+    <link href="http://java.paykin.info/enums-in-jsf/"/>
     <updated>2011-09-25T00:00:00+03:00</updated>
-    <id>http://test.paykin.info/enums-in-jsf</id>
+    <id>http://java.paykin.info/enums-in-jsf</id>
     <content type="html"><![CDATA[<p>Finally I find the way to use enum with JSF:
 Suppose you have enum:</p>
 
@@ -630,9 +630,9 @@ It works because each enum in have method &lt;code&gt;valueOf(String stringValue
   
   <entry>
     <title type="html"><![CDATA[Deploying JDBC driver in JBoss Maven plugin]]></title>
-    <link href="http://test.paykin.info/deploying-jdbc-jboss-maven-plugin/"/>
+    <link href="http://java.paykin.info/deploying-jdbc-jboss-maven-plugin/"/>
     <updated>2011-09-25T00:00:00+03:00</updated>
-    <id>http://test.paykin.info/deploying-jdbc-jboss-maven-plugin</id>
+    <id>http://java.paykin.info/deploying-jdbc-jboss-maven-plugin</id>
     <content type="html"><![CDATA[<p>With release of jboss-as maven plugin version 7.0.1.Final the new goal deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.
 After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the &lt;code&gt;NullPointerException&lt;/code&gt; in Maven build.
 Here is part of maven pom.xml used to deploy the driver to jboss:</p>

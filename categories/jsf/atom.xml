@@ -2,12 +2,12 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: JSF | Programming Notes]]></title>
-  <link href="http://test.paykin.info/categories/jsf/atom.xml" rel="self"/>
-  <link href="http://test.paykin.info/"/>
-  <updated>2013-09-26T19:51:20+03:00</updated>
-  <id>http://test.paykin.info/</id>
+  <link href="http://java.paykin.info/categories/jsf/atom.xml" rel="self"/>
+  <link href="http://java.paykin.info/"/>
+  <updated>2013-09-26T19:54:30+03:00</updated>
+  <id>http://java.paykin.info/</id>
   <author>
-    <name><![CDATA[Dmitry]]></name>
+    <name><![CDATA[Dmitry Paykin]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Forcing JBoss 7 to apply changes to JSP's immediately]]></title>
-    <link href="http://test.paykin.info/jboss-7-changes-jsp/"/>
+    <link href="http://java.paykin.info/jboss-7-changes-jsp/"/>
     <updated>2011-10-27T00:00:00+02:00</updated>
-    <id>http://test.paykin.info/jboss-7-changes-jsp</id>
+    <id>http://java.paykin.info/jboss-7-changes-jsp</id>
     <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:
 ``` xml</p>
 
@@ -34,9 +34,9 @@ And now JBoss behaves as you expect it in development mode: all changes to JSP f
   
   <entry>
     <title type="html"><![CDATA[Enums in JSF]]></title>
-    <link href="http://test.paykin.info/enums-in-jsf/"/>
+    <link href="http://java.paykin.info/enums-in-jsf/"/>
     <updated>2011-09-25T00:00:00+03:00</updated>
-    <id>http://test.paykin.info/enums-in-jsf</id>
+    <id>http://java.paykin.info/enums-in-jsf</id>
     <content type="html"><![CDATA[<p>Finally I find the way to use enum with JSF:
 Suppose you have enum:
 ``` java
