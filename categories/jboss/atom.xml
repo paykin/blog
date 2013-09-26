@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JBoss | Programming Notes]]></title>
   <link href="http://java.paykin.info/categories/jboss/atom.xml" rel="self"/>
   <link href="http://java.paykin.info/"/>
-  <updated>2013-09-26T19:54:30+03:00</updated>
+  <updated>2013-09-26T20:26:16+03:00</updated>
   <id>http://java.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry Paykin]]></name>
@@ -21,63 +21,66 @@
     <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
 In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
 ``` xml
-&lt;dependency&gt;</p>
+<dependency></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.hornetq&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;hornetq-jms&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;${hornetq.version}&amp;lt;/version&amp;gt;
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-jms&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
 </code></pre>
 
-<p>&lt;/dependency&gt;
-&lt;dependency&gt;</p>
+<p></dependency>
+<dependency></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.hornetq&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;hornetq-jms-client&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;${hornetq.version}&amp;lt;/version&amp;gt;
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-jms-client&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
 </code></pre>
 
-<p>&lt;/dependency&gt;
-&lt;dependency&gt;</p>
+<p></dependency>
+<dependency></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.hornetq&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;hornetq-core-client&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;${hornetq.version}&amp;lt;/version&amp;gt;
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-core-client&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
 </code></pre>
 
-<p>&lt;/dependency&gt;
-&lt;dependency&gt;</p>
+<p></dependency>
+<dependency></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.jboss.netty&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;netty&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;3.2.7.Final&amp;lt;/version&amp;gt;
+<pre><code>&lt;groupId&gt;org.jboss.netty&lt;/groupId&gt;
+&lt;artifactId&gt;netty&lt;/artifactId&gt;
+&lt;version&gt;3.2.7.Final&lt;/version&gt;
 </code></pre>
 
-<p>&lt;/dependency&gt;
-<code>
-After that modify your spring.xml. Here is an example:
-&amp;lt;!--more--&amp;gt;
-</code> xml
-&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?&gt;
+<p></dependency>
+```
+After that modify your spring.xml. Here is an example:</p>
+
+<!--more-->
+
+
+<p>``` xml
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
 &lt;beans xmlns=&ldquo;<a href="http://www.springframework.org/schema/beans">http://www.springframework.org/schema/beans</a>&rdquo;</p>
 
 <pre><code>   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"&amp;gt;
-&amp;lt;bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" /&amp;gt;
-&amp;lt;bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/&amp;gt;
-&amp;lt;bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory"&amp;gt;
-    &amp;lt;constructor-arg name="serverLocator" ref="hornetqServerLocator"/&amp;gt;
-&amp;lt;/bean&amp;gt;
-&amp;lt;bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration"&amp;gt;
-    &amp;lt;property name="connectionFactory" ref="hornetqJmsConnectionFactory"/&amp;gt;
-    &amp;lt;property name="transacted" value="false"/&amp;gt;
-    &amp;lt;property name="requestTimeout" value="60000"/&amp;gt;
-&amp;lt;/bean&amp;gt;
-&amp;lt;bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent"&amp;gt;
-    &amp;lt;property name="configuration" ref="hornetqJmsConfig"/&amp;gt;
-&amp;lt;/bean&amp;gt;
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"&gt;
+&lt;bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" /&gt;
+&lt;bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/&gt;
+&lt;bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory"&gt;
+    &lt;constructor-arg name="serverLocator" ref="hornetqServerLocator"/&gt;
+&lt;/bean&gt;
+&lt;bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration"&gt;
+    &lt;property name="connectionFactory" ref="hornetqJmsConnectionFactory"/&gt;
+    &lt;property name="transacted" value="false"/&gt;
+    &lt;property name="requestTimeout" value="60000"/&gt;
+&lt;/bean&gt;
+&lt;bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent"&gt;
+    &lt;property name="configuration" ref="hornetqJmsConfig"/&gt;
+&lt;/bean&gt;
 </code></pre>
 
-<p>&lt;/beans&gt;
+<p></beans>
 <code>
 And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
 </code> java</p>
@@ -93,7 +96,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 @Configurable
 public class HornetqServerLocatorFactory {
     public ServerLocator createServerLocator() {
-        final Map&amp;lt;String, Object&amp;gt; connectionParams = new HashMap&amp;lt;String, Object&amp;gt;();
+        final Map&lt;String, Object&gt; connectionParams = new HashMap&lt;String, Object&gt;();
         connectionParams.put( "port", "hornetq-host.com" );
         connectionParams.put( "host", 5900 );
         final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
@@ -115,18 +118,21 @@ That&rsquo;s it</p>
     <id>http://java.paykin.info/add-datasource-programaticaly-cli-jboss-7</id>
     <content type="html"><![CDATA[<p>In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:
 ``` xml
-&lt;dependency&gt;</p>
+<dependency></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.jboss.as&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;jboss-as-controller-client&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;7.0.2.Final&amp;lt;/version&amp;gt;
+<pre><code>&lt;groupId&gt;org.jboss.as&lt;/groupId&gt;
+&lt;artifactId&gt;jboss-as-controller-client&lt;/artifactId&gt;
+&lt;version&gt;7.0.2.Final&lt;/version&gt;
 </code></pre>
 
-<p>&lt;/dependency&gt;
-<code>
-The following example creates new datasource:
-&amp;lt;!--more--&amp;gt;
-</code> java</p>
+<p></dependency>
+```
+The following example creates new datasource:</p>
+
+<!--more-->
+
+
+<p>``` java</p>
 
 <pre><code>public void createDatasource() throws Exception{
     ModelNode request = new ModelNode();
@@ -186,9 +192,9 @@ The examples have the same effect as trying to add datasource from Jboss Adminis
     <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:
 ``` xml</p>
 
-<pre><code>&amp;lt;configuration&amp;gt;
-    &amp;lt;jsp-configuration development="true"/&amp;gt;
-&amp;lt;/configuration&amp;gt;
+<pre><code>&lt;configuration&gt;
+    &lt;jsp-configuration development="true"/&gt;
+&lt;/configuration&gt;
 ...
 </code></pre>
 
@@ -203,41 +209,47 @@ And now JBoss behaves as you expect it in development mode: all changes to JSP f
     <updated>2011-09-25T00:00:00+03:00</updated>
     <id>http://java.paykin.info/deploying-jdbc-jboss-maven-plugin</id>
     <content type="html"><![CDATA[<p>With release of jboss-as maven plugin version 7.0.1.Final the new goal deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.
-After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the &lt;code&gt;NullPointerException&lt;/code&gt; in Maven build.
+After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the <code>NullPointerException</code> in Maven build.
 Here is part of maven pom.xml used to deploy the driver to jboss:
 ``` xml           <br/>
-&lt;plugin&gt;</p>
+<plugin></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.jboss.as.plugins&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;jboss-as-maven-plugin&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;7.0.1.Final&amp;lt;/version&amp;gt;
-&amp;lt;executions&amp;gt;
-    &amp;lt;execution&amp;gt;
-        &amp;lt;id&amp;gt;deploy-driver-AS400&amp;lt;/id&amp;gt;
-        &amp;lt;phase&amp;gt;package&amp;lt;/phase&amp;gt;
-        &amp;lt;goals&amp;gt;
-            &amp;lt;goal&amp;gt;deploy-artifact&amp;lt;/goal&amp;gt;
-        &amp;lt;/goals&amp;gt;
-        &amp;lt;configuration&amp;gt;
-            &amp;lt;hostname&amp;gt;${jboss-hostname}&amp;lt;/hostname&amp;gt;
-            &amp;lt;groupId&amp;gt;com.ibm&amp;lt;/groupId&amp;gt;
-            &amp;lt;artifactId&amp;gt;as400&amp;lt;/artifactId&amp;gt;
-            &amp;lt;fileName&amp;gt;jt400.jar&amp;lt;/fileName&amp;gt;
-            &amp;lt;name&amp;gt;jt400.jar&amp;lt;/name&amp;gt;
-        &amp;lt;/configuration&amp;gt;
-    &amp;lt;/execution&amp;gt;
-&amp;lt;/executions&amp;gt;
+<pre><code>&lt;groupId&gt;org.jboss.as.plugins&lt;/groupId&gt;
+&lt;artifactId&gt;jboss-as-maven-plugin&lt;/artifactId&gt;
+&lt;version&gt;7.0.1.Final&lt;/version&gt;
+&lt;executions&gt;
+    &lt;execution&gt;
+        &lt;id&gt;deploy-driver-AS400&lt;/id&gt;
+        &lt;phase&gt;package&lt;/phase&gt;
+        &lt;goals&gt;
+            &lt;goal&gt;deploy-artifact&lt;/goal&gt;
+        &lt;/goals&gt;
+        &lt;configuration&gt;
+            &lt;hostname&gt;${jboss-hostname}&lt;/hostname&gt;
+            &lt;groupId&gt;com.ibm&lt;/groupId&gt;
+            &lt;artifactId&gt;as400&lt;/artifactId&gt;
+            &lt;fileName&gt;jt400.jar&lt;/fileName&gt;
+            &lt;name&gt;jt400.jar&lt;/name&gt;
+        &lt;/configuration&gt;
+    &lt;/execution&gt;
+&lt;/executions&gt;
 </code></pre>
 
-<p>&lt;/plugin&gt;
-<code>                
-In the plugin's manual at &amp;lt;a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html"&amp;gt;http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html&amp;lt;/a&amp;gt; it said
-&amp;lt;blockquote&amp;gt;The artifact must be already listed as a dependency in the projects pom.xml&amp;lt;/blockquote&amp;gt;
-but it do not tells in which scope the driver's JAR have to be: it have to be in &amp;lt;strong&amp;gt;compile&amp;lt;/strong&amp;gt; or &amp;lt;strong&amp;gt;runtime&amp;lt;/strong&amp;gt; scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.
-&amp;lt;!--more--&amp;gt;
-Here is full stacktrace of the error I received:
-</code>
-[ERROR] Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed. NullPointerException &ndash;&gt; [Help 1]
+<p></plugin>
+```               <br/>
+In the plugin&rsquo;s manual at <a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html"><a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a></a> it said</p>
+
+<blockquote>The artifact must be already listed as a dependency in the projects pom.xml</blockquote>
+
+
+<p>but it do not tells in which scope the driver&rsquo;s JAR have to be: it have to be in <strong>compile</strong> or <strong>runtime</strong> scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.</p>
+
+<!--more-->
+
+
+<p>Here is full stacktrace of the error I received:
+<code>
+[ERROR] Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed. NullPointerException -&gt; [Help 1]
 org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed.
 at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:225)
 at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
@@ -262,12 +274,12 @@ at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
 Caused by: org.apache.maven.plugin.PluginExecutionException: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed.
 at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:116)
 at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:209)
-&hellip; 19 more
+... 19 more
 Caused by: java.lang.NullPointerException
 at org.jboss.as.plugin.deployment.AbstractDeployment.execute(AbstractDeployment.java:191)
 at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
-&hellip; 20 more
-```</p>
+... 20 more
+</code></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | Programming Notes]]></title>
   <link href="http://java.paykin.info/categories/java/atom.xml" rel="self"/>
   <link href="http://java.paykin.info/"/>
-  <updated>2013-09-26T19:54:30+03:00</updated>
+  <updated>2013-09-26T20:26:16+03:00</updated>
   <id>http://java.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry Paykin]]></name>
@@ -18,31 +18,28 @@
     <link href="http://java.paykin.info/liferay-portlet-intellij-idea/"/>
     <updated>2013-04-29T00:00:00+03:00</updated>
     <id>http://java.paykin.info/liferay-portlet-intellij-idea</id>
-    <content type="html"><![CDATA[<p>You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:
-&lt;ol&gt;</p>
+    <content type="html"><![CDATA[<p>You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:</p>
 
-<pre><code>&amp;lt;li&amp;gt;&amp;lt;span style="line-height: 14px;"&amp;gt;Create debug configuration in IntelliJ IDEA using Local Tomcat&amp;lt;/span&amp;gt;&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;Configure deployment artifact: add your WAR as "yourwar:war exploded"&amp;lt;/li&amp;gt;
-&amp;lt;li&amp;gt;Create XML file with name "yourwar.xml" with the following content:
-</code></pre>
+<ol>
+    <li><span style="line-height: 14px;">Create debug configuration in IntelliJ IDEA using Local Tomcat</span></li>
+    <li>Configure deployment artifact: add your WAR as "yourwar:war exploded"</li>
+    <li>Create XML file with name "yourwar.xml" with the following content:
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Context 
+  docBase="/absolute/path/to/project/yourwar" 
+  reloadable="false" 
+  path="/yourwar"/>
+```
 
-<p><code>xml
-&amp;lt;?xml version="1.0" encoding="UTF-8"?&amp;gt;
-&amp;lt;Context
-  docBase="/absolute/path/to/project/yourwar"
-  reloadable="false"
-  path="/yourwar"/&amp;gt;
-</code></p>
+Please note, docBase have to be the same as "Output directory" setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as "Application context" in Run/Debug configuration</li>
+    <li>Create post deployment action that will copy just created XML to Liferay's autodeploy folder.</li>
+</ol>
 
-<p>Please note, docBase have to be the same as &ldquo;Output directory&rdquo; setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as &ldquo;Application context&rdquo; in Run/Debug configuration&lt;/li&gt;</p>
 
-<pre><code>&amp;lt;li&amp;gt;Create post deployment action that will copy just created XML to Liferay's autodeploy folder.&amp;lt;/li&amp;gt;
-</code></pre>
+<p>Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
 
-<p>&lt;/ol&gt;
-Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
-
-<p>For additional instructions that you have to follow consider &lt;a href=&ldquo;<a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ">http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ</a>&rdquo; title=&ldquo;Liferay official wiki&rdquo; target=&ldquo;_blank&rdquo;&gt;Liferay official wiki&lt;/a&gt;.</p>
+<p>For additional instructions that you have to follow consider <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a>.</p>
 
 <p>Please note, I tested it with IntelliJ IDEA 12.1 and Liferay 6.0.5 on Tomcat 6</p>
 ]]></content>
@@ -56,63 +53,66 @@ Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
     <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
 In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
 ``` xml
-&lt;dependency&gt;</p>
+<dependency></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.hornetq&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;hornetq-jms&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;${hornetq.version}&amp;lt;/version&amp;gt;
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-jms&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
 </code></pre>
 
-<p>&lt;/dependency&gt;
-&lt;dependency&gt;</p>
+<p></dependency>
+<dependency></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.hornetq&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;hornetq-jms-client&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;${hornetq.version}&amp;lt;/version&amp;gt;
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-jms-client&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
 </code></pre>
 
-<p>&lt;/dependency&gt;
-&lt;dependency&gt;</p>
+<p></dependency>
+<dependency></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.hornetq&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;hornetq-core-client&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;${hornetq.version}&amp;lt;/version&amp;gt;
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-core-client&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
 </code></pre>
 
-<p>&lt;/dependency&gt;
-&lt;dependency&gt;</p>
+<p></dependency>
+<dependency></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.jboss.netty&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;netty&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;3.2.7.Final&amp;lt;/version&amp;gt;
+<pre><code>&lt;groupId&gt;org.jboss.netty&lt;/groupId&gt;
+&lt;artifactId&gt;netty&lt;/artifactId&gt;
+&lt;version&gt;3.2.7.Final&lt;/version&gt;
 </code></pre>
 
-<p>&lt;/dependency&gt;
-<code>
-After that modify your spring.xml. Here is an example:
-&amp;lt;!--more--&amp;gt;
-</code> xml
-&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?&gt;
+<p></dependency>
+```
+After that modify your spring.xml. Here is an example:</p>
+
+<!--more-->
+
+
+<p>``` xml
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
 &lt;beans xmlns=&ldquo;<a href="http://www.springframework.org/schema/beans">http://www.springframework.org/schema/beans</a>&rdquo;</p>
 
 <pre><code>   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"&amp;gt;
-&amp;lt;bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" /&amp;gt;
-&amp;lt;bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/&amp;gt;
-&amp;lt;bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory"&amp;gt;
-    &amp;lt;constructor-arg name="serverLocator" ref="hornetqServerLocator"/&amp;gt;
-&amp;lt;/bean&amp;gt;
-&amp;lt;bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration"&amp;gt;
-    &amp;lt;property name="connectionFactory" ref="hornetqJmsConnectionFactory"/&amp;gt;
-    &amp;lt;property name="transacted" value="false"/&amp;gt;
-    &amp;lt;property name="requestTimeout" value="60000"/&amp;gt;
-&amp;lt;/bean&amp;gt;
-&amp;lt;bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent"&amp;gt;
-    &amp;lt;property name="configuration" ref="hornetqJmsConfig"/&amp;gt;
-&amp;lt;/bean&amp;gt;
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"&gt;
+&lt;bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" /&gt;
+&lt;bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/&gt;
+&lt;bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory"&gt;
+    &lt;constructor-arg name="serverLocator" ref="hornetqServerLocator"/&gt;
+&lt;/bean&gt;
+&lt;bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration"&gt;
+    &lt;property name="connectionFactory" ref="hornetqJmsConnectionFactory"/&gt;
+    &lt;property name="transacted" value="false"/&gt;
+    &lt;property name="requestTimeout" value="60000"/&gt;
+&lt;/bean&gt;
+&lt;bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent"&gt;
+    &lt;property name="configuration" ref="hornetqJmsConfig"/&gt;
+&lt;/bean&gt;
 </code></pre>
 
-<p>&lt;/beans&gt;
+<p></beans>
 <code>
 And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
 </code> java</p>
@@ -128,7 +128,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 @Configurable
 public class HornetqServerLocatorFactory {
     public ServerLocator createServerLocator() {
-        final Map&amp;lt;String, Object&amp;gt; connectionParams = new HashMap&amp;lt;String, Object&amp;gt;();
+        final Map&lt;String, Object&gt; connectionParams = new HashMap&lt;String, Object&gt;();
         connectionParams.put( "port", "hornetq-host.com" );
         connectionParams.put( "host", 5900 );
         final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
@@ -175,8 +175,8 @@ return suggestions;
 
 <p>}
 ```
-&lt;code&gt;sf.getCurrentSession()&lt;/code&gt; gets standard Hibernate session. If you use &lt;code&gt;EntityManager&lt;/code&gt;, there exists a method to obtain &lt;code&gt;FullTextSession&lt;/code&gt;.
-The example creates new index directory dedicated to spell checking. It adds terms from MyEntity&rsquo;s &lt;code&gt;description&lt;/code&gt; field to the index. &lt;code&gt;spellChecker.indexDictionary&lt;/code&gt; adds the terms to the index, and optionally merges it with existing index.</p>
+<code>sf.getCurrentSession()</code> gets standard Hibernate session. If you use <code>EntityManager</code>, there exists a method to obtain <code>FullTextSession</code>.
+The example creates new index directory dedicated to spell checking. It adds terms from MyEntity&rsquo;s <code>description</code> field to the index. <code>spellChecker.indexDictionary</code> adds the terms to the index, and optionally merges it with existing index.</p>
 ]]></content>
   </entry>
   
@@ -187,18 +187,21 @@ The example creates new index directory dedicated to spell checking. It adds ter
     <id>http://java.paykin.info/add-datasource-programaticaly-cli-jboss-7</id>
     <content type="html"><![CDATA[<p>In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:
 ``` xml
-&lt;dependency&gt;</p>
+<dependency></p>
 
-<pre><code>&amp;lt;groupId&amp;gt;org.jboss.as&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;jboss-as-controller-client&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;7.0.2.Final&amp;lt;/version&amp;gt;
+<pre><code>&lt;groupId&gt;org.jboss.as&lt;/groupId&gt;
+&lt;artifactId&gt;jboss-as-controller-client&lt;/artifactId&gt;
+&lt;version&gt;7.0.2.Final&lt;/version&gt;
 </code></pre>
 
-<p>&lt;/dependency&gt;
-<code>
-The following example creates new datasource:
-&amp;lt;!--more--&amp;gt;
-</code> java</p>
+<p></dependency>
+```
+The following example creates new datasource:</p>
+
+<!--more-->
+
+
+<p>``` java</p>
 
 <pre><code>public void createDatasource() throws Exception{
     ModelNode request = new ModelNode();
@@ -260,7 +263,7 @@ you probably run into all sorts of strange errors in Eclipse that
 not really related to your code, and then you get the feeling that Eclipse has gone mad.</p>
 
 <p>One way to solve these problems and clean the Eclipse is using -clean argument.
-all you need to do is to edit the eclipse.ini file located in your &lt;Eclipse install directory&gt; and add it as the first argument on the first line.
+all you need to do is to edit the eclipse.ini file located in your <Eclipse install directory> and add it as the first argument on the first line.
 After you upload the eclipse you can delete it until the next time you will need it.</p>
 ]]></content>
   </entry>

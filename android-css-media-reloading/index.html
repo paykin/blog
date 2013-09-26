@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="While trying to optimize site for mobile devices you have to add viewport meta tag: 1
-&amp;lt;meta name=&quot;viewport&quot; content=&quot;target- &hellip;">
+&lt;meta name=&quot;viewport&quot; content=&quot;target- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,15 +97,17 @@
 <div class="entry-content"><p>While trying to optimize site for mobile devices you have to add viewport meta tag:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>meta name=&quot;viewport&quot; content=&quot;target-densitydpi=device-dpi, width=device-width, height=device-height, initial-scale=1.0&quot; /<span class="ni">&amp;gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;target-densitydpi=device-dpi, width=device-width, height=device-height, initial-scale=1.0&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>You can add additional CSS file that will be used on mobile device only. To achieve this just add CSS media type. In Android developer&rsquo;s guide at &lt;a href=&ldquo;<a href="http://developer.android.com/guide/webapps/targeting.html">http://developer.android.com/guide/webapps/targeting.html</a>&rdquo;&gt;<a href="http://developer.android.com/guide/webapps/targeting.html&amp;lt;/a&amp;gt;">http://developer.android.com/guide/webapps/targeting.html&amp;lt;/a&amp;gt;</a> it suggests to target device DPI value like:
-&lt;!&mdash;more&mdash;&gt;</p>
+<p>You can add additional CSS file that will be used on mobile device only. To achieve this just add CSS media type. In Android developer&rsquo;s guide at <a href="http://developer.android.com/guide/webapps/targeting.html"><a href="http://developer.android.com/guide/webapps/targeting.html">http://developer.android.com/guide/webapps/targeting.html</a></a> it suggests to target device DPI value like:</p>
+
+<!--more-->
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>link rel=&quot;stylesheet&quot; href=&quot;css/mobile.css&quot; type=&quot;text/css&quot; media=&quot;screen and (-webkit-device-pixel-ratio:1.0)&quot; /<span class="ni">&amp;gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/mobile.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen and (-webkit-device-pixel-ratio:1.0)&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -114,11 +116,11 @@
 <p>There is another solution to target mobile devices (both Android, iPhone, Blackberry): to specify maximal width of the screen like:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>link rel=&quot;stylesheet&quot; href=&quot;css/mobile.css&quot; type=&quot;text/css&quot; media=&quot;screen and (max-device-width:801px) and (max-width:801px)&quot; /<span class="ni">&amp;gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/mobile.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen and (max-device-width:801px) and (max-width:801px)&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The problem is that Android (at least 2.3 I&rsquo;ve tested) recognizes this media type only after page reloading (refreshing) in browser. Googling the web I found the open &lt;a title=&ldquo;issue&rdquo; href=&ldquo;<a href="http://code.google.com/p/android/issues/detail?id=11961">http://code.google.com/p/android/issues/detail?id=11961</a>&rdquo; target=&ldquo;_blank&rdquo;&gt;issue&lt;/a&gt;.
+<p>The problem is that Android (at least 2.3 I&rsquo;ve tested) recognizes this media type only after page reloading (refreshing) in browser. Googling the web I found the open <a title="issue" href="http://code.google.com/p/android/issues/detail?id=11961" target="_blank">issue</a>.
 I solved it using JavaScript:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -140,7 +142,7 @@ I solved it using JavaScript:</p>
 
 <p>I tested it on my device an it works fine, unless some little delay: the CSS file loads only after JavaScript executes. When google will fix the issue (I hope so&hellip;), there will be no delay, since original link is in the HEAD section.</p>
 
-<p>Of course you have to detect mobile device using the JavaScript, I used solution suggested here: &lt;a href=&ldquo;<a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob">http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob</a>&rdquo;&gt;<a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob&amp;lt;/a&amp;gt;">http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob&amp;lt;/a&amp;gt;</a></p>
+<p>Of course you have to detect mobile device using the JavaScript, I used solution suggested here: <a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob"><a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob">http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob</a></a></p>
 </div>
 
 
@@ -177,9 +179,13 @@ I solved it using JavaScript:</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://java.paykin.info/android-css-media-reloading/" data-via="" data-counturl="http://java.paykin.info/android-css-media-reloading/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://java.paykin.info/android-css-media-reloading/" data-via="paykin" data-counturl="http://java.paykin.info/android-css-media-reloading/" >Tweet</a>
   
   
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
   
 </div>
 
@@ -232,6 +238,34 @@ I solved it using JavaScript:</p>
   </ul>
 </section>
 
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/paykin">@paykin</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'paykin',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
 
 
 
@@ -268,7 +302,24 @@ I solved it using JavaScript:</p>
 
 
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
 
 
 

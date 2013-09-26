@@ -97,7 +97,7 @@
 
 
   <div class="entry-content"><p>With release of jboss-as maven plugin version 7.0.1.Final the new goal deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.
-After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the &lt;code&gt;NullPointerException&lt;/code&gt; in Maven build.
+After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the <code>NullPointerException</code> in Maven build.
 Here is part of maven pom.xml used to deploy the driver to jboss:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -121,101 +121,44 @@ Here is part of maven pom.xml used to deploy the driver to jboss:</p>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>plugin<span class="ni">&amp;gt;</span>
-</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.jboss.as.plugins<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
-</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>jboss-as-maven-plugin<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
-</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>7.0.1.Final<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
-</span><span class='line'>  <span class="ni">&amp;lt;</span>executions<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>execution<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>id<span class="ni">&amp;gt;</span>deploy-driver-AS400<span class="ni">&amp;lt;</span>/id<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>phase<span class="ni">&amp;gt;</span>package<span class="ni">&amp;lt;</span>/phase<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>goals<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>goal<span class="ni">&amp;gt;</span>deploy-artifact<span class="ni">&amp;lt;</span>/goal<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/goals<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>configuration<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>hostname<span class="ni">&amp;gt;</span>${jboss-hostname}<span class="ni">&amp;lt;</span>/hostname<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>com.ibm<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>as400<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>fileName<span class="ni">&amp;gt;</span>jt400.jar<span class="ni">&amp;lt;</span>/fileName<span class="ni">&amp;gt;</span>
-</span><span class='line'>              <span class="ni">&amp;lt;</span>name<span class="ni">&amp;gt;</span>jt400.jar<span class="ni">&amp;lt;</span>/name<span class="ni">&amp;gt;</span>
-</span><span class='line'>          <span class="ni">&amp;lt;</span>/configuration<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>/execution<span class="ni">&amp;gt;</span>
-</span><span class='line'>  <span class="ni">&amp;lt;</span>/executions<span class="ni">&amp;gt;</span>
-</span><span class='line'><span class="ni">&amp;lt;</span>/plugin<span class="ni">&amp;gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.as.plugins<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>jboss-as-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>7.0.1.Final<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;executions&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;execution&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;id&gt;</span>deploy-driver-AS400<span class="nt">&lt;/id&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;goals&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;goal&gt;</span>deploy-artifact<span class="nt">&lt;/goal&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/goals&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;hostname&gt;</span>${jboss-hostname}<span class="nt">&lt;/hostname&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;groupId&gt;</span>com.ibm<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;artifactId&gt;</span>as400<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;fileName&gt;</span>jt400.jar<span class="nt">&lt;/fileName&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;name&gt;</span>jt400.jar<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/execution&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/executions&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plugin&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>               <br/>
-In the plugin&rsquo;s manual at &lt;a href=&ldquo;<a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a>&rdquo;&gt;<a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html&amp;lt;/a&amp;gt;">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html&amp;lt;/a&amp;gt;</a> it said
-&lt;blockquote&gt;The artifact must be already listed as a dependency in the projects pom.xml&lt;/blockquote&gt;
-but it do not tells in which scope the driver&rsquo;s JAR have to be: it have to be in &lt;strong&gt;compile&lt;/strong&gt; or &lt;strong&gt;runtime&lt;/strong&gt; scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.
-&lt;!&mdash;more&mdash;&gt;
-Here is full stacktrace of the error I received:</p>
+In the plugin&rsquo;s manual at <a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html"><a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a></a> it said</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'>[ERROR] Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed. NullPointerException -<span class="ni">&amp;gt;</span> [Help 1]
-</span><span class='line'>org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed.
-</span><span class='line'>at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:225)
-</span><span class='line'>at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
-</span><span class='line'>at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
-</span><span class='line'>at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
-</span><span class='line'>at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
-</span><span class='line'>at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
-</span><span class='line'>at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
-</span><span class='line'>at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:319)
-</span><span class='line'>at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:156)
-</span><span class='line'>at org.apache.maven.cli.MavenCli.execute(MavenCli.java:534)
-</span><span class='line'>at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:196)
-</span><span class='line'>at org.apache.maven.cli.MavenCli.main(MavenCli.java:141)
-</span><span class='line'>at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-</span><span class='line'>at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
-</span><span class='line'>at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
-</span><span class='line'>at java.lang.reflect.Method.invoke(Method.java:597)
-</span><span class='line'>at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
-</span><span class='line'>at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
-</span><span class='line'>at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
-</span><span class='line'>at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
-</span><span class='line'>Caused by: org.apache.maven.plugin.PluginExecutionException: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed.
-</span><span class='line'>at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:116)
-</span><span class='line'>at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:209)
-</span><span class='line'>... 19 more
-</span><span class='line'>Caused by: java.lang.NullPointerException
-</span><span class='line'>at org.jboss.as.plugin.deployment.AbstractDeployment.execute(AbstractDeployment.java:191)
-</span><span class='line'>at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
-</span><span class='line'>... 20 more
-</span></code></pre></td></tr></table></div></figure>
+<blockquote>The artifact must be already listed as a dependency in the projects pom.xml</blockquote>
+
+
+<p>but it do not tells in which scope the driver&rsquo;s JAR have to be: it have to be in <strong>compile</strong> or <strong>runtime</strong> scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.</p>
 
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/deploying-jdbc-jboss-maven-plugin/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -258,6 +201,34 @@ Here is full stacktrace of the error I received:</p>
   </ul>
 </section>
 
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/paykin">@paykin</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'paykin',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
 
 
 
@@ -290,7 +261,24 @@ Here is full stacktrace of the error I received:</p>
 
 
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
 
 
 
