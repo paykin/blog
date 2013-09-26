@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Forcing JBoss 7 to apply changes to JSP's immediately - Programming Notes</title>
+  <title>Category: Hibernate - Programming Notes</title>
   <meta name="author" content="Dmitry">
 
   
-  <meta name="description" content="JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or &hellip;">
+  <meta name="description" content="Category: Hibernate">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp">
+  <link rel="canonical" href="http://test.paykin.infoblog/categories/hibernate">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/github/atom.xml" rel="alternate" title="Programming Notes" type="application/atom+xml">
@@ -64,99 +64,35 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Forcing JBoss 7 to Apply Changes to JSP's Immediately</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-27T00:00:00+02:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Hibernate</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-<div class="entry-content"><p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;jsp-configuration</span> <span class="na">development=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
+  
+  <h2>2012</h2>
+
+<article>
+  
+<h1><a href="/blog/2012/04/26/spell-check-suggestions-hibernate-search-lucene/">Spell checking with suggestions with Hibernate Search 4 and Lucene 3.6</a></h1>
+<time datetime="2012-04-26T00:00:00+03:00" pubdate><span class='month'>Apr</span> <span class='day'>26</span> <span class='year'>2012</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/hibernate/'>Hibernate</a>, <a class='category' href='/blog/categories/java/'>Java</a>, <a class='category' href='/blog/categories/lucene/'>Lucene</a></span>
+</footer>
 
 
-<p>And now JBoss behaves as you expect it in development mode: all changes to JSP files are loaded automatically as soon as you change the JSP file.</p>
+</article>
+
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Dmitry</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-27T00:00:00+02:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/j2ee/'>J2EE</a>, <a class='category' href='/blog/categories/jboss/'>JBoss</a>, <a class='category' href='/blog/categories/jsf/'>JSF</a>, <a class='category' href='/blog/categories/java/'>Java</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/" data-via="" data-counturl="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2011/10/20/android-css-media-reloading/" title="Previous Post: Android browser recognizes CSS media type after page reloading">&laquo; Android browser recognizes CSS media type after page reloading</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2011/11/13/cleaning-eclipse-with-clean-argument/" title="Next Post: Cleaning eclipse with -clean argument">Cleaning eclipse with -clean argument &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
 </div>

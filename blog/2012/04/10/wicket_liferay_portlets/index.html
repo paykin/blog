@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Forcing JBoss 7 to apply changes to JSP's immediately - Programming Notes</title>
+  <title>Portlets with Wicket 1.5.x in Liferay portal - Programming Notes</title>
   <meta name="author" content="Dmitry">
 
   
-  <meta name="description" content="JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or &hellip;">
+  <meta name="description" content="After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed: portlet.xml should look like wickettest4 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp">
+  <link rel="canonical" href="http://test.paykin.info/blog/2012/04/10/wicket_liferay_portlets">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/github/atom.xml" rel="alternate" title="Programming Notes" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Forcing JBoss 7 to Apply Changes to JSP's Immediately</h1>
+      <h1 class="entry-title">Portlets With Wicket 1.5.x in Liferay Portal</h1>
     
     
       <p class="meta">
@@ -84,27 +84,69 @@
   
 
 
-<time datetime="2011-10-27T00:00:00+02:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
+<time datetime="2012-04-10T00:00:00+03:00" pubdate data-updated="true">Apr 10<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:</p>
+<div class="entry-content">After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed:
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;jsp-configuration</span> <span class="na">development=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And now JBoss behaves as you expect it in development mode: all changes to JSP files are loaded automatically as soon as you change the JSP file.</p>
+portlet.xml should look like
+<pre class="brush:xml"><portlet>
+	<description>wickettest4</description>
+	<portlet-name>wickettest4</portlet-name>
+	<display-name>wickettest4</display-name>
+	<portlet-class>org.apache.wicket.portlet.WicketPortlet</portlet-class>
+	<init-param>
+		<name>wicketFilterPath</name>
+		<value>/bla</value>
+	</init-param>
+	<supports>
+		<mime-type>text/html</mime-type>
+		<portlet-mode>VIEW</portlet-mode>
+	</supports>
+	<portlet-info>
+		<title>wickettest4</title>
+		<keywords>wickettest4</keywords>
+	</portlet-info>
+</portlet></pre>
+Note new portlet-class. Also, mime-type have to be text/html.
+<!--more-->
+web.xml also changed, notice filter class:
+<pre class="brush:xml"><filter>
+	<filter-name>wicket.wicket</filter-name>
+	<filter-class>org.apache.wicket.portlet.PortletFilter</filter-class>
+	<init-param>
+		<param-name>applicationClassName</param-name>
+		<param-value>org.wicket.WicketApplication</param-value>
+	</init-param>
+</filter>
+<filter-mapping>
+	<filter-name>wicket.wicket</filter-name>
+	<url-pattern>/bla/*</url-pattern>
+	<dispatcher>REQUEST</dispatcher>
+	<dispatcher>INCLUDE</dispatcher>
+	<dispatcher>FORWARD</dispatcher>
+</filter-mapping></pre>
+And of course Maven dependencies also changed:
+<pre class="brush:xml"><dependency>
+	<groupId>org.apache.wicket</groupId>
+	<artifactId>wicket-core</artifactId>
+	<version>${wicket.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.portals.bridges</groupId>
+	<artifactId>portals-bridges-common</artifactId>
+	<version>2.0</version>
+</dependency>
+<dependency>
+	<groupId>org.wicketstuff</groupId>
+	<artifactId>wicketstuff-portlet</artifactId>
+	<version>${wicket.version}</version>
+</dependency></pre>
+&nbsp;
 </div>
 
 
@@ -127,12 +169,12 @@
   
 
 
-<time datetime="2011-10-27T00:00:00+02:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
+<time datetime="2012-04-10T00:00:00+03:00" pubdate data-updated="true">Apr 10<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/j2ee/'>J2EE</a>, <a class='category' href='/blog/categories/jboss/'>JBoss</a>, <a class='category' href='/blog/categories/jsf/'>JSF</a>, <a class='category' href='/blog/categories/java/'>Java</a>
+    <a class='category' href='/blog/categories/wicket/'>Wicket</a>
   
 </span>
 
@@ -141,7 +183,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/" data-via="" data-counturl="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://test.paykin.info/blog/2012/04/10/wicket_liferay_portlets/" data-via="" data-counturl="http://test.paykin.info/blog/2012/04/10/wicket_liferay_portlets/" >Tweet</a>
   
   
   
@@ -150,10 +192,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/10/20/android-css-media-reloading/" title="Previous Post: Android browser recognizes CSS media type after page reloading">&laquo; Android browser recognizes CSS media type after page reloading</a>
+        <a class="basic-alignment left" href="/blog/2011/11/24/add-datasource-programaticaly-cli-jboss-7/" title="Previous Post: Create datasource programmatically on JBoss 7">&laquo; Create datasource programmatically on JBoss 7</a>
       
       
-        <a class="basic-alignment right" href="/blog/2011/11/13/cleaning-eclipse-with-clean-argument/" title="Next Post: Cleaning eclipse with -clean argument">Cleaning eclipse with -clean argument &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/04/26/spell-check-suggestions-hibernate-search-lucene/" title="Next Post: Spell checking with suggestions with Hibernate Search 4 and Lucene 3.6">Spell checking with suggestions with Hibernate Search 4 and Lucene 3.6 &raquo;</a>
       
     </p>
   </footer>

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Forcing JBoss 7 to apply changes to JSP's immediately - Programming Notes</title>
+  <title>Liferay portlets deployment in IntelliJ IDEA - Programming Notes</title>
   <meta name="author" content="Dmitry">
 
   
-  <meta name="description" content="JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or &hellip;">
+  <meta name="description" content="You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps: Create debug configuration in IntelliJ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp">
+  <link rel="canonical" href="http://test.paykin.info/blog/2013/04/29/liferay-portlet-intellij-idea">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/github/atom.xml" rel="alternate" title="Programming Notes" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Forcing JBoss 7 to Apply Changes to JSP's Immediately</h1>
+      <h1 class="entry-title">Liferay Portlets Deployment in IntelliJ IDEA</h1>
     
     
       <p class="meta">
@@ -84,27 +84,31 @@
   
 
 
-<time datetime="2011-10-27T00:00:00+02:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
+<time datetime="2013-04-29T00:00:00+03:00" pubdate data-updated="true">Apr 29<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:</p>
+<div class="entry-content">You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:
+<ol>
+	<li><span style="line-height: 14px;">Create debug configuration in IntelliJ IDEA using Local Tomcat</span></li>
+	<li>Configure deployment artifact: add your WAR as &#8220;yourwar:war exploded&#8221;</li>
+	<li>Create XML file with name &#8220;yourwar.xml&#8221; with the following content:
+<pre class="brush:xml"><?xml version="1.0" encoding="UTF-8"?>
+<Context 
+  docBase="/absolute/path/to/project/yourwar" 
+  reloadable="false" 
+  path="/yourwar"/></pre>
+Please note, docBase have to be the same as &#8220;Output directory&#8221; setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as &#8220;Application context&#8221; in Run/Debug configuration</li>
+	<li>Create post deployment action that will copy just created XML to Liferay&#8217;s autodeploy folder.</li>
+</ol>
+Enjoy automatic deployment, hot-swap and debugging your LIferay application.
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;jsp-configuration</span> <span class="na">development=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
+For additional instructions that you have to follow consider <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a>.
 
-
-<p>And now JBoss behaves as you expect it in development mode: all changes to JSP files are loaded automatically as soon as you change the JSP file.</p>
+Please note, I tested it with IntelliJ IDEA 12.1 and Liferay 6.0.5 on Tomcat 6
 </div>
 
 
@@ -127,12 +131,12 @@
   
 
 
-<time datetime="2011-10-27T00:00:00+02:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
+<time datetime="2013-04-29T00:00:00+03:00" pubdate data-updated="true">Apr 29<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/j2ee/'>J2EE</a>, <a class='category' href='/blog/categories/jboss/'>JBoss</a>, <a class='category' href='/blog/categories/jsf/'>JSF</a>, <a class='category' href='/blog/categories/java/'>Java</a>
+    <a class='category' href='/blog/categories/java/'>Java</a>
   
 </span>
 
@@ -141,7 +145,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/" data-via="" data-counturl="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://test.paykin.info/blog/2013/04/29/liferay-portlet-intellij-idea/" data-via="" data-counturl="http://test.paykin.info/blog/2013/04/29/liferay-portlet-intellij-idea/" >Tweet</a>
   
   
   
@@ -150,10 +154,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/10/20/android-css-media-reloading/" title="Previous Post: Android browser recognizes CSS media type after page reloading">&laquo; Android browser recognizes CSS media type after page reloading</a>
+        <a class="basic-alignment left" href="/blog/2012/12/13/hornetq-camel-spring/" title="Previous Post: Integrating HornetQ with Camel and Spring">&laquo; Integrating HornetQ with Camel and Spring</a>
       
       
-        <a class="basic-alignment right" href="/blog/2011/11/13/cleaning-eclipse-with-clean-argument/" title="Next Post: Cleaning eclipse with -clean argument">Cleaning eclipse with -clean argument &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2013/09/25/new-post/" title="Next Post: New Post">New Post &raquo;</a>
       
     </p>
   </footer>

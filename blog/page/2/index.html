@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Forcing JBoss 7 to apply changes to JSP's immediately - Programming Notes</title>
+  <title>Programming Notes</title>
   <meta name="author" content="Dmitry">
 
   
-  <meta name="description" content="JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or &hellip;">
+  <meta name="description" content="With release of jboss-as maven plugin&nbsp;version 7.0.1.Final the new goal&nbsp;deploy-artifact is added. It allows to deploy additional artifacts &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp">
+  <link rel="canonical" href="http://test.paykin.info/blog/page/2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/github/atom.xml" rel="alternate" title="Programming Notes" type="application/atom+xml">
@@ -63,12 +63,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Forcing JBoss 7 to Apply Changes to JSP's Immediately</h1>
+      <h1 class="entry-title"><a href="/blog/2011/09/25/deploying-jdbc-jboss-maven-plugin/">Deploying JDBC Driver in JBoss Maven Plugin</a></h1>
     
     
       <p class="meta">
@@ -84,83 +87,65 @@
   
 
 
-<time datetime="2011-10-27T00:00:00+02:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
+<time datetime="2011-09-25T00:00:00+03:00" pubdate data-updated="true">Sep 25<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:</p>
+  <div class="entry-content">With release of jboss-as maven plugin&nbsp;version 7.0.1.Final the new goal&nbsp;deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;jsp-configuration</span> <span class="na">development=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
+After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml&nbsp;I received the <code>NullPointerException</code>&nbsp;in Maven build.
 
+Here is part of maven pom.xml used to deploy the driver to jboss:
+<pre class="brush:xml">					<plugin>
+						<groupId>org.jboss.as.plugins</groupId>
+						<artifactId>jboss-as-maven-plugin</artifactId>
+						<version>7.0.1.Final</version>
+						<executions>
+							<execution>
+								<id>deploy-driver-AS400</id>
+								<phase>package</phase>
+								<goals>
+									<goal>deploy-artifact</goal>
+								</goals>
 
-<p>And now JBoss behaves as you expect it in development mode: all changes to JSP files are loaded automatically as soon as you change the JSP file.</p>
+								<configuration>
+									<hostname>${jboss-hostname}</hostname>
+									<groupId>com.ibm</groupId>
+									<artifactId>as400</artifactId>
+									<fileName>jt400.jar</fileName>
+									<name>jt400.jar</name>
+								</configuration>
+							</execution>
+
+						</executions>
+					</plugin></pre>
+&nbsp;
+
+In the plugin&#8217;s manual at&nbsp;<a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a>&nbsp;it said
+<blockquote>The artifact must be already listed as a dependency in the projects pom.xml</blockquote>
+but it do not tells in which scope the driver&#8217;s JAR have to be: it have to be in <strong>compile</strong> or <strong>runtime</strong> scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Dmitry</span></span>
-
-      
-
-
-
-
-
-
-
-
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/09/25/deploying-jdbc-jboss-maven-plugin/">Read on &rarr;</a>
+    </footer>
   
 
 
-<time datetime="2011-10-27T00:00:00+02:00" pubdate data-updated="true">Oct 27<span>th</span>, 2011</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/j2ee/'>J2EE</a>, <a class='category' href='/blog/categories/jboss/'>JBoss</a>, <a class='category' href='/blog/categories/jsf/'>JSF</a>, <a class='category' href='/blog/categories/java/'>Java</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/" data-via="" data-counturl="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/" >Tweet</a>
-  
-  
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2011/10/20/android-css-media-reloading/" title="Previous Post: Android browser recognizes CSS media type after page reloading">&laquo; Android browser recognizes CSS media type after page reloading</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2011/11/13/cleaning-eclipse-with-clean-argument/" title="Next Post: Cleaning eclipse with -clean argument">Cleaning eclipse with -clean argument &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -196,7 +181,6 @@
 
   
 </aside>
-
 
     </div>
   </div>

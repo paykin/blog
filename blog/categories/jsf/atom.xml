@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JSF | Programming Notes]]></title>
   <link href="http://test.paykin.info/blog/categories/jsf/atom.xml" rel="self"/>
   <link href="http://test.paykin.info/"/>
-  <updated>2013-09-26T18:00:46+03:00</updated>
+  <updated>2013-09-26T18:10:40+03:00</updated>
   <id>http://test.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry]]></name>
@@ -29,6 +29,38 @@
 
 <p>```
 And now JBoss behaves as you expect it in development mode: all changes to JSP files are loaded automatically as soon as you change the JSP file.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Enums in JSF]]></title>
+    <link href="http://test.paykin.info/blog/2011/09/25/enums-in-jsf/"/>
+    <updated>2011-09-25T00:00:00+03:00</updated>
+    <id>http://test.paykin.info/blog/2011/09/25/enums-in-jsf</id>
+    <content type="html"><![CDATA[<p>Finally I find the way to use enum with JSF:<br />
+Suppose you have enum:</p>
+
+
+<pre class="brush:java">public enum ActionTypeEnum {
+    UPDATE,
+    CREATE,
+    COPY
+}</pre>
+
+
+<p>In JSF you can write EL expressions in form:</p>
+
+
+<pre class="brush:xml"><h:outputText value="someText"
+    rendered="#{listAction.actionType == 'COPY'}"/></pre>
+
+
+<p>The property <code>actionType</code> in managed bean <code>listAction</code> have to be of type <code>ActionTypeEnum</code>.</p>
+
+
+<p>It works because each enum in have method <code>valueOf(String stringValue)</code> and JSF attempts to convert String value to enum.<br />
+&nbsp;</p>
+
 ]]></content>
   </entry>
   

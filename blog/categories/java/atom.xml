@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | Programming Notes]]></title>
   <link href="http://test.paykin.info/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://test.paykin.info/"/>
-  <updated>2013-09-26T18:00:46+03:00</updated>
+  <updated>2013-09-26T18:10:40+03:00</updated>
   <id>http://test.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry]]></name>
@@ -14,21 +14,241 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Forcing JBoss 7 to apply changes to JSP's immediately]]></title>
-    <link href="http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/"/>
-    <updated>2011-10-27T00:00:00+02:00</updated>
-    <id>http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp</id>
-    <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:
-``` xml</p>
+    <title type="html"><![CDATA[Liferay portlets deployment in IntelliJ IDEA]]></title>
+    <link href="http://test.paykin.info/blog/2013/04/29/liferay-portlet-intellij-idea/"/>
+    <updated>2013-04-29T00:00:00+03:00</updated>
+    <id>http://test.paykin.info/blog/2013/04/29/liferay-portlet-intellij-idea</id>
+    <content type="html"><![CDATA[<p>You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:</p>
 
-<pre><code>&lt;configuration&gt;
-    &lt;jsp-configuration development="true"/&gt;
-&lt;/configuration&gt;
-...
-</code></pre>
+<ol>
+    <li><span style="line-height: 14px;">Create debug configuration in IntelliJ IDEA using Local Tomcat</span></li>
+    <li>Configure deployment artifact: add your WAR as "yourwar:war exploded"</li>
+    <li>Create XML file with name "yourwar.xml" with the following content:
+<pre class="brush:xml"><?xml version="1.0" encoding="UTF-8"?>
+<Context 
+  docBase="/absolute/path/to/project/yourwar" 
+  reloadable="false" 
+  path="/yourwar"/></pre>
+Please note, docBase have to be the same as "Output directory" setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as "Application context" in Run/Debug configuration</li>
+    <li>Create post deployment action that will copy just created XML to Liferay's autodeploy folder.</li>
+</ol>
 
-<p>```
-And now JBoss behaves as you expect it in development mode: all changes to JSP files are loaded automatically as soon as you change the JSP file.</p>
+
+<p>Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
+
+<p>For additional instructions that you have to follow consider <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a>.</p>
+
+<p>Please note, I tested it with IntelliJ IDEA 12.1 and Liferay 6.0.5 on Tomcat 6</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Integrating HornetQ with Camel and Spring]]></title>
+    <link href="http://test.paykin.info/blog/2012/12/13/hornetq-camel-spring/"/>
+    <updated>2012-12-13T00:00:00+02:00</updated>
+    <id>http://test.paykin.info/blog/2012/12/13/hornetq-camel-spring</id>
+    <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.</p>
+
+<p>In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:</p>
+
+<pre class="brush:xml"><dependency>
+    <groupId>org.hornetq</groupId>
+    <artifactId>hornetq-jms</artifactId>
+    <version>${hornetq.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.hornetq</groupId>
+    <artifactId>hornetq-jms-client</artifactId>
+    <version>${hornetq.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.hornetq</groupId>
+    <artifactId>hornetq-core-client</artifactId>
+    <version>${hornetq.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.jboss.netty</groupId>
+    <artifactId>netty</artifactId>
+    <version>3.2.7.Final</version>
+</dependency></pre>
+
+
+<p>After that modify your spring.xml. Here is an example:</p>
+
+<!--more-->
+
+
+<pre class="brush:xml"><?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" />
+    <bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/>
+    <bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory">
+        <constructor-arg name="serverLocator" ref="hornetqServerLocator"/>
+    </bean>
+    <bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+        <property name="connectionFactory" ref="hornetqJmsConnectionFactory"/>
+        <property name="transacted" value="false"/>
+        <property name="requestTimeout" value="60000"/>
+    </bean>
+    <bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent">
+        <property name="configuration" ref="hornetqJmsConfig"/>
+    </bean>
+</beans></pre>
+
+
+<p>And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it &ndash; just put them as members of the class and inject them via Spring.xml.</p>
+
+<pre class="brush:java">package com.example;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.hornetq.api.core.TransportConfiguration;
+import org.hornetq.api.core.client.HornetQClient;
+import org.hornetq.api.core.client.ServerLocator;
+import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
+import org.springframework.beans.factory.annotation.Configurable;
+
+@Configurable
+public class HornetqServerLocatorFactory {
+
+    public ServerLocator createServerLocator() {
+        final Map<String, Object> connectionParams = new HashMap<String, Object>();
+        connectionParams.put( "port", "hornetq-host.com" );
+        connectionParams.put( "host", 5900 );
+
+        final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
+        final ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA( new TransportConfiguration[] { transportConfiguration } );
+        return serverLocator;
+    }
+}</pre>
+
+
+<p>That&rsquo;s it!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Spell checking with suggestions with Hibernate Search 4 and Lucene 3.6]]></title>
+    <link href="http://test.paykin.info/blog/2012/04/26/spell-check-suggestions-hibernate-search-lucene/"/>
+    <updated>2012-04-26T00:00:00+03:00</updated>
+    <id>http://test.paykin.info/blog/2012/04/26/spell-check-suggestions-hibernate-search-lucene</id>
+    <content type="html"><![CDATA[<p>In latest releases of Hibernate Search 4 and Lucene 3.6 there was some changes in SpellChecker API&rsquo;s.
+Here is example of the new API that allows to use spell checking with suggested words:</p>
+
+<pre class="brush:java">public String[] getSuggestions(String txt){
+    String[] suggestions =  new String[]{};
+
+    FullTextSession fullTextSession = Search.getFullTextSession(sf.getCurrentSession());
+    SearchFactory searchFactory = fullTextSession.getSearchFactory();
+    IndexReader reader = searchFactory.getIndexReaderAccessor().open(MyEntity.class);
+    try {
+        FSDirectory spellCheckerDir = FSDirectory.open(new File("D:\lucene\spellchecker\com.site.model.MyEntity"));
+        SpellChecker spellChecker = new SpellChecker(spellCheckerDir);
+        Dictionary dictionary = new LuceneDictionary(reader, "description");
+        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_35, searchFactory.getAnalyzer("myAnalyzer"));
+        spellChecker.indexDictionary(dictionary, config, true);
+        suggestions = spellChecker.suggestSimilar(txt, 10);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    finally{
+        searchFactory.getIndexReaderAccessor().close(reader);
+    }
+    return suggestions;
+}</pre>
+
+
+<p><code>sf.getCurrentSession()</code> gets standard Hibernate session. If you use <code>EntityManager</code>, there exists a method to obtain <code>FullTextSession</code>.
+The example creates new index directory dedicated to spell checking. It adds terms from MyEntity&rsquo;s <code>description</code> field to the index. <code>spellChecker.indexDictionary</code> adds the terms to the index, and optionally merges it with existing index.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Create datasource programmatically on JBoss 7]]></title>
+    <link href="http://test.paykin.info/blog/2011/11/24/add-datasource-programaticaly-cli-jboss-7/"/>
+    <updated>2011-11-24T00:00:00+02:00</updated>
+    <id>http://test.paykin.info/blog/2011/11/24/add-datasource-programaticaly-cli-jboss-7</id>
+    <content type="html"><![CDATA[<p>In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:</p>
+
+<pre class="brush:xml"><dependency>
+    <groupId>org.jboss.as</groupId>
+    <artifactId>jboss-as-controller-client</artifactId>
+    <version>7.0.2.Final</version>
+</dependency></pre>
+
+
+<p>The following example creates new datasource:</p>
+
+<!--more-->
+
+
+<pre class="brush:java">public void createDatasource() throws Exception{
+    ModelNode request = new ModelNode();
+    request.get(ClientConstants.OP).set(ClientConstants.ADD);
+    request.get(ClientConstants.OP_ADDR).add("subsystem",
+            "datasources");
+    request.get(ClientConstants.OP_ADDR).add("data-source",
+            "java:jboss/datasources/NewDatasource");
+
+    request.get("jndi-name").set("java:jboss/datasources/NewDatasource");
+    request.get("connection-url").set("jdbc:as400://1.2.3.4/SCHEME");
+    request.get("driver-class").set("com.ibm.as400.access.AS400JDBCDriver");
+    request.get("driver-name").set("jt400.jar");
+    request.get("user-name").set("username");
+    request.get("password").set("password");
+    request.get("pool-name").set("pool_NewDatasource");
+
+    ModelControllerClient client = ModelControllerClient.Factory.create(
+            InetAddress.getByName("127.0.0.1"), 9999);
+    client.execute(new OperationBuilder(request).build());
+}</pre>
+
+
+<p>If you want to check if the datasource already exists, consider following snippet:</p>
+
+<pre class="brush:java">public boolean checkIfDatasourceExists() throws Exception {
+    ModelNode request = new ModelNode();
+    request.get(ClientConstants.OP).set("read-resource");
+    request.get("recursive").set(false);
+    request.get(ClientConstants.OP_ADDR).add("subsystem", "datasources");
+
+    ModelControllerClient client = ModelControllerClient.Factory.create(
+            InetAddress.getByName("127.0.0.1"), 9999);
+    ModelNode responce = client.execute(new OperationBuilder(request).build());
+
+    ModelNode datasources = responce.get(ClientConstants.RESULT).get("data-source");
+
+    if (datasources.isDefined()) {
+        for (ModelNode dataSource : datasources.asList()) {
+            String dataSourceName = dataSource.asProperty().getName();
+            if (dataSourceName.equals("java:jboss/datasources/NewDatasource")) {
+                return true;
+            }
+        }
+    }
+    return false;
+}</pre>
+
+
+<p>The examples have the same effect as trying to add datasource from Jboss Administration console.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Cleaning eclipse with -clean argument]]></title>
+    <link href="http://test.paykin.info/blog/2011/11/13/cleaning-eclipse-with-clean-argument/"/>
+    <updated>2011-11-13T00:00:00+02:00</updated>
+    <id>http://test.paykin.info/blog/2011/11/13/cleaning-eclipse-with-clean-argument</id>
+    <content type="html"><![CDATA[<p>For those of you who work a lot with Eclipse,
+you probably run into all sorts of strange errors in Eclipse that
+not really related to your code, and then you get the feeling that Eclipse has gone mad.</p>
+
+<p>One way to solve these problems and clean the Eclipse is using -clean argument.
+all you need to do is to edit the eclipse.ini file located in your <Eclipse install directory> and add it as the first argument on the first line.
+After you upload the eclipse you can delete it until the next time you will need it.</p>
 ]]></content>
   </entry>
   

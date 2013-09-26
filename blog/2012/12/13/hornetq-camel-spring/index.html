@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Integrating HornetQ with Camel and Spring - Programming Notes</title>
+  <meta name="author" content="Dmitry">
+
+  
+  <meta name="description" content="Since Apache Camel have only one built-in implementation for specific JMS provider - ActiveMQ, you have to use generic org.apache.camel.component.jms &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://test.paykin.info/blog/2012/12/13/hornetq-camel-spring">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Programming Notes" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Programming Notes</a></h1>
+  
+    <h2>aaaa</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:test.paykin.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Integrating HornetQ With Camel and Spring</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-13T00:00:00+02:00" pubdate data-updated="true">Dec 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">Since Apache Camel have only one built-in implementation for specific JMS provider - ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
+
+In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
+<pre class="brush:xml"><dependency>
+	<groupId>org.hornetq</groupId>
+	<artifactId>hornetq-jms</artifactId>
+	<version>${hornetq.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.hornetq</groupId>
+	<artifactId>hornetq-jms-client</artifactId>
+	<version>${hornetq.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.hornetq</groupId>
+	<artifactId>hornetq-core-client</artifactId>
+	<version>${hornetq.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.jboss.netty</groupId>
+	<artifactId>netty</artifactId>
+	<version>3.2.7.Final</version>
+</dependency></pre>
+After that modify your spring.xml. Here is an example:
+<!--more-->
+<pre class="brush:xml"><?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" />
+    <bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/>
+    <bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory">
+        <constructor-arg name="serverLocator" ref="hornetqServerLocator"/>
+    </bean>
+    <bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+        <property name="connectionFactory" ref="hornetqJmsConnectionFactory"/>
+        <property name="transacted" value="false"/>
+        <property name="requestTimeout" value="60000"/>
+    </bean>
+    <bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent">
+        <property name="configuration" ref="hornetqJmsConfig"/>
+    </bean>
+</beans></pre>
+And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
+<pre class="brush:java">package com.example;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.hornetq.api.core.TransportConfiguration;
+import org.hornetq.api.core.client.HornetQClient;
+import org.hornetq.api.core.client.ServerLocator;
+import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
+import org.springframework.beans.factory.annotation.Configurable;
+
+@Configurable
+public class HornetqServerLocatorFactory {
+
+	public ServerLocator createServerLocator() {
+		final Map<String, Object> connectionParams = new HashMap<String, Object>();
+		connectionParams.put( "port", "hornetq-host.com" );
+		connectionParams.put( "host", 5900 );
+
+		final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
+		final ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA( new TransportConfiguration[] { transportConfiguration } );
+		return serverLocator;
+	}
+}</pre>
+That&#8217;s it!
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Dmitry</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-13T00:00:00+02:00" pubdate data-updated="true">Dec 13<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/j2ee/'>J2EE</a>, <a class='category' href='/blog/categories/jboss/'>JBoss</a>, <a class='category' href='/blog/categories/java/'>Java</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://test.paykin.info/blog/2012/12/13/hornetq-camel-spring/" data-via="" data-counturl="http://test.paykin.info/blog/2012/12/13/hornetq-camel-spring/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/26/spell-check-suggestions-hibernate-search-lucene/" title="Previous Post: Spell checking with suggestions with Hibernate Search 4 and Lucene 3.6">&laquo; Spell checking with suggestions with Hibernate Search 4 and Lucene 3.6</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/04/29/liferay-portlet-intellij-idea/" title="Next Post: Liferay portlets deployment in IntelliJ IDEA">Liferay portlets deployment in IntelliJ IDEA &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/09/25/new-post/">New Post</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/29/liferay-portlet-intellij-idea/">Liferay Portlets Deployment in IntelliJ IDEA</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/13/hornetq-camel-spring/">Integrating HornetQ With Camel and Spring</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/26/spell-check-suggestions-hibernate-search-lucene/">Spell Checking With Suggestions With Hibernate Search 4 and Lucene 3.6</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/10/wicket_liferay_portlets/">Portlets With Wicket 1.5.x in Liferay Portal</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Dmitry -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
