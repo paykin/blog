@@ -196,6 +196,12 @@ The example creates new index directory dedicated to spell checking. It adds ter
   </footer>
 </article>
 
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
 </div>
 
 <aside class="sidebar">
@@ -249,7 +255,10 @@ The example creates new index directory dedicated to spell checking. It adds ter
       var disqus_shortname = 'java-paykin';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://test.paykin.info/spell-check-suggestions-hibernate-search-lucene/';
+        var disqus_url = 'http://test.paykin.info/spell-check-suggestions-hibernate-search-lucene/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
