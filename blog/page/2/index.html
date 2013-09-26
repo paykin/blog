@@ -9,7 +9,7 @@
   <meta name="author" content="Dmitry">
 
   
-  <meta name="description" content="With release of jboss-as maven plugin&nbsp;version 7.0.1.Final the new goal&nbsp;deploy-artifact is added. It allows to deploy additional artifacts &hellip;">
+  <meta name="description" content="With release of jboss-as maven plugin version 7.0.1.Final the new goal deploy-artifact is added. It allows to deploy additional artifacts to JBoss &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,39 +94,70 @@
   </header>
 
 
-  <div class="entry-content">With release of jboss-as maven plugin&nbsp;version 7.0.1.Final the new goal&nbsp;deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.
+  <div class="entry-content"><p>With release of jboss-as maven plugin version 7.0.1.Final the new goal deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.</p>
 
-After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml&nbsp;I received the <code>NullPointerException</code>&nbsp;in Maven build.
+<p>After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the <code>NullPointerException</code> in Maven build.</p>
 
-Here is part of maven pom.xml used to deploy the driver to jboss:
-<pre class="brush:xml">					<plugin>
-						<groupId>org.jboss.as.plugins</groupId>
-						<artifactId>jboss-as-maven-plugin</artifactId>
-						<version>7.0.1.Final</version>
-						<executions>
-							<execution>
-								<id>deploy-driver-AS400</id>
-								<phase>package</phase>
-								<goals>
-									<goal>deploy-artifact</goal>
-								</goals>
+<p>Here is part of maven pom.xml used to deploy the driver to jboss:</p>
 
-								<configuration>
-									<hostname>${jboss-hostname}</hostname>
-									<groupId>com.ibm</groupId>
-									<artifactId>as400</artifactId>
-									<fileName>jt400.jar</fileName>
-									<name>jt400.jar</name>
-								</configuration>
-							</execution>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.as.plugins<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>jboss-as-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>7.0.1.Final<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;executions&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;execution&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;id&gt;</span>deploy-driver-AS400<span class="nt">&lt;/id&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;goals&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;goal&gt;</span>deploy-artifact<span class="nt">&lt;/goal&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/goals&gt;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;hostname&gt;</span>${jboss-hostname}<span class="nt">&lt;/hostname&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;groupId&gt;</span>com.ibm<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;artifactId&gt;</span>as400<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;fileName&gt;</span>jt400.jar<span class="nt">&lt;/fileName&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;name&gt;</span>jt400.jar<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/execution&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;/executions&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plugin&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-						</executions>
-					</plugin></pre>
-&nbsp;
 
-In the plugin&#8217;s manual at&nbsp;<a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a>&nbsp;it said
+<p></p>
+
+<p>In the plugin&rsquo;s manual at <a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html"><a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a></a> it said</p>
+
 <blockquote>The artifact must be already listed as a dependency in the projects pom.xml</blockquote>
-but it do not tells in which scope the driver&#8217;s JAR have to be: it have to be in <strong>compile</strong> or <strong>runtime</strong> scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.
+
+
+<p>but it do not tells in which scope the driver&rsquo;s JAR have to be: it have to be in <strong>compile</strong> or <strong>runtime</strong> scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.</p>
+
 </div>
   
   

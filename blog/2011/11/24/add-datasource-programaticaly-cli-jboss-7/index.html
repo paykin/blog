@@ -91,58 +91,119 @@
   </header>
 
 
-<div class="entry-content">In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:
-<pre class="brush:xml"><dependency>
-	<groupId>org.jboss.as</groupId>
-	<artifactId>jboss-as-controller-client</artifactId>
-	<version>7.0.2.Final</version>
-</dependency></pre>
-The following example creates new datasource:
+<div class="entry-content"><p>In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.as<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>jboss-as-controller-client<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>7.0.2.Final<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The following example creates new datasource:</p>
+
 <!--more-->
-<pre class="brush:java">public void createDatasource() throws Exception{
-	ModelNode request = new ModelNode();
-	request.get(ClientConstants.OP).set(ClientConstants.ADD);
-	request.get(ClientConstants.OP_ADDR).add("subsystem",
-			"datasources");
-	request.get(ClientConstants.OP_ADDR).add("data-source",
-			"java:jboss/datasources/NewDatasource");
 
-	request.get("jndi-name").set("java:jboss/datasources/NewDatasource");
-	request.get("connection-url").set("jdbc:as400://1.2.3.4/SCHEME");
-	request.get("driver-class").set("com.ibm.as400.access.AS400JDBCDriver");
-	request.get("driver-name").set("jt400.jar");
-	request.get("user-name").set("username");
-	request.get("password").set("password");
-	request.get("pool-name").set("pool_NewDatasource");
 
-	ModelControllerClient client = ModelControllerClient.Factory.create(
-			InetAddress.getByName("127.0.0.1"), 9999);
-	client.execute(new OperationBuilder(request).build());
-}</pre>
-If you want to check if the datasource already exists, consider following snippet:
-<pre class="brush:java">public boolean checkIfDatasourceExists() throws Exception {
-	ModelNode request = new ModelNode();
-	request.get(ClientConstants.OP).set("read-resource");
-	request.get("recursive").set(false);
-	request.get(ClientConstants.OP_ADDR).add("subsystem", "datasources");
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">createDatasource</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+</span><span class='line'>  <span class="n">ModelNode</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ModelNode</span><span class="o">();</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">ADD</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP_ADDR</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;subsystem&quot;</span><span class="o">,</span>
+</span><span class='line'>          <span class="s">&quot;datasources&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP_ADDR</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;data-source&quot;</span><span class="o">,</span>
+</span><span class='line'>          <span class="s">&quot;java:jboss/datasources/NewDatasource&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;jndi-name&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;java:jboss/datasources/NewDatasource&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;connection-url&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;jdbc:as400://1.2.3.4/SCHEME&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;driver-class&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;com.ibm.as400.access.AS400JDBCDriver&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;driver-name&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;jt400.jar&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;user-name&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;username&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;pool-name&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;pool_NewDatasource&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ModelControllerClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">ModelControllerClient</span><span class="o">.</span><span class="na">Factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span>
+</span><span class='line'>          <span class="n">InetAddress</span><span class="o">.</span><span class="na">getByName</span><span class="o">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="o">),</span> <span class="mi">9999</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">client</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">OperationBuilder</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-	ModelControllerClient client = ModelControllerClient.Factory.create(
-			InetAddress.getByName("127.0.0.1"), 9999);
-	ModelNode responce = client.execute(new OperationBuilder(request).build());
 
-	ModelNode datasources = responce.get(ClientConstants.RESULT).get("data-source");
+<p>If you want to check if the datasource already exists, consider following snippet:</p>
 
-	if (datasources.isDefined()) {
-		for (ModelNode dataSource : datasources.asList()) {
-			String dataSourceName = dataSource.asProperty().getName();
-			if (dataSourceName.equals("java:jboss/datasources/NewDatasource")) {
-				return true;
-			}
-		}
-	}
-	return false;
-}</pre>
-The examples have the same effect as trying to add datasource from Jboss Administration console.
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">checkIfDatasourceExists</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">ModelNode</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ModelNode</span><span class="o">();</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;read-resource&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;recursive&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP_ADDR</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;subsystem&quot;</span><span class="o">,</span> <span class="s">&quot;datasources&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ModelControllerClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">ModelControllerClient</span><span class="o">.</span><span class="na">Factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span>
+</span><span class='line'>          <span class="n">InetAddress</span><span class="o">.</span><span class="na">getByName</span><span class="o">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="o">),</span> <span class="mi">9999</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">ModelNode</span> <span class="n">responce</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">OperationBuilder</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ModelNode</span> <span class="n">datasources</span> <span class="o">=</span> <span class="n">responce</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">RESULT</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;data-source&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">datasources</span><span class="o">.</span><span class="na">isDefined</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="n">ModelNode</span> <span class="n">dataSource</span> <span class="o">:</span> <span class="n">datasources</span><span class="o">.</span><span class="na">asList</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">String</span> <span class="n">dataSourceName</span> <span class="o">=</span> <span class="n">dataSource</span><span class="o">.</span><span class="na">asProperty</span><span class="o">().</span><span class="na">getName</span><span class="o">();</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">dataSourceName</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;java:jboss/datasources/NewDatasource&quot;</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The examples have the same effect as trying to add datasource from Jboss Administration console.</p>
 </div>
 
 

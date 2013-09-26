@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JBoss | Programming Notes]]></title>
   <link href="http://test.paykin.info/blog/categories/jboss/atom.xml" rel="self"/>
   <link href="http://test.paykin.info/"/>
-  <updated>2013-09-26T18:10:40+03:00</updated>
+  <updated>2013-09-26T18:22:54+03:00</updated>
   <id>http://test.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry]]></name>
@@ -20,84 +20,99 @@
     <id>http://test.paykin.info/blog/2012/12/13/hornetq-camel-spring</id>
     <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.</p>
 
-<p>In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:</p>
+<p>In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
+``` xml
+<dependency></p>
 
-<pre class="brush:xml"><dependency>
-    <groupId>org.hornetq</groupId>
-    <artifactId>hornetq-jms</artifactId>
-    <version>${hornetq.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.hornetq</groupId>
-    <artifactId>hornetq-jms-client</artifactId>
-    <version>${hornetq.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.hornetq</groupId>
-    <artifactId>hornetq-core-client</artifactId>
-    <version>${hornetq.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.jboss.netty</groupId>
-    <artifactId>netty</artifactId>
-    <version>3.2.7.Final</version>
-</dependency></pre>
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-jms&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
+</code></pre>
 
+<p></dependency>
+<dependency></p>
 
-<p>After that modify your spring.xml. Here is an example:</p>
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-jms-client&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-core-client&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.jboss.netty&lt;/groupId&gt;
+&lt;artifactId&gt;netty&lt;/artifactId&gt;
+&lt;version&gt;3.2.7.Final&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+```
+After that modify your spring.xml. Here is an example:</p>
 
 <!--more-->
 
 
-<pre class="brush:xml"><?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    <bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" />
-    <bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/>
-    <bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory">
-        <constructor-arg name="serverLocator" ref="hornetqServerLocator"/>
-    </bean>
-    <bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
-        <property name="connectionFactory" ref="hornetqJmsConnectionFactory"/>
-        <property name="transacted" value="false"/>
-        <property name="requestTimeout" value="60000"/>
-    </bean>
-    <bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent">
-        <property name="configuration" ref="hornetqJmsConfig"/>
-    </bean>
-</beans></pre>
+<p>``` xml
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;beans xmlns=&ldquo;<a href="http://www.springframework.org/schema/beans">http://www.springframework.org/schema/beans</a>&rdquo;</p>
 
+<pre><code>   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"&gt;
+&lt;bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" /&gt;
+&lt;bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/&gt;
+&lt;bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory"&gt;
+    &lt;constructor-arg name="serverLocator" ref="hornetqServerLocator"/&gt;
+&lt;/bean&gt;
+&lt;bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration"&gt;
+    &lt;property name="connectionFactory" ref="hornetqJmsConnectionFactory"/&gt;
+    &lt;property name="transacted" value="false"/&gt;
+    &lt;property name="requestTimeout" value="60000"/&gt;
+&lt;/bean&gt;
+&lt;bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent"&gt;
+    &lt;property name="configuration" ref="hornetqJmsConfig"/&gt;
+&lt;/bean&gt;
+</code></pre>
 
-<p>And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it &ndash; just put them as members of the class and inject them via Spring.xml.</p>
+<p></beans>
+<code>
+And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
+</code> java
+package com.example;</p>
 
-<pre class="brush:java">package com.example;
+<p>import java.util.HashMap;
+import java.util.Map;</p>
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.hornetq.api.core.TransportConfiguration;
+<p>import org.hornetq.api.core.TransportConfiguration;
 import org.hornetq.api.core.client.HornetQClient;
 import org.hornetq.api.core.client.ServerLocator;
 import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Configurable;</p>
 
-@Configurable
-public class HornetqServerLocatorFactory {
+<p>@Configurable
+public class HornetqServerLocatorFactory {</p>
 
-    public ServerLocator createServerLocator() {
-        final Map<String, Object> connectionParams = new HashMap<String, Object>();
-        connectionParams.put( "port", "hornetq-host.com" );
-        connectionParams.put( "host", 5900 );
+<pre><code>public ServerLocator createServerLocator() {
+    final Map&lt;String, Object&gt; connectionParams = new HashMap&lt;String, Object&gt;();
+    connectionParams.put( "port", "hornetq-host.com" );
+    connectionParams.put( "host", 5900 );
 
-        final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
-        final ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA( new TransportConfiguration[] { transportConfiguration } );
-        return serverLocator;
-    }
-}</pre>
+    final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
+    final ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA( new TransportConfiguration[] { transportConfiguration } );
+    return serverLocator;
+}
+</code></pre>
 
-
-<p>That&rsquo;s it!</p>
+<p>}
+```
+That&rsquo;s it!</p>
 ]]></content>
   </entry>
   
@@ -106,69 +121,77 @@ public class HornetqServerLocatorFactory {
     <link href="http://test.paykin.info/blog/2011/11/24/add-datasource-programaticaly-cli-jboss-7/"/>
     <updated>2011-11-24T00:00:00+02:00</updated>
     <id>http://test.paykin.info/blog/2011/11/24/add-datasource-programaticaly-cli-jboss-7</id>
-    <content type="html"><![CDATA[<p>In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:</p>
+    <content type="html"><![CDATA[<p>In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:
+``` xml
+<dependency></p>
 
-<pre class="brush:xml"><dependency>
-    <groupId>org.jboss.as</groupId>
-    <artifactId>jboss-as-controller-client</artifactId>
-    <version>7.0.2.Final</version>
-</dependency></pre>
+<pre><code>&lt;groupId&gt;org.jboss.as&lt;/groupId&gt;
+&lt;artifactId&gt;jboss-as-controller-client&lt;/artifactId&gt;
+&lt;version&gt;7.0.2.Final&lt;/version&gt;
+</code></pre>
 
-
-<p>The following example creates new datasource:</p>
+<p></dependency>
+```
+The following example creates new datasource:</p>
 
 <!--more-->
 
 
-<pre class="brush:java">public void createDatasource() throws Exception{
-    ModelNode request = new ModelNode();
-    request.get(ClientConstants.OP).set(ClientConstants.ADD);
-    request.get(ClientConstants.OP_ADDR).add("subsystem",
-            "datasources");
-    request.get(ClientConstants.OP_ADDR).add("data-source",
-            "java:jboss/datasources/NewDatasource");
+<p>``` java
+public void createDatasource() throws Exception{</p>
 
-    request.get("jndi-name").set("java:jboss/datasources/NewDatasource");
-    request.get("connection-url").set("jdbc:as400://1.2.3.4/SCHEME");
-    request.get("driver-class").set("com.ibm.as400.access.AS400JDBCDriver");
-    request.get("driver-name").set("jt400.jar");
-    request.get("user-name").set("username");
-    request.get("password").set("password");
-    request.get("pool-name").set("pool_NewDatasource");
+<pre><code>ModelNode request = new ModelNode();
+request.get(ClientConstants.OP).set(ClientConstants.ADD);
+request.get(ClientConstants.OP_ADDR).add("subsystem",
+        "datasources");
+request.get(ClientConstants.OP_ADDR).add("data-source",
+        "java:jboss/datasources/NewDatasource");
 
-    ModelControllerClient client = ModelControllerClient.Factory.create(
-            InetAddress.getByName("127.0.0.1"), 9999);
-    client.execute(new OperationBuilder(request).build());
-}</pre>
+request.get("jndi-name").set("java:jboss/datasources/NewDatasource");
+request.get("connection-url").set("jdbc:as400://1.2.3.4/SCHEME");
+request.get("driver-class").set("com.ibm.as400.access.AS400JDBCDriver");
+request.get("driver-name").set("jt400.jar");
+request.get("user-name").set("username");
+request.get("password").set("password");
+request.get("pool-name").set("pool_NewDatasource");
 
+ModelControllerClient client = ModelControllerClient.Factory.create(
+        InetAddress.getByName("127.0.0.1"), 9999);
+client.execute(new OperationBuilder(request).build());
+</code></pre>
 
-<p>If you want to check if the datasource already exists, consider following snippet:</p>
+<p>}
+```</p>
 
-<pre class="brush:java">public boolean checkIfDatasourceExists() throws Exception {
-    ModelNode request = new ModelNode();
-    request.get(ClientConstants.OP).set("read-resource");
-    request.get("recursive").set(false);
-    request.get(ClientConstants.OP_ADDR).add("subsystem", "datasources");
+<p>If you want to check if the datasource already exists, consider following snippet:
+``` java
+public boolean checkIfDatasourceExists() throws Exception {</p>
 
-    ModelControllerClient client = ModelControllerClient.Factory.create(
-            InetAddress.getByName("127.0.0.1"), 9999);
-    ModelNode responce = client.execute(new OperationBuilder(request).build());
+<pre><code>ModelNode request = new ModelNode();
+request.get(ClientConstants.OP).set("read-resource");
+request.get("recursive").set(false);
+request.get(ClientConstants.OP_ADDR).add("subsystem", "datasources");
 
-    ModelNode datasources = responce.get(ClientConstants.RESULT).get("data-source");
+ModelControllerClient client = ModelControllerClient.Factory.create(
+        InetAddress.getByName("127.0.0.1"), 9999);
+ModelNode responce = client.execute(new OperationBuilder(request).build());
 
-    if (datasources.isDefined()) {
-        for (ModelNode dataSource : datasources.asList()) {
-            String dataSourceName = dataSource.asProperty().getName();
-            if (dataSourceName.equals("java:jboss/datasources/NewDatasource")) {
-                return true;
-            }
+ModelNode datasources = responce.get(ClientConstants.RESULT).get("data-source");
+
+if (datasources.isDefined()) {
+    for (ModelNode dataSource : datasources.asList()) {
+        String dataSourceName = dataSource.asProperty().getName();
+        if (dataSourceName.equals("java:jboss/datasources/NewDatasource")) {
+            return true;
         }
     }
-    return false;
-}</pre>
+}
+return false;
+</code></pre>
 
-
-<p>The examples have the same effect as trying to add datasource from Jboss Administration console.</p>
+<p>}
+```
+The examples have the same effect as trying to add datasource from Jboss Administration console.</p>
 ]]></content>
   </entry>
   
@@ -196,40 +219,41 @@ And now JBoss behaves as you expect it in development mode: all changes to JSP f
     <link href="http://test.paykin.info/blog/2011/09/25/deploying-jdbc-jboss-maven-plugin/"/>
     <updated>2011-09-25T00:00:00+03:00</updated>
     <id>http://test.paykin.info/blog/2011/09/25/deploying-jdbc-jboss-maven-plugin</id>
-    <content type="html"><![CDATA[<p>With release of jboss-as maven plugin&nbsp;version 7.0.1.Final the new goal&nbsp;deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.</p>
+    <content type="html"><![CDATA[<p>With release of jboss-as maven plugin version 7.0.1.Final the new goal deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.</p>
 
-<p>After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml&nbsp;I received the <code>NullPointerException</code>&nbsp;in Maven build.</p>
+<p>After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the <code>NullPointerException</code> in Maven build.</p>
 
-<p>Here is part of maven pom.xml used to deploy the driver to jboss:</p>
+<p>Here is part of maven pom.xml used to deploy the driver to jboss:
+``` xml           <br/>
+<plugin></p>
 
-<pre class="brush:xml">                 <plugin>
-                        <groupId>org.jboss.as.plugins</groupId>
-                        <artifactId>jboss-as-maven-plugin</artifactId>
-                        <version>7.0.1.Final</version>
-                        <executions>
-                            <execution>
-                                <id>deploy-driver-AS400</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>deploy-artifact</goal>
-                                </goals>
+<pre><code>&lt;groupId&gt;org.jboss.as.plugins&lt;/groupId&gt;
+&lt;artifactId&gt;jboss-as-maven-plugin&lt;/artifactId&gt;
+&lt;version&gt;7.0.1.Final&lt;/version&gt;
+&lt;executions&gt;
+    &lt;execution&gt;
+        &lt;id&gt;deploy-driver-AS400&lt;/id&gt;
+        &lt;phase&gt;package&lt;/phase&gt;
+        &lt;goals&gt;
+            &lt;goal&gt;deploy-artifact&lt;/goal&gt;
+        &lt;/goals&gt;
 
-                                <configuration>
-                                    <hostname>${jboss-hostname}</hostname>
-                                    <groupId>com.ibm</groupId>
-                                    <artifactId>as400</artifactId>
-                                    <fileName>jt400.jar</fileName>
-                                    <name>jt400.jar</name>
-                                </configuration>
-                            </execution>
+        &lt;configuration&gt;
+            &lt;hostname&gt;${jboss-hostname}&lt;/hostname&gt;
+            &lt;groupId&gt;com.ibm&lt;/groupId&gt;
+            &lt;artifactId&gt;as400&lt;/artifactId&gt;
+            &lt;fileName&gt;jt400.jar&lt;/fileName&gt;
+            &lt;name&gt;jt400.jar&lt;/name&gt;
+        &lt;/configuration&gt;
+    &lt;/execution&gt;
 
-                        </executions>
-                    </plugin></pre>
+&lt;/executions&gt;
+</code></pre>
 
+<p></plugin>
+```</p>
 
-<p>&nbsp;</p>
-
-<p>In the plugin&rsquo;s manual at&nbsp;<a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html"><a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a></a>&nbsp;it said</p>
+<p>In the plugin&rsquo;s manual at <a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html"><a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a></a> it said</p>
 
 <blockquote>The artifact must be already listed as a dependency in the projects pom.xml</blockquote>
 
@@ -239,9 +263,10 @@ And now JBoss behaves as you expect it in development mode: all changes to JSP f
 <!--more-->
 
 
-<p>Here is full stacktrace of the error I&nbsp;received:</p>
+<p>Here is full stacktrace of the error I received:</p>
 
-<p><code>[ERROR] Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed. NullPointerException &ndash;> [Help 1]
+<p><code>
+[ERROR] Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed. NullPointerException -&gt; [Help 1]
 org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed.
 at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:225)
 at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
@@ -266,11 +291,12 @@ at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
 Caused by: org.apache.maven.plugin.PluginExecutionException: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed.
 at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:116)
 at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:209)
-&hellip; 19 more
+... 19 more
 Caused by: java.lang.NullPointerException
 at org.jboss.as.plugin.deployment.AbstractDeployment.execute(AbstractDeployment.java:191)
 at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:107)
-&hellip; 20 more</code></p>
+... 20 more
+</code></p>
 ]]></content>
   </entry>
   

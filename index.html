@@ -143,24 +143,34 @@ drwxr-xr-x 14 root root 4096 Aug 15  2009 stage
   </header>
 
 
-  <div class="entry-content">You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:
+  <div class="entry-content"><p>You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:</p>
+
 <ol>
-	<li><span style="line-height: 14px;">Create debug configuration in IntelliJ IDEA using Local Tomcat</span></li>
-	<li>Configure deployment artifact: add your WAR as &#8220;yourwar:war exploded&#8221;</li>
-	<li>Create XML file with name &#8220;yourwar.xml&#8221; with the following content:
-<pre class="brush:xml"><?xml version="1.0" encoding="UTF-8"?>
-<Context 
-  docBase="/absolute/path/to/project/yourwar" 
-  reloadable="false" 
-  path="/yourwar"/></pre>
+    <li><span style="line-height: 14px;">Create debug configuration in IntelliJ IDEA using Local Tomcat</span></li>
+    <li>Configure deployment artifact: add your WAR as &#8220;yourwar:war exploded&#8221;</li>
+    <li>Create XML file with name &#8220;yourwar.xml&#8221; with the following content:
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;Context</span>
+</span><span class='line'>  <span class="na">docBase=</span><span class="s">&quot;/absolute/path/to/project/yourwar&quot;</span>
+</span><span class='line'>  <span class="na">reloadable=</span><span class="s">&quot;false&quot;</span>
+</span><span class='line'>  <span class="na">path=</span><span class="s">&quot;/yourwar&quot;</span><span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 Please note, docBase have to be the same as &#8220;Output directory&#8221; setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as &#8220;Application context&#8221; in Run/Debug configuration</li>
-	<li>Create post deployment action that will copy just created XML to Liferay&#8217;s autodeploy folder.</li>
+    <li>Create post deployment action that will copy just created XML to Liferay&#8217;s autodeploy folder.</li>
 </ol>
-Enjoy automatic deployment, hot-swap and debugging your LIferay application.
 
-For additional instructions that you have to follow consider <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a>.
 
-Please note, I tested it with IntelliJ IDEA 12.1 and Liferay 6.0.5 on Tomcat 6
+<p>Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
+
+<p>For additional instructions that you have to follow consider <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a>.</p>
+
+<p>Please note, I tested it with IntelliJ IDEA 12.1 and Liferay 6.0.5 on Tomcat 6</p>
 </div>
   
   
@@ -196,30 +206,55 @@ Please note, I tested it with IntelliJ IDEA 12.1 and Liferay 6.0.5 on Tomcat 6
   </header>
 
 
-  <div class="entry-content">Since Apache Camel have only one built-in implementation for specific JMS provider - ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
+  <div class="entry-content"><p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.</p>
 
-In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
-<pre class="brush:xml"><dependency>
-	<groupId>org.hornetq</groupId>
-	<artifactId>hornetq-jms</artifactId>
-	<version>${hornetq.version}</version>
-</dependency>
-<dependency>
-	<groupId>org.hornetq</groupId>
-	<artifactId>hornetq-jms-client</artifactId>
-	<version>${hornetq.version}</version>
-</dependency>
-<dependency>
-	<groupId>org.hornetq</groupId>
-	<artifactId>hornetq-core-client</artifactId>
-	<version>${hornetq.version}</version>
-</dependency>
-<dependency>
-	<groupId>org.jboss.netty</groupId>
-	<artifactId>netty</artifactId>
-	<version>3.2.7.Final</version>
-</dependency></pre>
-After that modify your spring.xml. Here is an example:
+<p>In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.hornetq<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>hornetq-jms<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${hornetq.version}<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.hornetq<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>hornetq-jms-client<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${hornetq.version}<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.hornetq<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>hornetq-core-client<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${hornetq.version}<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.netty<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>netty<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>3.2.7.Final<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After that modify your spring.xml. Here is an example:</p>
+
 </div>
   
   
@@ -259,31 +294,56 @@ After that modify your spring.xml. Here is an example:
   </header>
 
 
-  <div class="entry-content">In latest releases of Hibernate Search 4 and Lucene 3.6 there was some changes in SpellChecker API&#8217;s.
-Here is example of the new API that allows to use spell checking with suggested words:
-<pre class="brush:java">public String[] getSuggestions(String txt){
-	String[] suggestions =  new String[]{};
+  <div class="entry-content"><p>In latest releases of Hibernate Search 4 and Lucene 3.6 there was some changes in SpellChecker API&rsquo;s.
+Here is example of the new API that allows to use spell checking with suggested words:</p>
 
-	FullTextSession fullTextSession = Search.getFullTextSession(sf.getCurrentSession());
-	SearchFactory searchFactory = fullTextSession.getSearchFactory();
-	IndexReader reader = searchFactory.getIndexReaderAccessor().open(MyEntity.class);
-	try {
-		FSDirectory spellCheckerDir = FSDirectory.open(new File("D:\lucene\spellchecker\com.site.model.MyEntity"));
-		SpellChecker spellChecker = new SpellChecker(spellCheckerDir);
-		Dictionary dictionary = new LuceneDictionary(reader, "description");
-		IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_35, searchFactory.getAnalyzer("myAnalyzer"));
-		spellChecker.indexDictionary(dictionary, config, true);
-		suggestions = spellChecker.suggestSimilar(txt, 10);
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	finally{
-		searchFactory.getIndexReaderAccessor().close(reader);
-	}
-	return suggestions;
-}</pre>
-<code>sf.getCurrentSession()</code> gets standard Hibernate session. If you use <code>EntityManager</code>, there exists a method to obtain <code>FullTextSession</code>.
-The example creates new index directory dedicated to spell checking. It adds terms from MyEntity&#8217;s <code>description</code> field to the index. <code>spellChecker.indexDictionary</code> adds the terms to the index, and optionally merges it with existing index.
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSuggestions</span><span class="o">(</span><span class="n">String</span> <span class="n">txt</span><span class="o">){</span>
+</span><span class='line'>  <span class="n">String</span><span class="o">[]</span> <span class="n">suggestions</span> <span class="o">=</span> <span class="err"> </span><span class="k">new</span> <span class="n">String</span><span class="o">[]{};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">FullTextSession</span> <span class="n">fullTextSession</span> <span class="o">=</span> <span class="n">Search</span><span class="o">.</span><span class="na">getFullTextSession</span><span class="o">(</span><span class="n">sf</span><span class="o">.</span><span class="na">getCurrentSession</span><span class="o">());</span>
+</span><span class='line'>  <span class="n">SearchFactory</span> <span class="n">searchFactory</span> <span class="o">=</span> <span class="n">fullTextSession</span><span class="o">.</span><span class="na">getSearchFactory</span><span class="o">();</span>
+</span><span class='line'>  <span class="n">IndexReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">searchFactory</span><span class="o">.</span><span class="na">getIndexReaderAccessor</span><span class="o">().</span><span class="na">open</span><span class="o">(</span><span class="n">MyEntity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>  <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">FSDirectory</span> <span class="n">spellCheckerDir</span> <span class="o">=</span> <span class="n">FSDirectory</span><span class="o">.</span><span class="na">open</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;D:\lucene\spellchecker\com.site.model.MyEntity&quot;</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">SpellChecker</span> <span class="n">spellChecker</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SpellChecker</span><span class="o">(</span><span class="n">spellCheckerDir</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">Dictionary</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LuceneDictionary</span><span class="o">(</span><span class="n">reader</span><span class="o">,</span> <span class="s">&quot;description&quot;</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">IndexWriterConfig</span> <span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexWriterConfig</span><span class="o">(</span><span class="n">Version</span><span class="o">.</span><span class="na">LUCENE_35</span><span class="o">,</span> <span class="n">searchFactory</span><span class="o">.</span><span class="na">getAnalyzer</span><span class="o">(</span><span class="s">&quot;myAnalyzer&quot;</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">spellChecker</span><span class="o">.</span><span class="na">indexDictionary</span><span class="o">(</span><span class="n">dictionary</span><span class="o">,</span> <span class="n">config</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">suggestions</span> <span class="o">=</span> <span class="n">spellChecker</span><span class="o">.</span><span class="na">suggestSimilar</span><span class="o">(</span><span class="n">txt</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="k">finally</span><span class="o">{</span>
+</span><span class='line'>      <span class="n">searchFactory</span><span class="o">.</span><span class="na">getIndexReaderAccessor</span><span class="o">().</span><span class="na">close</span><span class="o">(</span><span class="n">reader</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">suggestions</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>sf.getCurrentSession()</code> gets standard Hibernate session. If you use <code>EntityManager</code>, there exists a method to obtain <code>FullTextSession</code>.
+The example creates new index directory dedicated to spell checking. It adds terms from MyEntity&rsquo;s <code>description</code> field to the index. <code>spellChecker.indexDictionary</code> adds the terms to the index, and optionally merges it with existing index.</p>
 </div>
   
   
@@ -319,28 +379,51 @@ The example creates new index directory dedicated to spell checking. It adds ter
   </header>
 
 
-  <div class="entry-content">After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed:
+  <div class="entry-content"><p>After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed:</p>
 
-portlet.xml should look like
-<pre class="brush:xml"><portlet>
-	<description>wickettest4</description>
-	<portlet-name>wickettest4</portlet-name>
-	<display-name>wickettest4</display-name>
-	<portlet-class>org.apache.wicket.portlet.WicketPortlet</portlet-class>
-	<init-param>
-		<name>wicketFilterPath</name>
-		<value>/bla</value>
-	</init-param>
-	<supports>
-		<mime-type>text/html</mime-type>
-		<portlet-mode>VIEW</portlet-mode>
-	</supports>
-	<portlet-info>
-		<title>wickettest4</title>
-		<keywords>wickettest4</keywords>
-	</portlet-info>
-</portlet></pre>
-Note new portlet-class. Also, mime-type have to be text/html.
+<p>portlet.xml should look like</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;portlet&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;description&gt;</span>wickettest4<span class="nt">&lt;/description&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;portlet-name&gt;</span>wickettest4<span class="nt">&lt;/portlet-name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;display-name&gt;</span>wickettest4<span class="nt">&lt;/display-name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;portlet-class&gt;</span>org.apache.wicket.portlet.WicketPortlet<span class="nt">&lt;/portlet-class&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;init-param&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;name&gt;</span>wicketFilterPath<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;value&gt;</span>/bla<span class="nt">&lt;/value&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/init-param&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;supports&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;mime-type&gt;</span>text/html<span class="nt">&lt;/mime-type&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;portlet-mode&gt;</span>VIEW<span class="nt">&lt;/portlet-mode&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/supports&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;portlet-info&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;title&gt;</span>wickettest4<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;keywords&gt;</span>wickettest4<span class="nt">&lt;/keywords&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/portlet-info&gt;</span>
+</span><span class='line'><span class="nt">&lt;/portlet&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note new portlet-class. Also, mime-type have to be text/html.</p>
+
 </div>
   
   
@@ -380,13 +463,23 @@ Note new portlet-class. Also, mime-type have to be text/html.
   </header>
 
 
-  <div class="entry-content">In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:
-<pre class="brush:xml"><dependency>
-	<groupId>org.jboss.as</groupId>
-	<artifactId>jboss-as-controller-client</artifactId>
-	<version>7.0.2.Final</version>
-</dependency></pre>
-The following example creates new datasource:
+  <div class="entry-content"><p>In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.as<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>jboss-as-controller-client<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>7.0.2.Final<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The following example creates new datasource:</p>
+
 </div>
   
   
@@ -426,13 +519,13 @@ The following example creates new datasource:
   </header>
 
 
-  <div class="entry-content">For those of you who work a lot with Eclipse,
+  <div class="entry-content"><p>For those of you who work a lot with Eclipse,
 you probably run into all sorts of strange errors in Eclipse that
-not really related to your code, and then you get the feeling that Eclipse has gone mad.
+not really related to your code, and then you get the feeling that Eclipse has gone mad.</p>
 
-One way to solve these problems and clean the Eclipse is using -clean argument.
+<p>One way to solve these problems and clean the Eclipse is using -clean argument.
 all you need to do is to edit the eclipse.ini file located in your <Eclipse install directory> and add it as the first argument on the first line.
-After you upload the eclipse you can delete it until the next time you will need it.
+After you upload the eclipse you can delete it until the next time you will need it.</p>
 </div>
   
   
@@ -565,19 +658,34 @@ After you upload the eclipse you can delete it until the next time you will need
   </header>
 
 
-  <div class="entry-content"><p>Finally I find the way to use enum with JSF:<br />
+  <div class="entry-content"><p>Finally I find the way to use enum with JSF:
 Suppose you have enum:</p>
-<pre class="brush:java">public enum ActionTypeEnum {
-	UPDATE,
-	CREATE,
-	COPY
-}</pre>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">enum</span> <span class="n">ActionTypeEnum</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">UPDATE</span><span class="o">,</span>
+</span><span class='line'>  <span class="n">CREATE</span><span class="o">,</span>
+</span><span class='line'>  <span class="n">COPY</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <p>In JSF you can write EL expressions in form:</p>
-<pre class="brush:xml"><h:outputText value="someText"
-	rendered="#{listAction.actionType == 'COPY'}"/></pre>
-<p>The property <code>actionType</code> in managed bean <code>listAction</code> have to be of type <code>ActionTypeEnum</code>.</p>
-<p>It works because each enum in have method <code>valueOf(String stringValue)</code> and JSF attempts to convert String value to enum.<br />
-&nbsp;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">&quot;someText&quot;</span>
+</span><span class='line'>  <span class="na">rendered=</span><span class="s">&quot;#{listAction.actionType == &#39;COPY&#39;}&quot;</span><span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+The property <code>actionType</code> in managed bean <code>listAction</code> have to be of type <code>ActionTypeEnum</code>.
+It works because each enum in have method <code>valueOf(String stringValue)</code> and JSF attempts to convert String value to enum.</p>
 </div>
   
   

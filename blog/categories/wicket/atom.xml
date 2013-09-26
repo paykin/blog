@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Wicket | Programming Notes]]></title>
   <link href="http://test.paykin.info/blog/categories/wicket/atom.xml" rel="self"/>
   <link href="http://test.paykin.info/"/>
-  <updated>2013-09-26T18:10:40+03:00</updated>
+  <updated>2013-09-26T18:22:54+03:00</updated>
   <id>http://test.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry]]></name>
@@ -20,72 +20,88 @@
     <id>http://test.paykin.info/blog/2012/04/10/wicket_liferay_portlets</id>
     <content type="html"><![CDATA[<p>After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed:</p>
 
-<p>portlet.xml should look like</p>
+<p>portlet.xml should look like
+``` xml
+<portlet></p>
 
-<pre class="brush:xml"><portlet>
-    <description>wickettest4</description>
-    <portlet-name>wickettest4</portlet-name>
-    <display-name>wickettest4</display-name>
-    <portlet-class>org.apache.wicket.portlet.WicketPortlet</portlet-class>
-    <init-param>
-        <name>wicketFilterPath</name>
-        <value>/bla</value>
-    </init-param>
-    <supports>
-        <mime-type>text/html</mime-type>
-        <portlet-mode>VIEW</portlet-mode>
-    </supports>
-    <portlet-info>
-        <title>wickettest4</title>
-        <keywords>wickettest4</keywords>
-    </portlet-info>
-</portlet></pre>
+<pre><code>&lt;description&gt;wickettest4&lt;/description&gt;
+&lt;portlet-name&gt;wickettest4&lt;/portlet-name&gt;
+&lt;display-name&gt;wickettest4&lt;/display-name&gt;
+&lt;portlet-class&gt;org.apache.wicket.portlet.WicketPortlet&lt;/portlet-class&gt;
+&lt;init-param&gt;
+    &lt;name&gt;wicketFilterPath&lt;/name&gt;
+    &lt;value&gt;/bla&lt;/value&gt;
+&lt;/init-param&gt;
+&lt;supports&gt;
+    &lt;mime-type&gt;text/html&lt;/mime-type&gt;
+    &lt;portlet-mode&gt;VIEW&lt;/portlet-mode&gt;
+&lt;/supports&gt;
+&lt;portlet-info&gt;
+    &lt;title&gt;wickettest4&lt;/title&gt;
+    &lt;keywords&gt;wickettest4&lt;/keywords&gt;
+&lt;/portlet-info&gt;
+</code></pre>
 
+<p></portlet>
+```</p>
 
 <p>Note new portlet-class. Also, mime-type have to be text/html.</p>
 
 <!--more-->
 
 
-<p>web.xml also changed, notice filter class:</p>
+<p>web.xml also changed, notice filter class:
+``` xml
+<filter></p>
 
-<pre class="brush:xml"><filter>
-    <filter-name>wicket.wicket</filter-name>
-    <filter-class>org.apache.wicket.portlet.PortletFilter</filter-class>
-    <init-param>
-        <param-name>applicationClassName</param-name>
-        <param-value>org.wicket.WicketApplication</param-value>
-    </init-param>
-</filter>
-<filter-mapping>
-    <filter-name>wicket.wicket</filter-name>
-    <url-pattern>/bla/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>INCLUDE</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-</filter-mapping></pre>
+<pre><code>&lt;filter-name&gt;wicket.wicket&lt;/filter-name&gt;
+&lt;filter-class&gt;org.apache.wicket.portlet.PortletFilter&lt;/filter-class&gt;
+&lt;init-param&gt;
+    &lt;param-name&gt;applicationClassName&lt;/param-name&gt;
+    &lt;param-value&gt;org.wicket.WicketApplication&lt;/param-value&gt;
+&lt;/init-param&gt;
+</code></pre>
 
+<p></filter>
+&lt;filter-mapping></p>
 
-<p>And of course Maven dependencies also changed:</p>
+<pre><code>&lt;filter-name&gt;wicket.wicket&lt;/filter-name&gt;
+&lt;url-pattern&gt;/bla/*&lt;/url-pattern&gt;
+&lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;
+&lt;dispatcher&gt;INCLUDE&lt;/dispatcher&gt;
+&lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;
+</code></pre>
 
-<pre class="brush:xml"><dependency>
-    <groupId>org.apache.wicket</groupId>
-    <artifactId>wicket-core</artifactId>
-    <version>${wicket.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.portals.bridges</groupId>
-    <artifactId>portals-bridges-common</artifactId>
-    <version>2.0</version>
-</dependency>
-<dependency>
-    <groupId>org.wicketstuff</groupId>
-    <artifactId>wicketstuff-portlet</artifactId>
-    <version>${wicket.version}</version>
-</dependency></pre>
+<p>&lt;/filter-mapping>
+```</p>
 
+<p>And of course Maven dependencies also changed:
+``` xml
+<dependency></p>
 
-<p>&nbsp;</p>
+<pre><code>&lt;groupId&gt;org.apache.wicket&lt;/groupId&gt;
+&lt;artifactId&gt;wicket-core&lt;/artifactId&gt;
+&lt;version&gt;${wicket.version}&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.apache.portals.bridges&lt;/groupId&gt;
+&lt;artifactId&gt;portals-bridges-common&lt;/artifactId&gt;
+&lt;version&gt;2.0&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.wicketstuff&lt;/groupId&gt;
+&lt;artifactId&gt;wicketstuff-portlet&lt;/artifactId&gt;
+&lt;version&gt;${wicket.version}&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+```</p>
 ]]></content>
   </entry>
   

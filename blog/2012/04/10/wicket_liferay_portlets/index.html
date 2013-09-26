@@ -9,7 +9,14 @@
   <meta name="author" content="Dmitry">
 
   
-  <meta name="description" content="After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed: portlet.xml should look like wickettest4 &hellip;">
+  <meta name="description" content="After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed: portlet.xml should look like 1
+2
+3
+4
+5
+6
+7
+8 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,62 +98,123 @@
   </header>
 
 
-<div class="entry-content">After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed:
+<div class="entry-content"><p>After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed:</p>
 
-portlet.xml should look like
-<pre class="brush:xml"><portlet>
-	<description>wickettest4</description>
-	<portlet-name>wickettest4</portlet-name>
-	<display-name>wickettest4</display-name>
-	<portlet-class>org.apache.wicket.portlet.WicketPortlet</portlet-class>
-	<init-param>
-		<name>wicketFilterPath</name>
-		<value>/bla</value>
-	</init-param>
-	<supports>
-		<mime-type>text/html</mime-type>
-		<portlet-mode>VIEW</portlet-mode>
-	</supports>
-	<portlet-info>
-		<title>wickettest4</title>
-		<keywords>wickettest4</keywords>
-	</portlet-info>
-</portlet></pre>
-Note new portlet-class. Also, mime-type have to be text/html.
+<p>portlet.xml should look like</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;portlet&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;description&gt;</span>wickettest4<span class="nt">&lt;/description&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;portlet-name&gt;</span>wickettest4<span class="nt">&lt;/portlet-name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;display-name&gt;</span>wickettest4<span class="nt">&lt;/display-name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;portlet-class&gt;</span>org.apache.wicket.portlet.WicketPortlet<span class="nt">&lt;/portlet-class&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;init-param&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;name&gt;</span>wicketFilterPath<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;value&gt;</span>/bla<span class="nt">&lt;/value&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/init-param&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;supports&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;mime-type&gt;</span>text/html<span class="nt">&lt;/mime-type&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;portlet-mode&gt;</span>VIEW<span class="nt">&lt;/portlet-mode&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/supports&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;portlet-info&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;title&gt;</span>wickettest4<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;keywords&gt;</span>wickettest4<span class="nt">&lt;/keywords&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/portlet-info&gt;</span>
+</span><span class='line'><span class="nt">&lt;/portlet&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note new portlet-class. Also, mime-type have to be text/html.</p>
+
 <!--more-->
-web.xml also changed, notice filter class:
-<pre class="brush:xml"><filter>
-	<filter-name>wicket.wicket</filter-name>
-	<filter-class>org.apache.wicket.portlet.PortletFilter</filter-class>
-	<init-param>
-		<param-name>applicationClassName</param-name>
-		<param-value>org.wicket.WicketApplication</param-value>
-	</init-param>
-</filter>
-<filter-mapping>
-	<filter-name>wicket.wicket</filter-name>
-	<url-pattern>/bla/*</url-pattern>
-	<dispatcher>REQUEST</dispatcher>
-	<dispatcher>INCLUDE</dispatcher>
-	<dispatcher>FORWARD</dispatcher>
-</filter-mapping></pre>
-And of course Maven dependencies also changed:
-<pre class="brush:xml"><dependency>
-	<groupId>org.apache.wicket</groupId>
-	<artifactId>wicket-core</artifactId>
-	<version>${wicket.version}</version>
-</dependency>
-<dependency>
-	<groupId>org.apache.portals.bridges</groupId>
-	<artifactId>portals-bridges-common</artifactId>
-	<version>2.0</version>
-</dependency>
-<dependency>
-	<groupId>org.wicketstuff</groupId>
-	<artifactId>wicketstuff-portlet</artifactId>
-	<version>${wicket.version}</version>
-</dependency></pre>
-&nbsp;
+
+
+<p>web.xml also changed, notice filter class:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;filter&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;filter-name&gt;</span>wicket.wicket<span class="nt">&lt;/filter-name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;filter-class&gt;</span>org.apache.wicket.portlet.PortletFilter<span class="nt">&lt;/filter-class&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;init-param&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;param-name&gt;</span>applicationClassName<span class="nt">&lt;/param-name&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;param-value&gt;</span>org.wicket.WicketApplication<span class="nt">&lt;/param-value&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/init-param&gt;</span>
+</span><span class='line'><span class="nt">&lt;/filter&gt;</span>
+</span><span class='line'><span class="nt">&lt;filter-mapping&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;filter-name&gt;</span>wicket.wicket<span class="nt">&lt;/filter-name&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;url-pattern&gt;</span>/bla/*<span class="nt">&lt;/url-pattern&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;dispatcher&gt;</span>REQUEST<span class="nt">&lt;/dispatcher&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;dispatcher&gt;</span>INCLUDE<span class="nt">&lt;/dispatcher&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;dispatcher&gt;</span>FORWARD<span class="nt">&lt;/dispatcher&gt;</span>
+</span><span class='line'><span class="nt">&lt;/filter-mapping&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And of course Maven dependencies also changed:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.apache.wicket<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>wicket-core<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${wicket.version}<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.apache.portals.bridges<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>portals-bridges-common<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>2.0<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.wicketstuff<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>wicketstuff-portlet<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${wicket.version}<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 

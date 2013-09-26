@@ -9,7 +9,7 @@
   <meta name="author" content="Dmitry">
 
   
-  <meta name="description" content="Since Apache Camel have only one built-in implementation for specific JMS provider - ActiveMQ, you have to use generic org.apache.camel.component.jms &hellip;">
+  <meta name="description" content="Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,75 +91,151 @@
   </header>
 
 
-<div class="entry-content">Since Apache Camel have only one built-in implementation for specific JMS provider - ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
+<div class="entry-content"><p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.</p>
 
-In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
-<pre class="brush:xml"><dependency>
-	<groupId>org.hornetq</groupId>
-	<artifactId>hornetq-jms</artifactId>
-	<version>${hornetq.version}</version>
-</dependency>
-<dependency>
-	<groupId>org.hornetq</groupId>
-	<artifactId>hornetq-jms-client</artifactId>
-	<version>${hornetq.version}</version>
-</dependency>
-<dependency>
-	<groupId>org.hornetq</groupId>
-	<artifactId>hornetq-core-client</artifactId>
-	<version>${hornetq.version}</version>
-</dependency>
-<dependency>
-	<groupId>org.jboss.netty</groupId>
-	<artifactId>netty</artifactId>
-	<version>3.2.7.Final</version>
-</dependency></pre>
-After that modify your spring.xml. Here is an example:
+<p>In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.hornetq<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>hornetq-jms<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${hornetq.version}<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.hornetq<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>hornetq-jms-client<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${hornetq.version}<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.hornetq<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>hornetq-core-client<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${hornetq.version}<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.netty<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>netty<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>3.2.7.Final<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After that modify your spring.xml. Here is an example:</p>
+
 <!--more-->
-<pre class="brush:xml"><?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    <bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" />
-    <bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/>
-    <bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory">
-        <constructor-arg name="serverLocator" ref="hornetqServerLocator"/>
-    </bean>
-    <bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
-        <property name="connectionFactory" ref="hornetqJmsConnectionFactory"/>
-        <property name="transacted" value="false"/>
-        <property name="requestTimeout" value="60000"/>
-    </bean>
-    <bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent">
-        <property name="configuration" ref="hornetqJmsConfig"/>
-    </bean>
-</beans></pre>
-And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
-<pre class="brush:java">package com.example;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import org.hornetq.api.core.TransportConfiguration;
-import org.hornetq.api.core.client.HornetQClient;
-import org.hornetq.api.core.client.ServerLocator;
-import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
-import org.springframework.beans.factory.annotation.Configurable;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.springframework.org/schema/beans&quot;</span>
+</span><span class='line'>       <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+</span><span class='line'>       <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;hornetqServerLocatorFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;com.example.HornetqServerLocatorFactory&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;hornetqServerLocator&quot;</span> <span class="na">factory-bean=</span><span class="s">&quot;hornetqServerLocatorFactory&quot;</span> <span class="na">factory-method=</span><span class="s">&quot;createServerLocator&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;hornetqJmsConnectionFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;org.hornetq.jms.client.HornetQJMSConnectionFactory&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;constructor-arg</span> <span class="na">name=</span><span class="s">&quot;serverLocator&quot;</span> <span class="na">ref=</span><span class="s">&quot;hornetqServerLocator&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/bean&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;hornetqJmsConfig&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.camel.component.jms.JmsConfiguration&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;connectionFactory&quot;</span> <span class="na">ref=</span><span class="s">&quot;hornetqJmsConnectionFactory&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;transacted&quot;</span> <span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;requestTimeout&quot;</span> <span class="na">value=</span><span class="s">&quot;60000&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/bean&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;hornetq&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.camel.component.jms.JmsComponent&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;configuration&quot;</span> <span class="na">ref=</span><span class="s">&quot;hornetqJmsConfig&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/bean&gt;</span>
+</span><span class='line'><span class="nt">&lt;/beans&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-@Configurable
-public class HornetqServerLocatorFactory {
 
-	public ServerLocator createServerLocator() {
-		final Map<String, Object> connectionParams = new HashMap<String, Object>();
-		connectionParams.put( "port", "hornetq-host.com" );
-		connectionParams.put( "host", 5900 );
+<p>And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it &ndash; just put them as members of the class and inject them via Spring.xml.</p>
 
-		final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
-		final ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA( new TransportConfiguration[] { transportConfiguration } );
-		return serverLocator;
-	}
-}</pre>
-That&#8217;s it!
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.api.core.TransportConfiguration</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.api.core.client.HornetQClient</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.api.core.client.ServerLocator</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.core.remoting.impl.netty.NettyConnectorFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Configurable</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@Configurable</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HornetqServerLocatorFactory</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">ServerLocator</span> <span class="nf">createServerLocator</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">final</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">connectionParams</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;();</span>
+</span><span class='line'>      <span class="n">connectionParams</span><span class="o">.</span><span class="na">put</span><span class="o">(</span> <span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="s">&quot;hornetq-host.com&quot;</span> <span class="o">);</span>
+</span><span class='line'>      <span class="n">connectionParams</span><span class="o">.</span><span class="na">put</span><span class="o">(</span> <span class="s">&quot;host&quot;</span><span class="o">,</span> <span class="mi">5900</span> <span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="kd">final</span> <span class="n">TransportConfiguration</span> <span class="n">transportConfiguration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TransportConfiguration</span><span class="o">(</span> <span class="n">NettyConnectorFactory</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">connectionParams</span> <span class="o">);</span>
+</span><span class='line'>      <span class="kd">final</span> <span class="n">ServerLocator</span> <span class="n">serverLocator</span> <span class="o">=</span> <span class="n">HornetQClient</span><span class="o">.</span><span class="na">createServerLocatorWithoutHA</span><span class="o">(</span> <span class="k">new</span> <span class="n">TransportConfiguration</span><span class="o">[]</span> <span class="o">{</span> <span class="n">transportConfiguration</span> <span class="o">}</span> <span class="o">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">serverLocator</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it!</p>
 </div>
 
 
