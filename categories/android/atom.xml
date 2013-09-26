@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | Programming Notes]]></title>
   <link href="http://test.paykin.info/categories/android/atom.xml" rel="self"/>
   <link href="http://test.paykin.info/"/>
-  <updated>2013-09-26T18:40:22+03:00</updated>
+  <updated>2013-09-26T19:49:20+03:00</updated>
   <id>http://test.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry]]></name>
@@ -20,23 +20,20 @@
     <id>http://test.paykin.info/android-css-media-reloading</id>
     <content type="html"><![CDATA[<p>While trying to optimize site for mobile devices you have to add viewport meta tag:
 <code>html
-&lt;meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, height=device-height, initial-scale=1.0" /&gt;
+&amp;lt;meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, height=device-height, initial-scale=1.0" /&amp;gt;
 </code>
-You can add additional CSS file that will be used on mobile device only. To achieve this just add CSS media type. In Android developer&rsquo;s guide at <a href="http://developer.android.com/guide/webapps/targeting.html"><a href="http://developer.android.com/guide/webapps/targeting.html">http://developer.android.com/guide/webapps/targeting.html</a></a> it suggests to target device DPI value like:</p>
-
-<!--more-->
-
-
-<p><code>html
-&lt;link rel="stylesheet" href="css/mobile.css" type="text/css" media="screen and (-webkit-device-pixel-ratio:1.0)" /&gt;
+You can add additional CSS file that will be used on mobile device only. To achieve this just add CSS media type. In Android developer&rsquo;s guide at &lt;a href=&ldquo;<a href="http://developer.android.com/guide/webapps/targeting.html">http://developer.android.com/guide/webapps/targeting.html</a>&rdquo;&gt;<a href="http://developer.android.com/guide/webapps/targeting.html&amp;lt;/a&amp;gt;">http://developer.android.com/guide/webapps/targeting.html&amp;lt;/a&amp;gt;</a> it suggests to target device DPI value like:
+&lt;!&mdash;more&mdash;&gt;
+<code>html
+&amp;lt;link rel="stylesheet" href="css/mobile.css" type="text/css" media="screen and (-webkit-device-pixel-ratio:1.0)" /&amp;gt;
 </code>
 It works fine, but Google Chrome on desktop PC also loads this CSS file.</p>
 
 <p>There is another solution to target mobile devices (both Android, iPhone, Blackberry): to specify maximal width of the screen like:
 <code>html
-&lt;link rel="stylesheet" href="css/mobile.css" type="text/css" media="screen and (max-device-width:801px) and (max-width:801px)" /&gt;
+&amp;lt;link rel="stylesheet" href="css/mobile.css" type="text/css" media="screen and (max-device-width:801px) and (max-width:801px)" /&amp;gt;
 </code>
-The problem is that Android (at least 2.3 I&rsquo;ve tested) recognizes this media type only after page reloading (refreshing) in browser. Googling the web I found the open <a title="issue" href="http://code.google.com/p/android/issues/detail?id=11961" target="_blank">issue</a>.
+The problem is that Android (at least 2.3 I&rsquo;ve tested) recognizes this media type only after page reloading (refreshing) in browser. Googling the web I found the open &lt;a title=&ldquo;issue&rdquo; href=&ldquo;<a href="http://code.google.com/p/android/issues/detail?id=11961">http://code.google.com/p/android/issues/detail?id=11961</a>&rdquo; target=&ldquo;_blank&rdquo;&gt;issue&lt;/a&gt;.
 I solved it using JavaScript:
 ``` javascript
 if(isMobile){</p>
@@ -52,7 +49,7 @@ document.head.appendChild(cssLink);
 ```
 I tested it on my device an it works fine, unless some little delay: the CSS file loads only after JavaScript executes. When google will fix the issue (I hope so&hellip;), there will be no delay, since original link is in the HEAD section.</p>
 
-<p>Of course you have to detect mobile device using the JavaScript, I used solution suggested here: <a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob"><a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob">http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob</a></a></p>
+<p>Of course you have to detect mobile device using the JavaScript, I used solution suggested here: &lt;a href=&ldquo;<a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob">http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob</a>&rdquo;&gt;<a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob&amp;lt;/a&amp;gt;">http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob&amp;lt;/a&amp;gt;</a></p>
 ]]></content>
   </entry>
   

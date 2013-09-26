@@ -93,6 +93,8 @@ public enum ActionTypeEnum { UPDATE, CREATE, COPY
 
 <time datetime="2011-09-25T00:00:00+03:00" pubdate data-updated="true">Sep 25<span>th</span>, 2011</time>
         
+         | <a href="#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -118,14 +120,14 @@ Suppose you have enum:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">&quot;someText&quot;</span>
-</span><span class='line'>  <span class="na">rendered=</span><span class="s">&quot;#{listAction.actionType == &#39;COPY&#39;}&quot;</span><span class="nt">/&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>h:outputText value=&quot;someText&quot;
+</span><span class='line'>  rendered=&quot;#{listAction.actionType == &#39;COPY&#39;}&quot;/<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>
-The property <code>actionType</code> in managed bean <code>listAction</code> have to be of type <code>ActionTypeEnum</code>.
-It works because each enum in have method <code>valueOf(String stringValue)</code> and JSF attempts to convert String value to enum.</p>
+The property &lt;code&gt;actionType&lt;/code&gt; in managed bean &lt;code&gt;listAction&lt;/code&gt; have to be of type &lt;code&gt;ActionTypeEnum&lt;/code&gt;.
+It works because each enum in have method &lt;code&gt;valueOf(String stringValue)&lt;/code&gt; and JSF attempts to convert String value to enum.</p>
 </div>
 
 
@@ -228,6 +230,19 @@ It works because each enum in have method <code>valueOf(String stringValue)</cod
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'java-paykin';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 

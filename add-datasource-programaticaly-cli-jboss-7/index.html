@@ -86,6 +86,8 @@
 
 <time datetime="2011-11-24T00:00:00+02:00" pubdate data-updated="true">Nov 24<span>th</span>, 2011</time>
         
+         | <a href="#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -98,18 +100,16 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.as<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>jboss-as-controller-client<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>7.0.2.Final<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.jboss.as<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>jboss-as-controller-client<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>7.0.2.Final<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/dependency<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The following example creates new datasource:</p>
-
-<!--more-->
-
+<p>The following example creates new datasource:
+&lt;!&mdash;more&mdash;&gt;</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -129,8 +129,6 @@
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">createDatasource</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
 </span><span class='line'>  <span class="n">ModelNode</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ModelNode</span><span class="o">();</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">ADD</span><span class="o">);</span>
@@ -138,7 +136,6 @@
 </span><span class='line'>          <span class="s">&quot;datasources&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP_ADDR</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;data-source&quot;</span><span class="o">,</span>
 </span><span class='line'>          <span class="s">&quot;java:jboss/datasources/NewDatasource&quot;</span><span class="o">);</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;jndi-name&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;java:jboss/datasources/NewDatasource&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;connection-url&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;jdbc:as400://1.2.3.4/SCHEME&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;driver-class&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;com.ibm.as400.access.AS400JDBCDriver&quot;</span><span class="o">);</span>
@@ -146,7 +143,6 @@
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;user-name&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;username&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;pool-name&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;pool_NewDatasource&quot;</span><span class="o">);</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="n">ModelControllerClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">ModelControllerClient</span><span class="o">.</span><span class="na">Factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span>
 </span><span class='line'>          <span class="n">InetAddress</span><span class="o">.</span><span class="na">getByName</span><span class="o">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="o">),</span> <span class="mi">9999</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">client</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">OperationBuilder</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
@@ -175,21 +171,15 @@
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">checkIfDatasourceExists</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
 </span><span class='line'>  <span class="n">ModelNode</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ModelNode</span><span class="o">();</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;read-resource&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;recursive&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP_ADDR</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;subsystem&quot;</span><span class="o">,</span> <span class="s">&quot;datasources&quot;</span><span class="o">);</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="n">ModelControllerClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">ModelControllerClient</span><span class="o">.</span><span class="na">Factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span>
 </span><span class='line'>          <span class="n">InetAddress</span><span class="o">.</span><span class="na">getByName</span><span class="o">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="o">),</span> <span class="mi">9999</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">ModelNode</span> <span class="n">responce</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">OperationBuilder</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="n">ModelNode</span> <span class="n">datasources</span> <span class="o">=</span> <span class="n">responce</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">RESULT</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;data-source&quot;</span><span class="o">);</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">datasources</span><span class="o">.</span><span class="na">isDefined</span><span class="o">())</span> <span class="o">{</span>
 </span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="n">ModelNode</span> <span class="n">dataSource</span> <span class="o">:</span> <span class="n">datasources</span><span class="o">.</span><span class="na">asList</span><span class="o">())</span> <span class="o">{</span>
 </span><span class='line'>          <span class="n">String</span> <span class="n">dataSourceName</span> <span class="o">=</span> <span class="n">dataSource</span><span class="o">.</span><span class="na">asProperty</span><span class="o">().</span><span class="na">getName</span><span class="o">();</span>
@@ -306,6 +296,19 @@
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'java-paykin';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 

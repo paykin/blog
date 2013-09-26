@@ -9,7 +9,8 @@
   <meta name="author" content="Dmitry">
 
   
-  <meta name="description" content="You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps: Create debug configuration in IntelliJ &hellip;">
+  <meta name="description" content="You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:
+&lt;ol&gt; &amp;lt;li&amp;gt;&amp;lt;span &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,37 +87,43 @@
 
 <time datetime="2013-04-29T00:00:00+03:00" pubdate data-updated="true">Apr 29<span>th</span>, 2013</time>
         
+         | <a href="#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:</p>
+<div class="entry-content"><p>You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:
+&lt;ol&gt;</p>
 
-<ol>
-    <li><span style="line-height: 14px;">Create debug configuration in IntelliJ IDEA using Local Tomcat</span></li>
-    <li>Configure deployment artifact: add your WAR as &#8220;yourwar:war exploded&#8221;</li>
-    <li>Create XML file with name &#8220;yourwar.xml&#8221; with the following content:
+<pre><code>&amp;lt;li&amp;gt;&amp;lt;span style="line-height: 14px;"&amp;gt;Create debug configuration in IntelliJ IDEA using Local Tomcat&amp;lt;/span&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;Configure deployment artifact: add your WAR as "yourwar:war exploded"&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;Create XML file with name "yourwar.xml" with the following content:
+</code></pre>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;Context</span>
-</span><span class='line'>  <span class="na">docBase=</span><span class="s">&quot;/absolute/path/to/project/yourwar&quot;</span>
-</span><span class='line'>  <span class="na">reloadable=</span><span class="s">&quot;false&quot;</span>
-</span><span class='line'>  <span class="na">path=</span><span class="s">&quot;/yourwar&quot;</span><span class="nt">/&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>Context
+</span><span class='line'>  docBase=&quot;/absolute/path/to/project/yourwar&quot;
+</span><span class='line'>  reloadable=&quot;false&quot;
+</span><span class='line'>  path=&quot;/yourwar&quot;/<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-Please note, docBase have to be the same as &#8220;Output directory&#8221; setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as &#8220;Application context&#8221; in Run/Debug configuration</li>
-    <li>Create post deployment action that will copy just created XML to Liferay&#8217;s autodeploy folder.</li>
-</ol>
 
+<p>Please note, docBase have to be the same as &ldquo;Output directory&rdquo; setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as &ldquo;Application context&rdquo; in Run/Debug configuration&lt;/li&gt;</p>
 
-<p>Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
+<pre><code>&amp;lt;li&amp;gt;Create post deployment action that will copy just created XML to Liferay's autodeploy folder.&amp;lt;/li&amp;gt;
+</code></pre>
 
-<p>For additional instructions that you have to follow consider <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a>.</p>
+<p>&lt;/ol&gt;
+Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
+
+<p>For additional instructions that you have to follow consider &lt;a href=&ldquo;<a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ">http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ</a>&rdquo; title=&ldquo;Liferay official wiki&rdquo; target=&ldquo;_blank&rdquo;&gt;Liferay official wiki&lt;/a&gt;.</p>
 
 <p>Please note, I tested it with IntelliJ IDEA 12.1 and Liferay 6.0.5 on Tomcat 6</p>
 </div>
@@ -221,6 +228,19 @@ Please note, docBase have to be the same as &#8220;Output directory&#8221; setti
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'java-paykin';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 

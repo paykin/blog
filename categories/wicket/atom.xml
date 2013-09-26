@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Wicket | Programming Notes]]></title>
   <link href="http://test.paykin.info/categories/wicket/atom.xml" rel="self"/>
   <link href="http://test.paykin.info/"/>
-  <updated>2013-09-26T18:40:22+03:00</updated>
+  <updated>2013-09-26T19:49:20+03:00</updated>
   <id>http://test.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry]]></name>
@@ -22,85 +22,82 @@
 
 <p>portlet.xml should look like
 ``` xml
-<portlet></p>
+&lt;portlet&gt;</p>
 
-<pre><code>&lt;description&gt;wickettest4&lt;/description&gt;
-&lt;portlet-name&gt;wickettest4&lt;/portlet-name&gt;
-&lt;display-name&gt;wickettest4&lt;/display-name&gt;
-&lt;portlet-class&gt;org.apache.wicket.portlet.WicketPortlet&lt;/portlet-class&gt;
-&lt;init-param&gt;
-    &lt;name&gt;wicketFilterPath&lt;/name&gt;
-    &lt;value&gt;/bla&lt;/value&gt;
-&lt;/init-param&gt;
-&lt;supports&gt;
-    &lt;mime-type&gt;text/html&lt;/mime-type&gt;
-    &lt;portlet-mode&gt;VIEW&lt;/portlet-mode&gt;
-&lt;/supports&gt;
-&lt;portlet-info&gt;
-    &lt;title&gt;wickettest4&lt;/title&gt;
-    &lt;keywords&gt;wickettest4&lt;/keywords&gt;
-&lt;/portlet-info&gt;
+<pre><code>&amp;lt;description&amp;gt;wickettest4&amp;lt;/description&amp;gt;
+&amp;lt;portlet-name&amp;gt;wickettest4&amp;lt;/portlet-name&amp;gt;
+&amp;lt;display-name&amp;gt;wickettest4&amp;lt;/display-name&amp;gt;
+&amp;lt;portlet-class&amp;gt;org.apache.wicket.portlet.WicketPortlet&amp;lt;/portlet-class&amp;gt;
+&amp;lt;init-param&amp;gt;
+    &amp;lt;name&amp;gt;wicketFilterPath&amp;lt;/name&amp;gt;
+    &amp;lt;value&amp;gt;/bla&amp;lt;/value&amp;gt;
+&amp;lt;/init-param&amp;gt;
+&amp;lt;supports&amp;gt;
+    &amp;lt;mime-type&amp;gt;text/html&amp;lt;/mime-type&amp;gt;
+    &amp;lt;portlet-mode&amp;gt;VIEW&amp;lt;/portlet-mode&amp;gt;
+&amp;lt;/supports&amp;gt;
+&amp;lt;portlet-info&amp;gt;
+    &amp;lt;title&amp;gt;wickettest4&amp;lt;/title&amp;gt;
+    &amp;lt;keywords&amp;gt;wickettest4&amp;lt;/keywords&amp;gt;
+&amp;lt;/portlet-info&amp;gt;
 </code></pre>
 
-<p></portlet>
+<p>&lt;/portlet&gt;
 ```</p>
 
-<p>Note new portlet-class. Also, mime-type have to be text/html.</p>
-
-<!--more-->
-
-
-<p>web.xml also changed, notice filter class:
+<p>Note new portlet-class. Also, mime-type have to be text/html.
+&lt;!&mdash;more&mdash;&gt;
+web.xml also changed, notice filter class:
 ``` xml
-<filter></p>
+&lt;filter&gt;</p>
 
-<pre><code>&lt;filter-name&gt;wicket.wicket&lt;/filter-name&gt;
-&lt;filter-class&gt;org.apache.wicket.portlet.PortletFilter&lt;/filter-class&gt;
-&lt;init-param&gt;
-    &lt;param-name&gt;applicationClassName&lt;/param-name&gt;
-    &lt;param-value&gt;org.wicket.WicketApplication&lt;/param-value&gt;
-&lt;/init-param&gt;
+<pre><code>&amp;lt;filter-name&amp;gt;wicket.wicket&amp;lt;/filter-name&amp;gt;
+&amp;lt;filter-class&amp;gt;org.apache.wicket.portlet.PortletFilter&amp;lt;/filter-class&amp;gt;
+&amp;lt;init-param&amp;gt;
+    &amp;lt;param-name&amp;gt;applicationClassName&amp;lt;/param-name&amp;gt;
+    &amp;lt;param-value&amp;gt;org.wicket.WicketApplication&amp;lt;/param-value&amp;gt;
+&amp;lt;/init-param&amp;gt;
 </code></pre>
 
-<p></filter>
-&lt;filter-mapping></p>
+<p>&lt;/filter&gt;
+&lt;filter-mapping&gt;</p>
 
-<pre><code>&lt;filter-name&gt;wicket.wicket&lt;/filter-name&gt;
-&lt;url-pattern&gt;/bla/*&lt;/url-pattern&gt;
-&lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;
-&lt;dispatcher&gt;INCLUDE&lt;/dispatcher&gt;
-&lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;
+<pre><code>&amp;lt;filter-name&amp;gt;wicket.wicket&amp;lt;/filter-name&amp;gt;
+&amp;lt;url-pattern&amp;gt;/bla/*&amp;lt;/url-pattern&amp;gt;
+&amp;lt;dispatcher&amp;gt;REQUEST&amp;lt;/dispatcher&amp;gt;
+&amp;lt;dispatcher&amp;gt;INCLUDE&amp;lt;/dispatcher&amp;gt;
+&amp;lt;dispatcher&amp;gt;FORWARD&amp;lt;/dispatcher&amp;gt;
 </code></pre>
 
-<p>&lt;/filter-mapping>
+<p>&lt;/filter-mapping&gt;
 ```</p>
 
 <p>And of course Maven dependencies also changed:
 ``` xml
-<dependency></p>
+&lt;dependency&gt;</p>
 
-<pre><code>&lt;groupId&gt;org.apache.wicket&lt;/groupId&gt;
-&lt;artifactId&gt;wicket-core&lt;/artifactId&gt;
-&lt;version&gt;${wicket.version}&lt;/version&gt;
+<pre><code>&amp;lt;groupId&amp;gt;org.apache.wicket&amp;lt;/groupId&amp;gt;
+&amp;lt;artifactId&amp;gt;wicket-core&amp;lt;/artifactId&amp;gt;
+&amp;lt;version&amp;gt;${wicket.version}&amp;lt;/version&amp;gt;
 </code></pre>
 
-<p></dependency>
-<dependency></p>
+<p>&lt;/dependency&gt;
+&lt;dependency&gt;</p>
 
-<pre><code>&lt;groupId&gt;org.apache.portals.bridges&lt;/groupId&gt;
-&lt;artifactId&gt;portals-bridges-common&lt;/artifactId&gt;
-&lt;version&gt;2.0&lt;/version&gt;
+<pre><code>&amp;lt;groupId&amp;gt;org.apache.portals.bridges&amp;lt;/groupId&amp;gt;
+&amp;lt;artifactId&amp;gt;portals-bridges-common&amp;lt;/artifactId&amp;gt;
+&amp;lt;version&amp;gt;2.0&amp;lt;/version&amp;gt;
 </code></pre>
 
-<p></dependency>
-<dependency></p>
+<p>&lt;/dependency&gt;
+&lt;dependency&gt;</p>
 
-<pre><code>&lt;groupId&gt;org.wicketstuff&lt;/groupId&gt;
-&lt;artifactId&gt;wicketstuff-portlet&lt;/artifactId&gt;
-&lt;version&gt;${wicket.version}&lt;/version&gt;
+<pre><code>&amp;lt;groupId&amp;gt;org.wicketstuff&amp;lt;/groupId&amp;gt;
+&amp;lt;artifactId&amp;gt;wicketstuff-portlet&amp;lt;/artifactId&amp;gt;
+&amp;lt;version&amp;gt;${wicket.version}&amp;lt;/version&amp;gt;
 </code></pre>
 
-<p></dependency>
+<p>&lt;/dependency&gt;
 ```</p>
 ]]></content>
   </entry>

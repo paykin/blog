@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JSF | Programming Notes]]></title>
   <link href="http://test.paykin.info/categories/jsf/atom.xml" rel="self"/>
   <link href="http://test.paykin.info/"/>
-  <updated>2013-09-26T18:40:22+03:00</updated>
+  <updated>2013-09-26T19:49:20+03:00</updated>
   <id>http://test.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry]]></name>
@@ -21,9 +21,9 @@
     <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:
 ``` xml</p>
 
-<pre><code>&lt;configuration&gt;
-    &lt;jsp-configuration development="true"/&gt;
-&lt;/configuration&gt;
+<pre><code>&amp;lt;configuration&amp;gt;
+    &amp;lt;jsp-configuration development="true"/&amp;gt;
+&amp;lt;/configuration&amp;gt;
 ...
 </code></pre>
 
@@ -53,12 +53,12 @@ In JSF you can write EL expressions in form:
 </code> xml
 &lt;h:outputText value=&ldquo;someText&rdquo;</p>
 
-<pre><code>rendered="#{listAction.actionType == 'COPY'}"/&gt;
+<pre><code>rendered="#{listAction.actionType == 'COPY'}"/&amp;gt;
 </code></pre>
 
 <p>```
-The property <code>actionType</code> in managed bean <code>listAction</code> have to be of type <code>ActionTypeEnum</code>.
-It works because each enum in have method <code>valueOf(String stringValue)</code> and JSF attempts to convert String value to enum.</p>
+The property &lt;code&gt;actionType&lt;/code&gt; in managed bean &lt;code&gt;listAction&lt;/code&gt; have to be of type &lt;code&gt;ActionTypeEnum&lt;/code&gt;.
+It works because each enum in have method &lt;code&gt;valueOf(String stringValue)&lt;/code&gt; and JSF attempts to convert String value to enum.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Programming Notes]]></title>
   <link href="http://test.paykin.info/atom.xml" rel="self"/>
   <link href="http://test.paykin.info/"/>
-  <updated>2013-09-26T18:40:22+03:00</updated>
+  <updated>2013-09-26T19:49:20+03:00</updated>
   <id>http://test.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry]]></name>
@@ -38,32 +38,36 @@ drwxr-xr-x 14 root root 4096 Aug 15  2009 stage
     <link href="http://test.paykin.info/liferay-portlet-intellij-idea/"/>
     <updated>2013-04-29T00:00:00+03:00</updated>
     <id>http://test.paykin.info/liferay-portlet-intellij-idea</id>
-    <content type="html"><![CDATA[<p>You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:</p>
+    <content type="html"><![CDATA[<p>You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps:
+&lt;ol&gt;</p>
 
-<ol>
-    <li><span style="line-height: 14px;">Create debug configuration in IntelliJ IDEA using Local Tomcat</span></li>
-    <li>Configure deployment artifact: add your WAR as &#8220;yourwar:war exploded&#8221;</li>
-    <li>Create XML file with name &#8220;yourwar.xml&#8221; with the following content:
+<pre><code>&amp;lt;li&amp;gt;&amp;lt;span style="line-height: 14px;"&amp;gt;Create debug configuration in IntelliJ IDEA using Local Tomcat&amp;lt;/span&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;Configure deployment artifact: add your WAR as "yourwar:war exploded"&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;Create XML file with name "yourwar.xml" with the following content:
+</code></pre>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;Context</span>
-</span><span class='line'>  <span class="na">docBase=</span><span class="s">&quot;/absolute/path/to/project/yourwar&quot;</span>
-</span><span class='line'>  <span class="na">reloadable=</span><span class="s">&quot;false&quot;</span>
-</span><span class='line'>  <span class="na">path=</span><span class="s">&quot;/yourwar&quot;</span><span class="nt">/&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>Context
+</span><span class='line'>  docBase=&quot;/absolute/path/to/project/yourwar&quot;
+</span><span class='line'>  reloadable=&quot;false&quot;
+</span><span class='line'>  path=&quot;/yourwar&quot;/<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-Please note, docBase have to be the same as &#8220;Output directory&#8221; setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as &#8220;Application context&#8221; in Run/Debug configuration</li>
-    <li>Create post deployment action that will copy just created XML to Liferay&#8217;s autodeploy folder.</li>
-</ol>
 
+<p>Please note, docBase have to be the same as &ldquo;Output directory&rdquo; setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as &ldquo;Application context&rdquo; in Run/Debug configuration&lt;/li&gt;</p>
 
-<p>Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
+<pre><code>&amp;lt;li&amp;gt;Create post deployment action that will copy just created XML to Liferay's autodeploy folder.&amp;lt;/li&amp;gt;
+</code></pre>
 
-<p>For additional instructions that you have to follow consider <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a>.</p>
+<p>&lt;/ol&gt;
+Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
+
+<p>For additional instructions that you have to follow consider &lt;a href=&ldquo;<a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ">http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ</a>&rdquo; title=&ldquo;Liferay official wiki&rdquo; target=&ldquo;_blank&rdquo;&gt;Liferay official wiki&lt;/a&gt;.</p>
 
 <p>Please note, I tested it with IntelliJ IDEA 12.1 and Liferay 6.0.5 on Tomcat 6</p>
 ]]></content>
@@ -74,9 +78,8 @@ Please note, docBase have to be the same as &#8220;Output directory&#8221; setti
     <link href="http://test.paykin.info/hornetq-camel-spring/"/>
     <updated>2012-12-13T00:00:00+02:00</updated>
     <id>http://test.paykin.info/hornetq-camel-spring</id>
-    <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.</p>
-
-<p>In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:</p>
+    <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
+In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -98,33 +101,31 @@ Please note, docBase have to be the same as &#8220;Output directory&#8221; setti
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.hornetq<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>hornetq-jms<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${hornetq.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.hornetq<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>hornetq-jms-client<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${hornetq.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.hornetq<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>hornetq-core-client<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${hornetq.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.netty<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>netty<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>3.2.7.Final<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.hornetq<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>hornetq-jms<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>${hornetq.version}<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.hornetq<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>hornetq-jms-client<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>${hornetq.version}<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.hornetq<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>hornetq-core-client<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>${hornetq.version}<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.jboss.netty<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>netty<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>3.2.7.Final<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/dependency<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>After that modify your spring.xml. Here is an example:</p>
-
-<!--more-->
-
+<p>After that modify your spring.xml. Here is an example:
+&lt;!&mdash;more&mdash;&gt;</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -144,24 +145,24 @@ Please note, docBase have to be the same as &#8220;Output directory&#8221; setti
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.springframework.org/schema/beans&quot;</span>
-</span><span class='line'>       <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-</span><span class='line'>       <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;hornetqServerLocatorFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;com.example.HornetqServerLocatorFactory&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;hornetqServerLocator&quot;</span> <span class="na">factory-bean=</span><span class="s">&quot;hornetqServerLocatorFactory&quot;</span> <span class="na">factory-method=</span><span class="s">&quot;createServerLocator&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;hornetqJmsConnectionFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;org.hornetq.jms.client.HornetQJMSConnectionFactory&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;constructor-arg</span> <span class="na">name=</span><span class="s">&quot;serverLocator&quot;</span> <span class="na">ref=</span><span class="s">&quot;hornetqServerLocator&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/bean&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;hornetqJmsConfig&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.camel.component.jms.JmsConfiguration&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;connectionFactory&quot;</span> <span class="na">ref=</span><span class="s">&quot;hornetqJmsConnectionFactory&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;transacted&quot;</span> <span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;requestTimeout&quot;</span> <span class="na">value=</span><span class="s">&quot;60000&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/bean&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;hornetq&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.camel.component.jms.JmsComponent&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;configuration&quot;</span> <span class="na">ref=</span><span class="s">&quot;hornetqJmsConfig&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/bean&gt;</span>
-</span><span class='line'><span class="nt">&lt;/beans&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+</span><span class='line'>       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+</span><span class='line'>       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>bean id=&quot;hornetqServerLocatorFactory&quot; class=&quot;com.example.HornetqServerLocatorFactory&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>bean id=&quot;hornetqServerLocator&quot; factory-bean=&quot;hornetqServerLocatorFactory&quot; factory-method=&quot;createServerLocator&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>bean id=&quot;hornetqJmsConnectionFactory&quot; class=&quot;org.hornetq.jms.client.HornetQJMSConnectionFactory&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>constructor-arg name=&quot;serverLocator&quot; ref=&quot;hornetqServerLocator&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/bean<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>bean id=&quot;hornetqJmsConfig&quot; class=&quot;org.apache.camel.component.jms.JmsConfiguration&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>property name=&quot;connectionFactory&quot; ref=&quot;hornetqJmsConnectionFactory&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>property name=&quot;transacted&quot; value=&quot;false&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>property name=&quot;requestTimeout&quot; value=&quot;60000&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/bean<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>bean id=&quot;hornetq&quot; class=&quot;org.apache.camel.component.jms.JmsComponent&quot;<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>property name=&quot;configuration&quot; ref=&quot;hornetqJmsConfig&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>/bean<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/beans<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -186,30 +187,20 @@ Please note, docBase have to be the same as &#8220;Output directory&#8221; setti
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
-</span><span class='line'>
 </span><span class='line'><span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
-</span><span class='line'>
 </span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.api.core.TransportConfiguration</span><span class="o">;</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.api.core.client.HornetQClient</span><span class="o">;</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.api.core.client.ServerLocator</span><span class="o">;</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.core.remoting.impl.netty.NettyConnectorFactory</span><span class="o">;</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Configurable</span><span class="o">;</span>
-</span><span class='line'>
 </span><span class='line'><span class="nd">@Configurable</span>
 </span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HornetqServerLocatorFactory</span> <span class="o">{</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="kd">public</span> <span class="n">ServerLocator</span> <span class="nf">createServerLocator</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>      <span class="kd">final</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">connectionParams</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;();</span>
+</span><span class='line'>      <span class="kd">final</span> <span class="n">Map</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">connectionParams</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&amp;</span><span class="n">gt</span><span class="o">;();</span>
 </span><span class='line'>      <span class="n">connectionParams</span><span class="o">.</span><span class="na">put</span><span class="o">(</span> <span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="s">&quot;hornetq-host.com&quot;</span> <span class="o">);</span>
 </span><span class='line'>      <span class="n">connectionParams</span><span class="o">.</span><span class="na">put</span><span class="o">(</span> <span class="s">&quot;host&quot;</span><span class="o">,</span> <span class="mi">5900</span> <span class="o">);</span>
-</span><span class='line'>
 </span><span class='line'>      <span class="kd">final</span> <span class="n">TransportConfiguration</span> <span class="n">transportConfiguration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TransportConfiguration</span><span class="o">(</span> <span class="n">NettyConnectorFactory</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">connectionParams</span> <span class="o">);</span>
 </span><span class='line'>      <span class="kd">final</span> <span class="n">ServerLocator</span> <span class="n">serverLocator</span> <span class="o">=</span> <span class="n">HornetQClient</span><span class="o">.</span><span class="na">createServerLocatorWithoutHA</span><span class="o">(</span> <span class="k">new</span> <span class="n">TransportConfiguration</span><span class="o">[]</span> <span class="o">{</span> <span class="n">transportConfiguration</span> <span class="o">}</span> <span class="o">);</span>
 </span><span class='line'>      <span class="k">return</span> <span class="n">serverLocator</span><span class="o">;</span>
@@ -218,7 +209,7 @@ Please note, docBase have to be the same as &#8220;Output directory&#8221; setti
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>That&rsquo;s it!</p>
+<p>That&rsquo;s it</p>
 ]]></content>
   </entry>
   
@@ -250,10 +241,8 @@ Here is example of the new API that allows to use spell checking with suggested 
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
-<span class='line-number'>21</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSuggestions</span><span class="o">(</span><span class="n">String</span> <span class="n">txt</span><span class="o">){</span>
 </span><span class='line'>  <span class="n">String</span><span class="o">[]</span> <span class="n">suggestions</span> <span class="o">=</span> <span class="err"> </span><span class="k">new</span> <span class="n">String</span><span class="o">[]{};</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="n">FullTextSession</span> <span class="n">fullTextSession</span> <span class="o">=</span> <span class="n">Search</span><span class="o">.</span><span class="na">getFullTextSession</span><span class="o">(</span><span class="n">sf</span><span class="o">.</span><span class="na">getCurrentSession</span><span class="o">());</span>
 </span><span class='line'>  <span class="n">SearchFactory</span> <span class="n">searchFactory</span> <span class="o">=</span> <span class="n">fullTextSession</span><span class="o">.</span><span class="na">getSearchFactory</span><span class="o">();</span>
 </span><span class='line'>  <span class="n">IndexReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">searchFactory</span><span class="o">.</span><span class="na">getIndexReaderAccessor</span><span class="o">().</span><span class="na">open</span><span class="o">(</span><span class="n">MyEntity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
@@ -275,8 +264,8 @@ Here is example of the new API that allows to use spell checking with suggested 
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>sf.getCurrentSession()</code> gets standard Hibernate session. If you use <code>EntityManager</code>, there exists a method to obtain <code>FullTextSession</code>.
-The example creates new index directory dedicated to spell checking. It adds terms from MyEntity&rsquo;s <code>description</code> field to the index. <code>spellChecker.indexDictionary</code> adds the terms to the index, and optionally merges it with existing index.</p>
+<p>&lt;code&gt;sf.getCurrentSession()&lt;/code&gt; gets standard Hibernate session. If you use &lt;code&gt;EntityManager&lt;/code&gt;, there exists a method to obtain &lt;code&gt;FullTextSession&lt;/code&gt;.
+The example creates new index directory dedicated to spell checking. It adds terms from MyEntity&rsquo;s &lt;code&gt;description&lt;/code&gt; field to the index. &lt;code&gt;spellChecker.indexDictionary&lt;/code&gt; adds the terms to the index, and optionally merges it with existing index.</p>
 ]]></content>
   </entry>
   
@@ -307,33 +296,30 @@ The example creates new index directory dedicated to spell checking. It adds ter
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;portlet&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;description&gt;</span>wickettest4<span class="nt">&lt;/description&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;portlet-name&gt;</span>wickettest4<span class="nt">&lt;/portlet-name&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;display-name&gt;</span>wickettest4<span class="nt">&lt;/display-name&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;portlet-class&gt;</span>org.apache.wicket.portlet.WicketPortlet<span class="nt">&lt;/portlet-class&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;init-param&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;name&gt;</span>wicketFilterPath<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;value&gt;</span>/bla<span class="nt">&lt;/value&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/init-param&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;supports&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;mime-type&gt;</span>text/html<span class="nt">&lt;/mime-type&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;portlet-mode&gt;</span>VIEW<span class="nt">&lt;/portlet-mode&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/supports&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;portlet-info&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;title&gt;</span>wickettest4<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;keywords&gt;</span>wickettest4<span class="nt">&lt;/keywords&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/portlet-info&gt;</span>
-</span><span class='line'><span class="nt">&lt;/portlet&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>portlet<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>description<span class="ni">&amp;gt;</span>wickettest4<span class="ni">&amp;lt;</span>/description<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>portlet-name<span class="ni">&amp;gt;</span>wickettest4<span class="ni">&amp;lt;</span>/portlet-name<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>display-name<span class="ni">&amp;gt;</span>wickettest4<span class="ni">&amp;lt;</span>/display-name<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>portlet-class<span class="ni">&amp;gt;</span>org.apache.wicket.portlet.WicketPortlet<span class="ni">&amp;lt;</span>/portlet-class<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>init-param<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>name<span class="ni">&amp;gt;</span>wicketFilterPath<span class="ni">&amp;lt;</span>/name<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>value<span class="ni">&amp;gt;</span>/bla<span class="ni">&amp;lt;</span>/value<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>/init-param<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>supports<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>mime-type<span class="ni">&amp;gt;</span>text/html<span class="ni">&amp;lt;</span>/mime-type<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>portlet-mode<span class="ni">&amp;gt;</span>VIEW<span class="ni">&amp;lt;</span>/portlet-mode<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>/supports<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>portlet-info<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>title<span class="ni">&amp;gt;</span>wickettest4<span class="ni">&amp;lt;</span>/title<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>keywords<span class="ni">&amp;gt;</span>wickettest4<span class="ni">&amp;lt;</span>/keywords<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>/portlet-info<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/portlet<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Note new portlet-class. Also, mime-type have to be text/html.</p>
-
-<!--more-->
-
-
-<p>web.xml also changed, notice filter class:</p>
+<p>Note new portlet-class. Also, mime-type have to be text/html.
+&lt;!&mdash;more&mdash;&gt;
+web.xml also changed, notice filter class:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -350,21 +336,21 @@ The example creates new index directory dedicated to spell checking. It adds ter
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;filter&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;filter-name&gt;</span>wicket.wicket<span class="nt">&lt;/filter-name&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;filter-class&gt;</span>org.apache.wicket.portlet.PortletFilter<span class="nt">&lt;/filter-class&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;init-param&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;param-name&gt;</span>applicationClassName<span class="nt">&lt;/param-name&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;param-value&gt;</span>org.wicket.WicketApplication<span class="nt">&lt;/param-value&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/init-param&gt;</span>
-</span><span class='line'><span class="nt">&lt;/filter&gt;</span>
-</span><span class='line'><span class="nt">&lt;filter-mapping&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;filter-name&gt;</span>wicket.wicket<span class="nt">&lt;/filter-name&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;url-pattern&gt;</span>/bla/*<span class="nt">&lt;/url-pattern&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;dispatcher&gt;</span>REQUEST<span class="nt">&lt;/dispatcher&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;dispatcher&gt;</span>INCLUDE<span class="nt">&lt;/dispatcher&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;dispatcher&gt;</span>FORWARD<span class="nt">&lt;/dispatcher&gt;</span>
-</span><span class='line'><span class="nt">&lt;/filter-mapping&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>filter<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>filter-name<span class="ni">&amp;gt;</span>wicket.wicket<span class="ni">&amp;lt;</span>/filter-name<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>filter-class<span class="ni">&amp;gt;</span>org.apache.wicket.portlet.PortletFilter<span class="ni">&amp;lt;</span>/filter-class<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>init-param<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>param-name<span class="ni">&amp;gt;</span>applicationClassName<span class="ni">&amp;lt;</span>/param-name<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>param-value<span class="ni">&amp;gt;</span>org.wicket.WicketApplication<span class="ni">&amp;lt;</span>/param-value<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>/init-param<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/filter<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>filter-mapping<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>filter-name<span class="ni">&amp;gt;</span>wicket.wicket<span class="ni">&amp;lt;</span>/filter-name<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>url-pattern<span class="ni">&amp;gt;</span>/bla/*<span class="ni">&amp;lt;</span>/url-pattern<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>dispatcher<span class="ni">&amp;gt;</span>REQUEST<span class="ni">&amp;lt;</span>/dispatcher<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>dispatcher<span class="ni">&amp;gt;</span>INCLUDE<span class="ni">&amp;lt;</span>/dispatcher<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>dispatcher<span class="ni">&amp;gt;</span>FORWARD<span class="ni">&amp;lt;</span>/dispatcher<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/filter-mapping<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -385,21 +371,21 @@ The example creates new index directory dedicated to spell checking. It adds ter
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.apache.wicket<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>wicket-core<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${wicket.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.apache.portals.bridges<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>portals-bridges-common<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>2.0<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.wicketstuff<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>wicketstuff-portlet<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>${wicket.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.apache.wicket<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>wicket-core<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>${wicket.version}<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.apache.portals.bridges<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>portals-bridges-common<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>2.0<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.wicketstuff<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>wicketstuff-portlet<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>${wicket.version}<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/dependency<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
@@ -417,18 +403,16 @@ The example creates new index directory dedicated to spell checking. It adds ter
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.as<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>jboss-as-controller-client<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>7.0.2.Final<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>dependency<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.jboss.as<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>jboss-as-controller-client<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>7.0.2.Final<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/dependency<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The following example creates new datasource:</p>
-
-<!--more-->
-
+<p>The following example creates new datasource:
+&lt;!&mdash;more&mdash;&gt;</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -448,8 +432,6 @@ The example creates new index directory dedicated to spell checking. It adds ter
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">createDatasource</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
 </span><span class='line'>  <span class="n">ModelNode</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ModelNode</span><span class="o">();</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">ADD</span><span class="o">);</span>
@@ -457,7 +439,6 @@ The example creates new index directory dedicated to spell checking. It adds ter
 </span><span class='line'>          <span class="s">&quot;datasources&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP_ADDR</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;data-source&quot;</span><span class="o">,</span>
 </span><span class='line'>          <span class="s">&quot;java:jboss/datasources/NewDatasource&quot;</span><span class="o">);</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;jndi-name&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;java:jboss/datasources/NewDatasource&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;connection-url&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;jdbc:as400://1.2.3.4/SCHEME&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;driver-class&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;com.ibm.as400.access.AS400JDBCDriver&quot;</span><span class="o">);</span>
@@ -465,7 +446,6 @@ The example creates new index directory dedicated to spell checking. It adds ter
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;user-name&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;username&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;pool-name&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;pool_NewDatasource&quot;</span><span class="o">);</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="n">ModelControllerClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">ModelControllerClient</span><span class="o">.</span><span class="na">Factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span>
 </span><span class='line'>          <span class="n">InetAddress</span><span class="o">.</span><span class="na">getByName</span><span class="o">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="o">),</span> <span class="mi">9999</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">client</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">OperationBuilder</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
@@ -494,21 +474,15 @@ The example creates new index directory dedicated to spell checking. It adds ter
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">checkIfDatasourceExists</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
 </span><span class='line'>  <span class="n">ModelNode</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ModelNode</span><span class="o">();</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;read-resource&quot;</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;recursive&quot;</span><span class="o">).</span><span class="na">set</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">OP_ADDR</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;subsystem&quot;</span><span class="o">,</span> <span class="s">&quot;datasources&quot;</span><span class="o">);</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="n">ModelControllerClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">ModelControllerClient</span><span class="o">.</span><span class="na">Factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span>
 </span><span class='line'>          <span class="n">InetAddress</span><span class="o">.</span><span class="na">getByName</span><span class="o">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="o">),</span> <span class="mi">9999</span><span class="o">);</span>
 </span><span class='line'>  <span class="n">ModelNode</span> <span class="n">responce</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">OperationBuilder</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="n">ModelNode</span> <span class="n">datasources</span> <span class="o">=</span> <span class="n">responce</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientConstants</span><span class="o">.</span><span class="na">RESULT</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;data-source&quot;</span><span class="o">);</span>
-</span><span class='line'>
 </span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">datasources</span><span class="o">.</span><span class="na">isDefined</span><span class="o">())</span> <span class="o">{</span>
 </span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="n">ModelNode</span> <span class="n">dataSource</span> <span class="o">:</span> <span class="n">datasources</span><span class="o">.</span><span class="na">asList</span><span class="o">())</span> <span class="o">{</span>
 </span><span class='line'>          <span class="n">String</span> <span class="n">dataSourceName</span> <span class="o">=</span> <span class="n">dataSource</span><span class="o">.</span><span class="na">asProperty</span><span class="o">().</span><span class="na">getName</span><span class="o">();</span>
@@ -536,7 +510,7 @@ you probably run into all sorts of strange errors in Eclipse that
 not really related to your code, and then you get the feeling that Eclipse has gone mad.</p>
 
 <p>One way to solve these problems and clean the Eclipse is using -clean argument.
-all you need to do is to edit the eclipse.ini file located in your <Eclipse install directory> and add it as the first argument on the first line.
+all you need to do is to edit the eclipse.ini file located in your &lt;Eclipse install directory&gt; and add it as the first argument on the first line.
 After you upload the eclipse you can delete it until the next time you will need it.</p>
 ]]></content>
   </entry>
@@ -552,9 +526,9 @@ After you upload the eclipse you can delete it until the next time you will need
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;jsp-configuration</span> <span class="na">development=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>jsp-configuration development=&quot;true&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/configuration<span class="ni">&amp;gt;</span>
 </span><span class='line'>...
 </span></code></pre></td></tr></table></div></figure>
 
@@ -571,17 +545,15 @@ After you upload the eclipse you can delete it until the next time you will need
     <content type="html"><![CDATA[<p>While trying to optimize site for mobile devices you have to add viewport meta tag:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;target-densitydpi=device-dpi, width=device-width, height=device-height, initial-scale=1.0&quot;</span> <span class="nt">/&gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>meta name=&quot;viewport&quot; content=&quot;target-densitydpi=device-dpi, width=device-width, height=device-height, initial-scale=1.0&quot; /<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>You can add additional CSS file that will be used on mobile device only. To achieve this just add CSS media type. In Android developer&rsquo;s guide at <a href="http://developer.android.com/guide/webapps/targeting.html"><a href="http://developer.android.com/guide/webapps/targeting.html">http://developer.android.com/guide/webapps/targeting.html</a></a> it suggests to target device DPI value like:</p>
-
-<!--more-->
-
+<p>You can add additional CSS file that will be used on mobile device only. To achieve this just add CSS media type. In Android developer&rsquo;s guide at &lt;a href=&ldquo;<a href="http://developer.android.com/guide/webapps/targeting.html">http://developer.android.com/guide/webapps/targeting.html</a>&rdquo;&gt;<a href="http://developer.android.com/guide/webapps/targeting.html&amp;lt;/a&amp;gt;">http://developer.android.com/guide/webapps/targeting.html&amp;lt;/a&amp;gt;</a> it suggests to target device DPI value like:
+&lt;!&mdash;more&mdash;&gt;</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/mobile.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen and (-webkit-device-pixel-ratio:1.0)&quot;</span> <span class="nt">/&gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>link rel=&quot;stylesheet&quot; href=&quot;css/mobile.css&quot; type=&quot;text/css&quot; media=&quot;screen and (-webkit-device-pixel-ratio:1.0)&quot; /<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -590,11 +562,11 @@ After you upload the eclipse you can delete it until the next time you will need
 <p>There is another solution to target mobile devices (both Android, iPhone, Blackberry): to specify maximal width of the screen like:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/mobile.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen and (max-device-width:801px) and (max-width:801px)&quot;</span> <span class="nt">/&gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>link rel=&quot;stylesheet&quot; href=&quot;css/mobile.css&quot; type=&quot;text/css&quot; media=&quot;screen and (max-device-width:801px) and (max-width:801px)&quot; /<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The problem is that Android (at least 2.3 I&rsquo;ve tested) recognizes this media type only after page reloading (refreshing) in browser. Googling the web I found the open <a title="issue" href="http://code.google.com/p/android/issues/detail?id=11961" target="_blank">issue</a>.
+<p>The problem is that Android (at least 2.3 I&rsquo;ve tested) recognizes this media type only after page reloading (refreshing) in browser. Googling the web I found the open &lt;a title=&ldquo;issue&rdquo; href=&ldquo;<a href="http://code.google.com/p/android/issues/detail?id=11961">http://code.google.com/p/android/issues/detail?id=11961</a>&rdquo; target=&ldquo;_blank&rdquo;&gt;issue&lt;/a&gt;.
 I solved it using JavaScript:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -616,7 +588,7 @@ I solved it using JavaScript:</p>
 
 <p>I tested it on my device an it works fine, unless some little delay: the CSS file loads only after JavaScript executes. When google will fix the issue (I hope so&hellip;), there will be no delay, since original link is in the HEAD section.</p>
 
-<p>Of course you have to detect mobile device using the JavaScript, I used solution suggested here: <a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob"><a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob">http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob</a></a></p>
+<p>Of course you have to detect mobile device using the JavaScript, I used solution suggested here: &lt;a href=&ldquo;<a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob">http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob</a>&rdquo;&gt;<a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob&amp;lt;/a&amp;gt;">http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob&amp;lt;/a&amp;gt;</a></p>
 ]]></content>
   </entry>
   
@@ -645,14 +617,14 @@ Suppose you have enum:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;h:outputText</span> <span class="na">value=</span><span class="s">&quot;someText&quot;</span>
-</span><span class='line'>  <span class="na">rendered=</span><span class="s">&quot;#{listAction.actionType == &#39;COPY&#39;}&quot;</span><span class="nt">/&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>h:outputText value=&quot;someText&quot;
+</span><span class='line'>  rendered=&quot;#{listAction.actionType == &#39;COPY&#39;}&quot;/<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>
-The property <code>actionType</code> in managed bean <code>listAction</code> have to be of type <code>ActionTypeEnum</code>.
-It works because each enum in have method <code>valueOf(String stringValue)</code> and JSF attempts to convert String value to enum.</p>
+The property &lt;code&gt;actionType&lt;/code&gt; in managed bean &lt;code&gt;listAction&lt;/code&gt; have to be of type &lt;code&gt;ActionTypeEnum&lt;/code&gt;.
+It works because each enum in have method &lt;code&gt;valueOf(String stringValue)&lt;/code&gt; and JSF attempts to convert String value to enum.</p>
 ]]></content>
   </entry>
   
@@ -661,11 +633,9 @@ It works because each enum in have method <code>valueOf(String stringValue)</cod
     <link href="http://test.paykin.info/deploying-jdbc-jboss-maven-plugin/"/>
     <updated>2011-09-25T00:00:00+03:00</updated>
     <id>http://test.paykin.info/deploying-jdbc-jboss-maven-plugin</id>
-    <content type="html"><![CDATA[<p>With release of jboss-as maven plugin version 7.0.1.Final the new goal deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.</p>
-
-<p>After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the <code>NullPointerException</code> in Maven build.</p>
-
-<p>Here is part of maven pom.xml used to deploy the driver to jboss:</p>
+    <content type="html"><![CDATA[<p>With release of jboss-as maven plugin version 7.0.1.Final the new goal deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.
+After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the &lt;code&gt;NullPointerException&lt;/code&gt; in Maven build.
+Here is part of maven pom.xml used to deploy the driver to jboss:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -688,47 +658,36 @@ It works because each enum in have method <code>valueOf(String stringValue)</cod
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.as.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>jboss-as-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>7.0.1.Final<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;executions&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;execution&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;id&gt;</span>deploy-driver-AS400<span class="nt">&lt;/id&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;goals&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;goal&gt;</span>deploy-artifact<span class="nt">&lt;/goal&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/goals&gt;</span>
-</span><span class='line'>
-</span><span class='line'>          <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;hostname&gt;</span>${jboss-hostname}<span class="nt">&lt;/hostname&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;groupId&gt;</span>com.ibm<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;artifactId&gt;</span>as400<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;fileName&gt;</span>jt400.jar<span class="nt">&lt;/fileName&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;name&gt;</span>jt400.jar<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/execution&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;/executions&gt;</span>
-</span><span class='line'><span class="nt">&lt;/plugin&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="ni">&amp;lt;</span>plugin<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>org.jboss.as.plugins<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>jboss-as-maven-plugin<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>7.0.1.Final<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>executions<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>execution<span class="ni">&amp;gt;</span>
+</span><span class='line'>          <span class="ni">&amp;lt;</span>id<span class="ni">&amp;gt;</span>deploy-driver-AS400<span class="ni">&amp;lt;</span>/id<span class="ni">&amp;gt;</span>
+</span><span class='line'>          <span class="ni">&amp;lt;</span>phase<span class="ni">&amp;gt;</span>package<span class="ni">&amp;lt;</span>/phase<span class="ni">&amp;gt;</span>
+</span><span class='line'>          <span class="ni">&amp;lt;</span>goals<span class="ni">&amp;gt;</span>
+</span><span class='line'>              <span class="ni">&amp;lt;</span>goal<span class="ni">&amp;gt;</span>deploy-artifact<span class="ni">&amp;lt;</span>/goal<span class="ni">&amp;gt;</span>
+</span><span class='line'>          <span class="ni">&amp;lt;</span>/goals<span class="ni">&amp;gt;</span>
+</span><span class='line'>          <span class="ni">&amp;lt;</span>configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>              <span class="ni">&amp;lt;</span>hostname<span class="ni">&amp;gt;</span>${jboss-hostname}<span class="ni">&amp;lt;</span>/hostname<span class="ni">&amp;gt;</span>
+</span><span class='line'>              <span class="ni">&amp;lt;</span>groupId<span class="ni">&amp;gt;</span>com.ibm<span class="ni">&amp;lt;</span>/groupId<span class="ni">&amp;gt;</span>
+</span><span class='line'>              <span class="ni">&amp;lt;</span>artifactId<span class="ni">&amp;gt;</span>as400<span class="ni">&amp;lt;</span>/artifactId<span class="ni">&amp;gt;</span>
+</span><span class='line'>              <span class="ni">&amp;lt;</span>fileName<span class="ni">&amp;gt;</span>jt400.jar<span class="ni">&amp;lt;</span>/fileName<span class="ni">&amp;gt;</span>
+</span><span class='line'>              <span class="ni">&amp;lt;</span>name<span class="ni">&amp;gt;</span>jt400.jar<span class="ni">&amp;lt;</span>/name<span class="ni">&amp;gt;</span>
+</span><span class='line'>          <span class="ni">&amp;lt;</span>/configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>      <span class="ni">&amp;lt;</span>/execution<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>/executions<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/plugin<span class="ni">&amp;gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p></p>
-
-<p>In the plugin&rsquo;s manual at <a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html"><a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a></a> it said</p>
-
-<blockquote>The artifact must be already listed as a dependency in the projects pom.xml</blockquote>
-
-
-<p>but it do not tells in which scope the driver&rsquo;s JAR have to be: it have to be in <strong>compile</strong> or <strong>runtime</strong> scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.</p>
-
-<!--more-->
-
-
-<p>Here is full stacktrace of the error I received:</p>
+<p>               <br/>
+In the plugin&rsquo;s manual at &lt;a href=&ldquo;<a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a>&rdquo;&gt;<a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html&amp;lt;/a&amp;gt;">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html&amp;lt;/a&amp;gt;</a> it said
+&lt;blockquote&gt;The artifact must be already listed as a dependency in the projects pom.xml&lt;/blockquote&gt;
+but it do not tells in which scope the driver&rsquo;s JAR have to be: it have to be in &lt;strong&gt;compile&lt;/strong&gt; or &lt;strong&gt;runtime&lt;/strong&gt; scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.
+&lt;!&mdash;more&mdash;&gt;
+Here is full stacktrace of the error I received:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -760,7 +719,7 @@ It works because each enum in have method <code>valueOf(String stringValue)</cod
 <span class='line-number'>28</span>
 <span class='line-number'>29</span>
 <span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'>[ERROR] Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed. NullPointerException -&gt; [Help 1]
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>[ERROR] Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed. NullPointerException -<span class="ni">&amp;gt;</span> [Help 1]
 </span><span class='line'>org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact (deploy-driver-AS400) on project project-ear: Execution deploy-driver-AS400 of goal org.jboss.as.plugins:jboss-as-maven-plugin:7.0.1.Final:deploy-artifact failed.
 </span><span class='line'>at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:225)
 </span><span class='line'>at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
