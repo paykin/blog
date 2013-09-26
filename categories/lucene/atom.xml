@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lucene | Programming Notes]]></title>
   <link href="http://java.paykin.info/categories/lucene/atom.xml" rel="self"/>
   <link href="http://java.paykin.info/"/>
-  <updated>2013-09-26T20:26:16+03:00</updated>
+  <updated>2013-09-26T22:17:54+03:00</updated>
   <id>http://java.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry Paykin]]></name>
@@ -27,12 +27,15 @@ public String[] getSuggestions(String txt){</p>
 FullTextSession fullTextSession = Search.getFullTextSession(sf.getCurrentSession());
 SearchFactory searchFactory = fullTextSession.getSearchFactory();
 IndexReader reader = searchFactory.getIndexReaderAccessor().open(MyEntity.class);
+
 try {
     FSDirectory spellCheckerDir = FSDirectory.open(new File("D:\lucene\spellchecker\com.site.model.MyEntity"));
     SpellChecker spellChecker = new SpellChecker(spellCheckerDir);
+
     Dictionary dictionary = new LuceneDictionary(reader, "description");
     IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_35, searchFactory.getAnalyzer("myAnalyzer"));
     spellChecker.indexDictionary(dictionary, config, true);
+
     suggestions = spellChecker.suggestSimilar(txt, 10);
 } catch (Exception e) {
     e.printStackTrace();
@@ -44,9 +47,9 @@ return suggestions;
 </code></pre>
 
 <p>}
-```
-<code>sf.getCurrentSession()</code> gets standard Hibernate session. If you use <code>EntityManager</code>, there exists a method to obtain <code>FullTextSession</code>.
-The example creates new index directory dedicated to spell checking. It adds terms from MyEntity&rsquo;s <code>description</code> field to the index. <code>spellChecker.indexDictionary</code> adds the terms to the index, and optionally merges it with existing index.</p>
+<code>``
+</code>sf.getCurrentSession()<code>gets standard Hibernate session. If you use</code>EntityManager<code>, there exists a method to obtain</code>FullTextSession<code>.
+The example creates new index directory dedicated to spell checking. It adds terms from MyEntity's</code>description<code>field to the index.</code>spellChecker.indexDictionary` adds the terms to the index, and optionally merges it with existing index.</p>
 ]]></content>
   </entry>
   

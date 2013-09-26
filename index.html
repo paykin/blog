@@ -9,9 +9,7 @@
   <meta name="author" content="Dmitry Paykin">
 
   
-  <meta name="description" content="Title! boody drwxr-xr-x 12 root root 4096 Aug 17 2009 doc
-drwxr-xr-x 4 root root 4096 Aug 15 2009 install
-drwxrwxr-x 2 root root 4096 Aug 15 2009 &hellip;">
+  <meta name="description" content="You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps: Create debug configuration in IntelliJ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +21,7 @@ drwxrwxr-x 2 root root 4096 Aug 15 2009 &hellip;">
   <link rel="canonical" href="http://java.paykin.info">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/github/atom.xml" rel="alternate" title="Programming Notes" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="Programming Notes" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -46,7 +44,7 @@ drwxrwxr-x 2 root root 4096 Aug 15 2009 &hellip;">
 
 </header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
@@ -67,55 +65,6 @@ drwxrwxr-x 2 root root 4096 Aug 15 2009 &hellip;">
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/new-post/">New Post</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-25T09:51:00+03:00" pubdate data-updated="true">Sep 25<span>th</span>, 2013</time>
-        
-         | <a href="/new-post/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Title!</p>
-
-<p>bo<em>ody</em></p>
-
-<p>drwxr-xr-x 12 root root 4096 Aug 17  2009 doc
-drwxr-xr-x  4 root root 4096 Aug 15  2009 install
-drwxrwxr-x  2 root root 4096 Aug 15  2009 response
-drwxr-xr-x  2 root root 4096 Aug 15  2009 rpm
--rwxr-xr-x  1 root root 3226 Aug 15  2009 runInstaller
-drwxrwxr-x  2 root root 4096 Aug 15  2009 sshsetup
-drwxr-xr-x 14 root root 4096 Aug 15  2009 stage
--rw-r&mdash;r&mdash;  1 root root 5402 Aug 17  2009 welcome.html</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -264,7 +213,7 @@ In order to work with HornetQ with Camel and Spring first you have to add Hornet
   
   
     <footer>
-      <a rel="full-article" href="/hornetq-camel-spring/">Read on &rarr;</a>
+      <a rel="full-article" href="/hornetq-camel-spring/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -324,17 +273,25 @@ Here is example of the new API that allows to use spell checking with suggested 
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSuggestions</span><span class="o">(</span><span class="n">String</span> <span class="n">txt</span><span class="o">){</span>
+</span><span class='line'>
 </span><span class='line'>  <span class="n">String</span><span class="o">[]</span> <span class="n">suggestions</span> <span class="o">=</span> <span class="err"> </span><span class="k">new</span> <span class="n">String</span><span class="o">[]{};</span>
 </span><span class='line'>  <span class="n">FullTextSession</span> <span class="n">fullTextSession</span> <span class="o">=</span> <span class="n">Search</span><span class="o">.</span><span class="na">getFullTextSession</span><span class="o">(</span><span class="n">sf</span><span class="o">.</span><span class="na">getCurrentSession</span><span class="o">());</span>
 </span><span class='line'>  <span class="n">SearchFactory</span> <span class="n">searchFactory</span> <span class="o">=</span> <span class="n">fullTextSession</span><span class="o">.</span><span class="na">getSearchFactory</span><span class="o">();</span>
 </span><span class='line'>  <span class="n">IndexReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">searchFactory</span><span class="o">.</span><span class="na">getIndexReaderAccessor</span><span class="o">().</span><span class="na">open</span><span class="o">(</span><span class="n">MyEntity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>
 </span><span class='line'>  <span class="k">try</span> <span class="o">{</span>
 </span><span class='line'>      <span class="n">FSDirectory</span> <span class="n">spellCheckerDir</span> <span class="o">=</span> <span class="n">FSDirectory</span><span class="o">.</span><span class="na">open</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;D:\lucene\spellchecker\com.site.model.MyEntity&quot;</span><span class="o">));</span>
 </span><span class='line'>      <span class="n">SpellChecker</span> <span class="n">spellChecker</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SpellChecker</span><span class="o">(</span><span class="n">spellCheckerDir</span><span class="o">);</span>
+</span><span class='line'>      
 </span><span class='line'>      <span class="n">Dictionary</span> <span class="n">dictionary</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LuceneDictionary</span><span class="o">(</span><span class="n">reader</span><span class="o">,</span> <span class="s">&quot;description&quot;</span><span class="o">);</span>
 </span><span class='line'>      <span class="n">IndexWriterConfig</span> <span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IndexWriterConfig</span><span class="o">(</span><span class="n">Version</span><span class="o">.</span><span class="na">LUCENE_35</span><span class="o">,</span> <span class="n">searchFactory</span><span class="o">.</span><span class="na">getAnalyzer</span><span class="o">(</span><span class="s">&quot;myAnalyzer&quot;</span><span class="o">));</span>
 </span><span class='line'>      <span class="n">spellChecker</span><span class="o">.</span><span class="na">indexDictionary</span><span class="o">(</span><span class="n">dictionary</span><span class="o">,</span> <span class="n">config</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>
 </span><span class='line'>      <span class="n">suggestions</span> <span class="o">=</span> <span class="n">spellChecker</span><span class="o">.</span><span class="na">suggestSimilar</span><span class="o">(</span><span class="n">txt</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
 </span><span class='line'>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span><span class='line'>      <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
@@ -435,7 +392,7 @@ The example creates new index directory dedicated to spell checking. It adds ter
   
   
     <footer>
-      <a rel="full-article" href="/wicket_liferay_portlets/">Read on &rarr;</a>
+      <a rel="full-article" href="/wicket_liferay_portlets/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -493,7 +450,7 @@ The example creates new index directory dedicated to spell checking. It adds ter
   
   
     <footer>
-      <a rel="full-article" href="/add-datasource-programaticaly-cli-jboss-7/">Read on &rarr;</a>
+      <a rel="full-article" href="/add-datasource-programaticaly-cli-jboss-7/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -638,7 +595,7 @@ After you upload the eclipse you can delete it until the next time you will need
   
   
     <footer>
-      <a rel="full-article" href="/android-css-media-reloading/">Read on &rarr;</a>
+      <a rel="full-article" href="/android-css-media-reloading/">Continue reading &rarr;</a>
     </footer>
   
 
@@ -710,9 +667,105 @@ It works because each enum in have method <code>valueOf(String stringValue)</cod
 
     </article>
   
-  <div class="pagination">
+  
+    <article>
+      
+  <header>
     
-      <a class="prev" href="/page/2/">&larr; Older</a>
+      <h1 class="entry-title"><a href="/deploying-jdbc-jboss-maven-plugin/">Deploying JDBC Driver in JBoss Maven Plugin</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-25T00:00:00+03:00" pubdate data-updated="true">Sep 25<span>th</span>, 2011</time>
+        
+         | <a href="/deploying-jdbc-jboss-maven-plugin/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>With release of jboss-as maven plugin version 7.0.1.Final the new goal deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.
+After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the <code>NullPointerException</code> in Maven build.
+Here is part of maven pom.xml used to deploy the driver to jboss:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.as.plugins<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>jboss-as-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;version&gt;</span>7.0.1.Final<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;executions&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;execution&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;id&gt;</span>deploy-driver-AS400<span class="nt">&lt;/id&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;goals&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;goal&gt;</span>deploy-artifact<span class="nt">&lt;/goal&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/goals&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;hostname&gt;</span>${jboss-hostname}<span class="nt">&lt;/hostname&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;groupId&gt;</span>com.ibm<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;artifactId&gt;</span>as400<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;fileName&gt;</span>jt400.jar<span class="nt">&lt;/fileName&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;name&gt;</span>jt400.jar<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/execution&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/executions&gt;</span>
+</span><span class='line'><span class="nt">&lt;/plugin&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>               <br/>
+In the plugin&rsquo;s manual at <a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html"><a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a></a> it said</p>
+
+<blockquote>The artifact must be already listed as a dependency in the projects pom.xml</blockquote>
+
+
+<p>but it do not tells in which scope the driver&rsquo;s JAR have to be: it have to be in <strong>compile</strong> or <strong>runtime</strong> scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/deploying-jdbc-jboss-maven-plugin/">Continue reading &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -721,12 +774,11 @@ It works because each enum in have method <code>valueOf(String stringValue)</cod
 <aside class="sidebar">
   
     <section>
+  <h1>Top Categories</h1>
+    <ul id="top-category-list"><li><a href='/categories/java'>Java (7)</a></li><li><a href='/categories/jboss'>JBoss (4)</a></li><li><a href='/categories/j2ee'>J2EE (3)</a></li><li><a href='/categories/jsf'>JSF (2)</a></li><li><a href='/categories/wicket'>Wicket (1)</a></li><li><a href='/categories/android'>Android (1)</a></li><li><a href='/categories/hibernate'>Hibernate (1)</a></li><li><a href='/categories/lucene'>Lucene (1)</a></li></ul>
+</section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/new-post/">New Post</a>
-      </li>
     
       <li class="post">
         <a href="/liferay-portlet-intellij-idea/">Liferay Portlets Deployment in IntelliJ IDEA</a>
@@ -742,6 +794,10 @@ It works because each enum in have method <code>valueOf(String stringValue)</cod
     
       <li class="post">
         <a href="/wicket_liferay_portlets/">Portlets With Wicket 1.5.x in Liferay Portal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/add-datasource-programaticaly-cli-jboss-7/">Create Datasource Programmatically on JBoss 7</a>
       </li>
     
   </ul>
@@ -776,6 +832,15 @@ It works because each enum in have method <code>valueOf(String stringValue)</cod
   <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/109338838873091480274?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
 
 
 
