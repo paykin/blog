@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Android browser recognizes CSS media type after page reloading - Programming Notes</title>
+  <meta name="author" content="Dmitry">
+
+  
+  <meta name="description" content="While trying to optimize site for mobile devices you have to add viewport meta tag: 1
+&lt;meta name=&quot;viewport&quot; content=&quot;target- &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://test.paykin.info/android-css-media-reloading">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/github/atom.xml" rel="alternate" title="Programming Notes" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Programming Notes</a></h1>
+  
+    <h2>aaaabbb</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/github/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:test.paykin.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Android Browser Recognizes CSS Media Type After Page Reloading</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-20T00:00:00+02:00" pubdate data-updated="true">Oct 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>While trying to optimize site for mobile devices you have to add viewport meta tag:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;target-densitydpi=device-dpi, width=device-width, height=device-height, initial-scale=1.0&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can add additional CSS file that will be used on mobile device only. To achieve this just add CSS media type. In Android developer&rsquo;s guide at <a href="http://developer.android.com/guide/webapps/targeting.html"><a href="http://developer.android.com/guide/webapps/targeting.html">http://developer.android.com/guide/webapps/targeting.html</a></a> it suggests to target device DPI value like:</p>
+
+<!--more-->
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/mobile.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen and (-webkit-device-pixel-ratio:1.0)&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It works fine, but Google Chrome on desktop PC also loads this CSS file.</p>
+
+<p>There is another solution to target mobile devices (both Android, iPhone, Blackberry): to specify maximal width of the screen like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/mobile.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen and (max-device-width:801px) and (max-width:801px)&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The problem is that Android (at least 2.3 I&rsquo;ve tested) recognizes this media type only after page reloading (refreshing) in browser. Googling the web I found the open <a title="issue" href="http://code.google.com/p/android/issues/detail?id=11961" target="_blank">issue</a>.
+I solved it using JavaScript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span><span class="p">(</span><span class="nx">isMobile</span><span class="p">){</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">cssLink</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;link&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">cssLink</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;text/css&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">cssLink</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;rel&quot;</span><span class="p">,</span> <span class="s2">&quot;stylesheet&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">cssLink</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;css/mobile.css&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">cssLink</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I tested it on my device an it works fine, unless some little delay: the CSS file loads only after JavaScript executes. When google will fix the issue (I hope so&hellip;), there will be no delay, since original link is in the HEAD section.</p>
+
+<p>Of course you have to detect mobile device using the JavaScript, I used solution suggested here: <a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob"><a href="http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob">http://localstreamer.posterous.com/javascript-code-snippet-how-to-detect-all-mob</a></a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Dmitry</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-20T00:00:00+02:00" pubdate data-updated="true">Oct 20<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/android/'>Android</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://test.paykin.info/android-css-media-reloading/" data-via="" data-counturl="http://test.paykin.info/android-css-media-reloading/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/enums-in-jsf/" title="Previous Post: Enums in JSF">&laquo; Enums in JSF</a>
+      
+      
+        <a class="basic-alignment right" href="/jboss-7-changes-jsp/" title="Next Post: Forcing JBoss 7 to apply changes to JSP's immediately">Forcing JBoss 7 to apply changes to JSP's immediately &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/new-post/">New Post</a>
+      </li>
+    
+      <li class="post">
+        <a href="/liferay-portlet-intellij-idea/">Liferay Portlets Deployment in IntelliJ IDEA</a>
+      </li>
+    
+      <li class="post">
+        <a href="/hornetq-camel-spring/">Integrating HornetQ With Camel and Spring</a>
+      </li>
+    
+      <li class="post">
+        <a href="/spell-check-suggestions-hibernate-search-lucene/">Spell Checking With Suggestions With Hibernate Search 4 and Lucene 3.6</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wicket_liferay_portlets/">Portlets With Wicket 1.5.x in Liferay Portal</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Dmitry -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

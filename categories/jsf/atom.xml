@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: JSF | Programming Notes]]></title>
+  <link href="http://test.paykin.info/categories/jsf/atom.xml" rel="self"/>
+  <link href="http://test.paykin.info/"/>
+  <updated>2013-09-26T18:40:22+03:00</updated>
+  <id>http://test.paykin.info/</id>
+  <author>
+    <name><![CDATA[Dmitry]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Forcing JBoss 7 to apply changes to JSP's immediately]]></title>
+    <link href="http://test.paykin.info/jboss-7-changes-jsp/"/>
+    <updated>2011-10-27T00:00:00+02:00</updated>
+    <id>http://test.paykin.info/jboss-7-changes-jsp</id>
+    <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:
+``` xml</p>
+
+<pre><code>&lt;configuration&gt;
+    &lt;jsp-configuration development="true"/&gt;
+&lt;/configuration&gt;
+...
+</code></pre>
+
+<p>```
+And now JBoss behaves as you expect it in development mode: all changes to JSP files are loaded automatically as soon as you change the JSP file.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Enums in JSF]]></title>
+    <link href="http://test.paykin.info/enums-in-jsf/"/>
+    <updated>2011-09-25T00:00:00+03:00</updated>
+    <id>http://test.paykin.info/enums-in-jsf</id>
+    <content type="html"><![CDATA[<p>Finally I find the way to use enum with JSF:
+Suppose you have enum:
+``` java
+public enum ActionTypeEnum {</p>
+
+<pre><code>UPDATE,
+CREATE,
+COPY
+</code></pre>
+
+<p>}
+<code>
+In JSF you can write EL expressions in form:
+</code> xml
+&lt;h:outputText value=&ldquo;someText&rdquo;</p>
+
+<pre><code>rendered="#{listAction.actionType == 'COPY'}"/&gt;
+</code></pre>
+
+<p>```
+The property <code>actionType</code> in managed bean <code>listAction</code> have to be of type <code>ActionTypeEnum</code>.
+It works because each enum in have method <code>valueOf(String stringValue)</code> and JSF attempts to convert String value to enum.</p>
+]]></content>
+  </entry>
+  
+</feed>

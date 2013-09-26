@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: J2EE | Programming Notes]]></title>
+  <link href="http://test.paykin.info/categories/j2ee/atom.xml" rel="self"/>
+  <link href="http://test.paykin.info/"/>
+  <updated>2013-09-26T18:40:22+03:00</updated>
+  <id>http://test.paykin.info/</id>
+  <author>
+    <name><![CDATA[Dmitry]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Integrating HornetQ with Camel and Spring]]></title>
+    <link href="http://test.paykin.info/hornetq-camel-spring/"/>
+    <updated>2012-12-13T00:00:00+02:00</updated>
+    <id>http://test.paykin.info/hornetq-camel-spring</id>
+    <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.</p>
+
+<p>In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
+``` xml
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-jms&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-jms-client&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+&lt;artifactId&gt;hornetq-core-client&lt;/artifactId&gt;
+&lt;version&gt;${hornetq.version}&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.jboss.netty&lt;/groupId&gt;
+&lt;artifactId&gt;netty&lt;/artifactId&gt;
+&lt;version&gt;3.2.7.Final&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+```
+After that modify your spring.xml. Here is an example:</p>
+
+<!--more-->
+
+
+<p>``` xml
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;beans xmlns=&ldquo;<a href="http://www.springframework.org/schema/beans">http://www.springframework.org/schema/beans</a>&rdquo;</p>
+
+<pre><code>   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"&gt;
+&lt;bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" /&gt;
+&lt;bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/&gt;
+&lt;bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory"&gt;
+    &lt;constructor-arg name="serverLocator" ref="hornetqServerLocator"/&gt;
+&lt;/bean&gt;
+&lt;bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration"&gt;
+    &lt;property name="connectionFactory" ref="hornetqJmsConnectionFactory"/&gt;
+    &lt;property name="transacted" value="false"/&gt;
+    &lt;property name="requestTimeout" value="60000"/&gt;
+&lt;/bean&gt;
+&lt;bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent"&gt;
+    &lt;property name="configuration" ref="hornetqJmsConfig"/&gt;
+&lt;/bean&gt;
+</code></pre>
+
+<p></beans>
+<code>
+And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
+</code> java
+package com.example;</p>
+
+<p>import java.util.HashMap;
+import java.util.Map;</p>
+
+<p>import org.hornetq.api.core.TransportConfiguration;
+import org.hornetq.api.core.client.HornetQClient;
+import org.hornetq.api.core.client.ServerLocator;
+import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
+import org.springframework.beans.factory.annotation.Configurable;</p>
+
+<p>@Configurable
+public class HornetqServerLocatorFactory {</p>
+
+<pre><code>public ServerLocator createServerLocator() {
+    final Map&lt;String, Object&gt; connectionParams = new HashMap&lt;String, Object&gt;();
+    connectionParams.put( "port", "hornetq-host.com" );
+    connectionParams.put( "host", 5900 );
+
+    final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
+    final ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA( new TransportConfiguration[] { transportConfiguration } );
+    return serverLocator;
+}
+</code></pre>
+
+<p>}
+```
+That&rsquo;s it!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Create datasource programmatically on JBoss 7]]></title>
+    <link href="http://test.paykin.info/add-datasource-programaticaly-cli-jboss-7/"/>
+    <updated>2011-11-24T00:00:00+02:00</updated>
+    <id>http://test.paykin.info/add-datasource-programaticaly-cli-jboss-7</id>
+    <content type="html"><![CDATA[<p>In order to create new datasource programmatically on JBoss 7 without restart (on the fly) from Java you can use CLI Java API. You have to include jboss-as-controller-client to your project dependencies:
+``` xml
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.jboss.as&lt;/groupId&gt;
+&lt;artifactId&gt;jboss-as-controller-client&lt;/artifactId&gt;
+&lt;version&gt;7.0.2.Final&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+```
+The following example creates new datasource:</p>
+
+<!--more-->
+
+
+<p>``` java
+public void createDatasource() throws Exception{</p>
+
+<pre><code>ModelNode request = new ModelNode();
+request.get(ClientConstants.OP).set(ClientConstants.ADD);
+request.get(ClientConstants.OP_ADDR).add("subsystem",
+        "datasources");
+request.get(ClientConstants.OP_ADDR).add("data-source",
+        "java:jboss/datasources/NewDatasource");
+
+request.get("jndi-name").set("java:jboss/datasources/NewDatasource");
+request.get("connection-url").set("jdbc:as400://1.2.3.4/SCHEME");
+request.get("driver-class").set("com.ibm.as400.access.AS400JDBCDriver");
+request.get("driver-name").set("jt400.jar");
+request.get("user-name").set("username");
+request.get("password").set("password");
+request.get("pool-name").set("pool_NewDatasource");
+
+ModelControllerClient client = ModelControllerClient.Factory.create(
+        InetAddress.getByName("127.0.0.1"), 9999);
+client.execute(new OperationBuilder(request).build());
+</code></pre>
+
+<p>}
+```</p>
+
+<p>If you want to check if the datasource already exists, consider following snippet:
+``` java
+public boolean checkIfDatasourceExists() throws Exception {</p>
+
+<pre><code>ModelNode request = new ModelNode();
+request.get(ClientConstants.OP).set("read-resource");
+request.get("recursive").set(false);
+request.get(ClientConstants.OP_ADDR).add("subsystem", "datasources");
+
+ModelControllerClient client = ModelControllerClient.Factory.create(
+        InetAddress.getByName("127.0.0.1"), 9999);
+ModelNode responce = client.execute(new OperationBuilder(request).build());
+
+ModelNode datasources = responce.get(ClientConstants.RESULT).get("data-source");
+
+if (datasources.isDefined()) {
+    for (ModelNode dataSource : datasources.asList()) {
+        String dataSourceName = dataSource.asProperty().getName();
+        if (dataSourceName.equals("java:jboss/datasources/NewDatasource")) {
+            return true;
+        }
+    }
+}
+return false;
+</code></pre>
+
+<p>}
+```
+The examples have the same effect as trying to add datasource from Jboss Administration console.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Forcing JBoss 7 to apply changes to JSP's immediately]]></title>
+    <link href="http://test.paykin.info/jboss-7-changes-jsp/"/>
+    <updated>2011-10-27T00:00:00+02:00</updated>
+    <id>http://test.paykin.info/jboss-7-changes-jsp</id>
+    <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:
+``` xml</p>
+
+<pre><code>&lt;configuration&gt;
+    &lt;jsp-configuration development="true"/&gt;
+&lt;/configuration&gt;
+...
+</code></pre>
+
+<p>```
+And now JBoss behaves as you expect it in development mode: all changes to JSP files are loaded automatically as soon as you change the JSP file.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,51 +1,47 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://test.paykin.info/blog/2011/09/25/deploying-jdbc-jboss-maven-plugin/</loc>
+        <loc>http://test.paykin.info/deploying-jdbc-jboss-maven-plugin/</loc>
         <lastmod>2013-09-26T18:16:21+03:00</lastmod>
     </url>
     <url>
-        <loc>http://test.paykin.info/blog/2011/09/25/enums-in-jsf/</loc>
+        <loc>http://test.paykin.info/enums-in-jsf/</loc>
         <lastmod>2013-09-26T18:14:24+03:00</lastmod>
     </url>
     <url>
-        <loc>http://test.paykin.info/blog/2011/10/20/android-css-media-reloading/</loc>
+        <loc>http://test.paykin.info/android-css-media-reloading/</loc>
         <lastmod>2013-09-26T18:10:25+03:00</lastmod>
     </url>
     <url>
-        <loc>http://test.paykin.info/blog/2011/10/27/jboss-7-changes-jsp/</loc>
+        <loc>http://test.paykin.info/jboss-7-changes-jsp/</loc>
         <lastmod>2013-09-26T18:07:52+03:00</lastmod>
     </url>
     <url>
-        <loc>http://test.paykin.info/blog/2011/11/13/cleaning-eclipse-with-clean-argument/</loc>
+        <loc>http://test.paykin.info/cleaning-eclipse-with-clean-argument/</loc>
         <lastmod>2013-09-26T18:07:52+03:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://test.paykin.info/blog/2011/11/24/add-datasource-programaticaly-cli-jboss-7/
-        </loc>
+        <loc>http://test.paykin.info/add-datasource-programaticaly-cli-jboss-7/</loc>
         <lastmod>2013-09-26T18:18:03+03:00</lastmod>
     </url>
     <url>
-        <loc>http://test.paykin.info/blog/2012/04/10/wicket_liferay_portlets/</loc>
+        <loc>http://test.paykin.info/wicket_liferay_portlets/</loc>
         <lastmod>2013-09-26T18:19:23+03:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://test.paykin.info/blog/2012/04/26/spell-check-suggestions-hibernate-search-lucene/
-        </loc>
+        <loc>http://test.paykin.info/spell-check-suggestions-hibernate-search-lucene/</loc>
         <lastmod>2013-09-26T18:20:15+03:00</lastmod>
     </url>
     <url>
-        <loc>http://test.paykin.info/blog/2012/12/13/hornetq-camel-spring/</loc>
+        <loc>http://test.paykin.info/hornetq-camel-spring/</loc>
         <lastmod>2013-09-26T18:21:38+03:00</lastmod>
     </url>
     <url>
-        <loc>http://test.paykin.info/blog/2013/04/29/liferay-portlet-intellij-idea/</loc>
+        <loc>http://test.paykin.info/liferay-portlet-intellij-idea/</loc>
         <lastmod>2013-09-26T18:22:43+03:00</lastmod>
     </url>
     <url>
-        <loc>http://test.paykin.info/blog/2013/09/25/new-post/</loc>
+        <loc>http://test.paykin.info/new-post/</loc>
         <lastmod>2013-09-26T18:07:52+03:00</lastmod>
     </url>
     <url>
