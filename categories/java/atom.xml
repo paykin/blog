@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | Programming Notes]]></title>
   <link href="http://java.paykin.info/categories/java/atom.xml" rel="self"/>
   <link href="http://java.paykin.info/"/>
-  <updated>2013-09-26T22:20:53+03:00</updated>
+  <updated>2013-09-27T14:19:42+03:00</updated>
   <id>http://java.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry Paykin]]></name>
@@ -22,9 +22,9 @@
 
 <ol>
     <li><span style="line-height: 14px;">Create debug configuration in IntelliJ IDEA using Local Tomcat</span></li>
-    <li>Configure deployment artifact: add your WAR as "yourwar:war exploded"</li>
+    <li>Configure deployment artifact: add your WAR as <code>yourwar:war exploded</code> and set <code>Application context</code> to <code>/yourwar</code></li>
     <li>Create XML file with name "yourwar.xml" with the following content:
-``` xml
+``` xml yourwar.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Context 
   docBase="/absolute/path/to/project/yourwar" 
@@ -34,12 +34,11 @@
 
 Please note, docBase have to be the same as "Output directory" setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as "Application context" in Run/Debug configuration</li>
     <li>Create post deployment action that will copy just created XML to Liferay's autodeploy folder.</li>
+  <li>As <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a> suggests, add empty <code>CATALINA_BASE</code> environment variable.</li>
 </ol>
 
 
 <p>Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
-
-<p>For additional instructions that you have to follow consider <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a>.</p>
 
 <p>Please note, I tested it with IntelliJ IDEA 12.1 and Liferay 6.0.5 on Tomcat 6</p>
 ]]></content>
@@ -50,9 +49,9 @@ Please note, docBase have to be the same as "Output directory" setting in Itelli
     <link href="http://java.paykin.info/hornetq-camel-spring/"/>
     <updated>2012-12-13T00:00:00+02:00</updated>
     <id>http://java.paykin.info/hornetq-camel-spring</id>
-    <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
-In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
-``` xml
+    <content type="html"><![CDATA[<p>Since <a href="http://camel.apache.org/">Apache Camel</a> have only one built-in implementation for specific JMS provider &ndash; <a href="http://activemq.apache.org/">ActiveMQ</a>, you have to use generic <code>org.apache.camel.component.jms.JmsConfiguration</code>.
+In order to work with <a href="http://www.jboss.org/hornetq">HornetQ</a> using Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
+``` xml pom.xml
 <dependency></p>
 
 <pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
@@ -91,7 +90,7 @@ After that modify your spring.xml. Here is an example:</p>
 <!--more-->
 
 
-<p>``` xml
+<p>``` xml spring.xml
 &lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
 &lt;beans xmlns=&ldquo;<a href="http://www.springframework.org/schema/beans">http://www.springframework.org/schema/beans</a>&rdquo;</p>
 
@@ -114,10 +113,11 @@ After that modify your spring.xml. Here is an example:</p>
 
 <p></beans>
 <code>
-And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
-</code> java</p>
+And the last thing is to write your implementation of `HornetqServerLocatorFactory`. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
+</code> java HornetqServerLocatorFactory.java</p>
 
 <pre><code>package com.example;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.hornetq.api.core.TransportConfiguration;
@@ -125,12 +125,15 @@ import org.hornetq.api.core.client.HornetQClient;
 import org.hornetq.api.core.client.ServerLocator;
 import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
 import org.springframework.beans.factory.annotation.Configurable;
+
 @Configurable
 public class HornetqServerLocatorFactory {
+
     public ServerLocator createServerLocator() {
         final Map&lt;String, Object&gt; connectionParams = new HashMap&lt;String, Object&gt;();
         connectionParams.put( "port", "hornetq-host.com" );
         connectionParams.put( "host", 5900 );
+
         final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
         final ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA( new TransportConfiguration[] { transportConfiguration } );
         return serverLocator;
@@ -149,11 +152,12 @@ That&rsquo;s it</p>
     <updated>2012-04-26T00:00:00+03:00</updated>
     <id>http://java.paykin.info/spell-check-suggestions-hibernate-search-lucene</id>
     <content type="html"><![CDATA[<p>In latest releases of Hibernate Search 4 and Lucene 3.6 there was some changes in SpellChecker API&rsquo;s.
-Here is example of the new API that allows to use spell checking with suggested words:
-``` java
+Here is example of the new API that allows to use spell checking with suggested words:</p>
+
+<p>``` java
 public String[] getSuggestions(String txt){</p>
 
-<pre><code>String[] suggestions =  new String[]{};
+<pre><code>String[] suggestions = new String[]{};
 FullTextSession fullTextSession = Search.getFullTextSession(sf.getCurrentSession());
 SearchFactory searchFactory = fullTextSession.getSearchFactory();
 IndexReader reader = searchFactory.getIndexReaderAccessor().open(MyEntity.class);

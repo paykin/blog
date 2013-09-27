@@ -55,6 +55,7 @@ Here is example of the new API that &hellip;">
 </form>
   
 <ul class="main-navigation">
+  <li><a href="http://www.paykin.info">Homepage</a></li>
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
@@ -121,7 +122,7 @@ Here is example of the new API that allows to use spell checking with suggested 
 <span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSuggestions</span><span class="o">(</span><span class="n">String</span> <span class="n">txt</span><span class="o">){</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="n">String</span><span class="o">[]</span> <span class="n">suggestions</span> <span class="o">=</span> <span class="err"> </span><span class="k">new</span> <span class="n">String</span><span class="o">[]{};</span>
+</span><span class='line'>  <span class="n">String</span><span class="o">[]</span> <span class="n">suggestions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]{};</span>
 </span><span class='line'>  <span class="n">FullTextSession</span> <span class="n">fullTextSession</span> <span class="o">=</span> <span class="n">Search</span><span class="o">.</span><span class="na">getFullTextSession</span><span class="o">(</span><span class="n">sf</span><span class="o">.</span><span class="na">getCurrentSession</span><span class="o">());</span>
 </span><span class='line'>  <span class="n">SearchFactory</span> <span class="n">searchFactory</span> <span class="o">=</span> <span class="n">fullTextSession</span><span class="o">.</span><span class="na">getSearchFactory</span><span class="o">();</span>
 </span><span class='line'>  <span class="n">IndexReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">searchFactory</span><span class="o">.</span><span class="na">getIndexReaderAccessor</span><span class="o">().</span><span class="na">open</span><span class="o">(</span><span class="n">MyEntity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
@@ -245,47 +246,6 @@ The example creates new index directory dedicated to spell checking. It adds ter
     
   </ul>
 </section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/paykin">@paykin</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'paykin',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/109338838873091480274?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
 
   
 </aside>

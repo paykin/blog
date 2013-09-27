@@ -4,7 +4,7 @@
   <title><![CDATA[Programming Notes]]></title>
   <link href="http://java.paykin.info/atom.xml" rel="self"/>
   <link href="http://java.paykin.info/"/>
-  <updated>2013-09-26T22:20:53+03:00</updated>
+  <updated>2013-09-27T14:19:42+03:00</updated>
   <id>http://java.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry Paykin]]></name>
@@ -22,9 +22,9 @@
 
 <ol>
     <li><span style="line-height: 14px;">Create debug configuration in IntelliJ IDEA using Local Tomcat</span></li>
-    <li>Configure deployment artifact: add your WAR as &#8220;yourwar:war exploded&#8221;</li>
+    <li>Configure deployment artifact: add your WAR as <code>yourwar:war exploded</code> and set <code>Application context</code> to <code>/yourwar</code></li>
     <li>Create XML file with name &#8220;yourwar.xml&#8221; with the following content:
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>yourwar.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -38,12 +38,11 @@
 
 Please note, docBase have to be the same as &#8220;Output directory&#8221; setting in ItelliJ IDEA of the artifact you deploy. Also, path have to be the same as &#8220;Application context&#8221; in Run/Debug configuration</li>
     <li>Create post deployment action that will copy just created XML to Liferay&#8217;s autodeploy folder.</li>
+  <li>As <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a> suggests, add empty <code>CATALINA_BASE</code> environment variable.</li>
 </ol>
 
 
 <p>Enjoy automatic deployment, hot-swap and debugging your LIferay application.</p>
-
-<p>For additional instructions that you have to follow consider <a href="http://www.liferay.com/community/wiki/-/wiki/Main/Running+Liferay+from+IntelliJ" title="Liferay official wiki" target="_blank">Liferay official wiki</a>.</p>
 
 <p>Please note, I tested it with IntelliJ IDEA 12.1 and Liferay 6.0.5 on Tomcat 6</p>
 ]]></content>
@@ -54,10 +53,10 @@ Please note, docBase have to be the same as &#8220;Output directory&#8221; setti
     <link href="http://java.paykin.info/hornetq-camel-spring/"/>
     <updated>2012-12-13T00:00:00+02:00</updated>
     <id>http://java.paykin.info/hornetq-camel-spring</id>
-    <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
-In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:</p>
+    <content type="html"><![CDATA[<p>Since <a href="http://camel.apache.org/">Apache Camel</a> have only one built-in implementation for specific JMS provider &ndash; <a href="http://activemq.apache.org/">ActiveMQ</a>, you have to use generic <code>org.apache.camel.component.jms.JmsConfiguration</code>.
+In order to work with <a href="http://www.jboss.org/hornetq">HornetQ</a> using Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>pom.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -105,7 +104,7 @@ In order to work with HornetQ with Camel and Spring first you have to add Hornet
 <!--more-->
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>spring.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -144,9 +143,9 @@ In order to work with HornetQ with Camel and Spring first you have to add Hornet
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it &ndash; just put them as members of the class and inject them via Spring.xml.</p>
+<p>And the last thing is to write your implementation of <code>HornetqServerLocatorFactory</code>. If you wish to configure HornetQ host and port from spring.xml, you can easily do it &ndash; just put them as members of the class and inject them via Spring.xml.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>HornetqServerLocatorFactory.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -165,7 +164,12 @@ In order to work with HornetQ with Camel and Spring first you have to add Hornet
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+</span><span class='line'>
 </span><span class='line'><span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.api.core.TransportConfiguration</span><span class="o">;</span>
@@ -173,12 +177,15 @@ In order to work with HornetQ with Camel and Spring first you have to add Hornet
 </span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.api.core.client.ServerLocator</span><span class="o">;</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">org.hornetq.core.remoting.impl.netty.NettyConnectorFactory</span><span class="o">;</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Configurable</span><span class="o">;</span>
+</span><span class='line'>
 </span><span class='line'><span class="nd">@Configurable</span>
 </span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HornetqServerLocatorFactory</span> <span class="o">{</span>
+</span><span class='line'>
 </span><span class='line'>  <span class="kd">public</span> <span class="n">ServerLocator</span> <span class="nf">createServerLocator</span><span class="o">()</span> <span class="o">{</span>
 </span><span class='line'>      <span class="kd">final</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">connectionParams</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;();</span>
 </span><span class='line'>      <span class="n">connectionParams</span><span class="o">.</span><span class="na">put</span><span class="o">(</span> <span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="s">&quot;hornetq-host.com&quot;</span> <span class="o">);</span>
 </span><span class='line'>      <span class="n">connectionParams</span><span class="o">.</span><span class="na">put</span><span class="o">(</span> <span class="s">&quot;host&quot;</span><span class="o">,</span> <span class="mi">5900</span> <span class="o">);</span>
+</span><span class='line'>
 </span><span class='line'>      <span class="kd">final</span> <span class="n">TransportConfiguration</span> <span class="n">transportConfiguration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TransportConfiguration</span><span class="o">(</span> <span class="n">NettyConnectorFactory</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">connectionParams</span> <span class="o">);</span>
 </span><span class='line'>      <span class="kd">final</span> <span class="n">ServerLocator</span> <span class="n">serverLocator</span> <span class="o">=</span> <span class="n">HornetQClient</span><span class="o">.</span><span class="na">createServerLocatorWithoutHA</span><span class="o">(</span> <span class="k">new</span> <span class="n">TransportConfiguration</span><span class="o">[]</span> <span class="o">{</span> <span class="n">transportConfiguration</span> <span class="o">}</span> <span class="o">);</span>
 </span><span class='line'>      <span class="k">return</span> <span class="n">serverLocator</span><span class="o">;</span>
@@ -225,7 +232,7 @@ Here is example of the new API that allows to use spell checking with suggested 
 <span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getSuggestions</span><span class="o">(</span><span class="n">String</span> <span class="n">txt</span><span class="o">){</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="n">String</span><span class="o">[]</span> <span class="n">suggestions</span> <span class="o">=</span> <span class="err"> </span><span class="k">new</span> <span class="n">String</span><span class="o">[]{};</span>
+</span><span class='line'>  <span class="n">String</span><span class="o">[]</span> <span class="n">suggestions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]{};</span>
 </span><span class='line'>  <span class="n">FullTextSession</span> <span class="n">fullTextSession</span> <span class="o">=</span> <span class="n">Search</span><span class="o">.</span><span class="na">getFullTextSession</span><span class="o">(</span><span class="n">sf</span><span class="o">.</span><span class="na">getCurrentSession</span><span class="o">());</span>
 </span><span class='line'>  <span class="n">SearchFactory</span> <span class="n">searchFactory</span> <span class="o">=</span> <span class="n">fullTextSession</span><span class="o">.</span><span class="na">getSearchFactory</span><span class="o">();</span>
 </span><span class='line'>  <span class="n">IndexReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">searchFactory</span><span class="o">.</span><span class="na">getIndexReaderAccessor</span><span class="o">().</span><span class="na">open</span><span class="o">(</span><span class="n">MyEntity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
@@ -511,16 +518,14 @@ After you upload the eclipse you can delete it until the next time you will need
     <link href="http://java.paykin.info/jboss-7-changes-jsp/"/>
     <updated>2011-10-27T00:00:00+02:00</updated>
     <id>http://java.paykin.info/jboss-7-changes-jsp</id>
-    <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:</p>
+    <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of <code>urn:jboss:domain:web:1.0</code> in <code>standalone.xml</code> so it looks like:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>standalone.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;configuration&gt;</span>
 </span><span class='line'>    <span class="nt">&lt;jsp-configuration</span> <span class="na">development=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
 </span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>...
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -536,7 +541,9 @@ After you upload the eclipse you can delete it until the next time you will need
     <content type="html"><![CDATA[<p>While trying to optimize site for mobile devices you have to add viewport meta tag:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;target-densitydpi=device-dpi, width=device-width, height=device-height, initial-scale=1.0&quot;</span> <span class="nt">/&gt;</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span>
+</span><span class='line'>  <span class="na">content=</span><span class="s">&quot;target-densitydpi=device-dpi, width=device-width, height=device-height, initial-scale=1.0&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -546,7 +553,9 @@ After you upload the eclipse you can delete it until the next time you will need
 
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/mobile.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen and (-webkit-device-pixel-ratio:1.0)&quot;</span> <span class="nt">/&gt;</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/mobile.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span>
+</span><span class='line'>  <span class="na">media=</span><span class="s">&quot;screen and (-webkit-device-pixel-ratio:1.0)&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -555,12 +564,15 @@ After you upload the eclipse you can delete it until the next time you will need
 <p>There is another solution to target mobile devices (both Android, iPhone, Blackberry): to specify maximal width of the screen like:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/mobile.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen and (max-device-width:801px) and (max-width:801px)&quot;</span> <span class="nt">/&gt;</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/mobile.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span>
+</span><span class='line'>  <span class="na">media=</span><span class="s">&quot;screen and (max-device-width:801px) and (max-width:801px)&quot;</span> <span class="nt">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The problem is that Android (at least 2.3 I&rsquo;ve tested) recognizes this media type only after page reloading (refreshing) in browser. Googling the web I found the open <a title="issue" href="http://code.google.com/p/android/issues/detail?id=11961" target="_blank">issue</a>.
-I solved it using JavaScript:</p>
+<p>The problem is that Android (at least 2.3 I&rsquo;ve tested) recognizes this media type only after page reloading (refreshing) in browser. Googling the web I found the open <a title="issue" href="http://code.google.com/p/android/issues/detail?id=11961" target="_blank">issue</a>.</p>
+
+<p>I solved it using JavaScript:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

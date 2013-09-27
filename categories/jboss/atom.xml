@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JBoss | Programming Notes]]></title>
   <link href="http://java.paykin.info/categories/jboss/atom.xml" rel="self"/>
   <link href="http://java.paykin.info/"/>
-  <updated>2013-09-26T22:20:53+03:00</updated>
+  <updated>2013-09-27T14:19:42+03:00</updated>
   <id>http://java.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry Paykin]]></name>
@@ -18,9 +18,9 @@
     <link href="http://java.paykin.info/hornetq-camel-spring/"/>
     <updated>2012-12-13T00:00:00+02:00</updated>
     <id>http://java.paykin.info/hornetq-camel-spring</id>
-    <content type="html"><![CDATA[<p>Since Apache Camel have only one built-in implementation for specific JMS provider &ndash; ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
-In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
-``` xml
+    <content type="html"><![CDATA[<p>Since <a href="http://camel.apache.org/">Apache Camel</a> have only one built-in implementation for specific JMS provider &ndash; <a href="http://activemq.apache.org/">ActiveMQ</a>, you have to use generic <code>org.apache.camel.component.jms.JmsConfiguration</code>.
+In order to work with <a href="http://www.jboss.org/hornetq">HornetQ</a> using Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
+``` xml pom.xml
 <dependency></p>
 
 <pre><code>&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
@@ -59,7 +59,7 @@ After that modify your spring.xml. Here is an example:</p>
 <!--more-->
 
 
-<p>``` xml
+<p>``` xml spring.xml
 &lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
 &lt;beans xmlns=&ldquo;<a href="http://www.springframework.org/schema/beans">http://www.springframework.org/schema/beans</a>&rdquo;</p>
 
@@ -82,10 +82,11 @@ After that modify your spring.xml. Here is an example:</p>
 
 <p></beans>
 <code>
-And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
-</code> java</p>
+And the last thing is to write your implementation of `HornetqServerLocatorFactory`. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
+</code> java HornetqServerLocatorFactory.java</p>
 
 <pre><code>package com.example;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.hornetq.api.core.TransportConfiguration;
@@ -93,12 +94,15 @@ import org.hornetq.api.core.client.HornetQClient;
 import org.hornetq.api.core.client.ServerLocator;
 import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
 import org.springframework.beans.factory.annotation.Configurable;
+
 @Configurable
 public class HornetqServerLocatorFactory {
+
     public ServerLocator createServerLocator() {
         final Map&lt;String, Object&gt; connectionParams = new HashMap&lt;String, Object&gt;();
         connectionParams.put( "port", "hornetq-host.com" );
         connectionParams.put( "host", 5900 );
+
         final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
         final ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA( new TransportConfiguration[] { transportConfiguration } );
         return serverLocator;
@@ -189,13 +193,12 @@ The examples have the same effect as trying to add datasource from Jboss Adminis
     <link href="http://java.paykin.info/jboss-7-changes-jsp/"/>
     <updated>2011-10-27T00:00:00+02:00</updated>
     <id>http://java.paykin.info/jboss-7-changes-jsp</id>
-    <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of  in  so it looks like:
-``` xml</p>
+    <content type="html"><![CDATA[<p>JBoss AS 7 by default do not reflect any changes to JSP files in WAR deployment. So, during application development you have to redeploy WAR or restart JBoss. In order to change this behaviour it is necessary to change section of <code>urn:jboss:domain:web:1.0</code> in <code>standalone.xml</code> so it looks like:
+``` xml standalone.xml</p>
 
 <pre><code>&lt;configuration&gt;
     &lt;jsp-configuration development="true"/&gt;
 &lt;/configuration&gt;
-...
 </code></pre>
 
 <p>```
