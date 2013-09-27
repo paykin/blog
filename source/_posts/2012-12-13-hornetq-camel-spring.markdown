@@ -20,9 +20,9 @@ meta:
   _edit_last: '2'
   _wpas_skip_2592522: '1'
 ---
-Since Apache Camel have only one built-in implementation for specific JMS provider - ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
-In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
-``` xml
+Since [Apache Camel](http://camel.apache.org/) have only one built-in implementation for specific JMS provider - [ActiveMQ](http://activemq.apache.org/), you have to use generic `org.apache.camel.component.jms.JmsConfiguration`.
+In order to work with [HornetQ](http://www.jboss.org/hornetq) using Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
+``` xml pom.xml
 <dependency>
 	<groupId>org.hornetq</groupId>
 	<artifactId>hornetq-jms</artifactId>
@@ -46,7 +46,7 @@ In order to work with HornetQ with Camel and Spring first you have to add Hornet
 ```
 After that modify your spring.xml. Here is an example:
 <!--more-->
-``` xml
+``` xml spring.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -66,9 +66,10 @@ After that modify your spring.xml. Here is an example:
     </bean>
 </beans>
 ```
-And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
-``` java
+And the last thing is to write your implementation of `HornetqServerLocatorFactory`. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
+``` java HornetqServerLocatorFactory.java
 	package com.example;
+
 	import java.util.HashMap;
 	import java.util.Map;
 	import org.hornetq.api.core.TransportConfiguration;
@@ -76,12 +77,15 @@ And the last thing is to write your implementation of HornetqServerLocatorFacto
 	import org.hornetq.api.core.client.ServerLocator;
 	import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
 	import org.springframework.beans.factory.annotation.Configurable;
+
 	@Configurable
 	public class HornetqServerLocatorFactory {
+
 		public ServerLocator createServerLocator() {
 			final Map<String, Object> connectionParams = new HashMap<String, Object>();
 			connectionParams.put( "port", "hornetq-host.com" );
 			connectionParams.put( "host", 5900 );
+
 			final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
 			final ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA( new TransportConfiguration[] { transportConfiguration } );
 			return serverLocator;

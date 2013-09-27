@@ -18,10 +18,11 @@ meta:
 ---
 In latest releases of Hibernate Search 4 and Lucene 3.6 there was some changes in SpellChecker API's.
 Here is example of the new API that allows to use spell checking with suggested words:
+
 ``` java
 public String[] getSuggestions(String txt){
 
-	String[] suggestions =  new String[]{};
+	String[] suggestions = new String[]{};
 	FullTextSession fullTextSession = Search.getFullTextSession(sf.getCurrentSession());
 	SearchFactory searchFactory = fullTextSession.getSearchFactory();
 	IndexReader reader = searchFactory.getIndexReaderAccessor().open(MyEntity.class);
