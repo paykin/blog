@@ -1,0 +1,27 @@
+---
+layout: post
+title: Enums in JSF
+categories:
+- JSF
+tags:
+- Java
+- JSF
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+---
+<p>Finally I find the way to use enum with JSF:<br />
+Suppose you have enum:</p>
+<pre class="brush:java">public enum ActionTypeEnum {
+	UPDATE,
+	CREATE,
+	COPY
+}</pre>
+<p>In JSF you can write EL expressions in form:</p>
+<pre class="brush:xml">&lt;h:outputText value="someText"
+	rendered="#{listAction.actionType == 'COPY'}"/&gt;</pre>
+<p>The property <code>actionType</code> in managed bean <code>listAction</code> have to be of type <code>ActionTypeEnum</code>.</p>
+<p>It works because each enum in have method <code>valueOf(String stringValue)</code> and JSF attempts to convert String value to enum.<br />
+&nbsp;</p>

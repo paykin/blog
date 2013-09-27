@@ -1,0 +1,90 @@
+---
+layout: post
+title: Integrating HornetQ with Camel and Spring
+categories:
+- J2EE
+- Java
+- JBoss
+tags:
+- Camel
+- HornetQ
+- J2ee
+- Java
+- JBoss
+- JMS
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _wpas_skip_2592522: '1'
+---
+Since Apache Camel have only one built-in implementation for specific JMS provider - ActiveMQ, you have to use generic org.apache.camel.component.jms.JmsConfiguration.
+
+In order to work with HornetQ with Camel and Spring first you have to add HornetQ dependencies to Maven pom.xml:
+<pre class="brush:xml">&lt;dependency&gt;
+	&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+	&lt;artifactId&gt;hornetq-jms&lt;/artifactId&gt;
+	&lt;version&gt;${hornetq.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+	&lt;artifactId&gt;hornetq-jms-client&lt;/artifactId&gt;
+	&lt;version&gt;${hornetq.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;org.hornetq&lt;/groupId&gt;
+	&lt;artifactId&gt;hornetq-core-client&lt;/artifactId&gt;
+	&lt;version&gt;${hornetq.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;org.jboss.netty&lt;/groupId&gt;
+	&lt;artifactId&gt;netty&lt;/artifactId&gt;
+	&lt;version&gt;3.2.7.Final&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+After that modify your spring.xml. Here is an example:
+<!--more-->
+<pre class="brush:xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"&gt;
+    &lt;bean id="hornetqServerLocatorFactory" class="com.example.HornetqServerLocatorFactory" /&gt;
+    &lt;bean id="hornetqServerLocator" factory-bean="hornetqServerLocatorFactory" factory-method="createServerLocator"/&gt;
+    &lt;bean id="hornetqJmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory"&gt;
+        &lt;constructor-arg name="serverLocator" ref="hornetqServerLocator"/&gt;
+    &lt;/bean&gt;
+    &lt;bean id="hornetqJmsConfig" class="org.apache.camel.component.jms.JmsConfiguration"&gt;
+        &lt;property name="connectionFactory" ref="hornetqJmsConnectionFactory"/&gt;
+        &lt;property name="transacted" value="false"/&gt;
+        &lt;property name="requestTimeout" value="60000"/&gt;
+    &lt;/bean&gt;
+    &lt;bean id="hornetq" class="org.apache.camel.component.jms.JmsComponent"&gt;
+        &lt;property name="configuration" ref="hornetqJmsConfig"/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;</pre>
+And the last thing is to write your implementation of HornetqServerLocatorFactory. If you wish to configure HornetQ host and port from spring.xml, you can easily do it - just put them as members of the class and inject them via Spring.xml.
+<pre class="brush:java">package com.example;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.hornetq.api.core.TransportConfiguration;
+import org.hornetq.api.core.client.HornetQClient;
+import org.hornetq.api.core.client.ServerLocator;
+import org.hornetq.core.remoting.impl.netty.NettyConnectorFactory;
+import org.springframework.beans.factory.annotation.Configurable;
+
+@Configurable
+public class HornetqServerLocatorFactory {
+
+	public ServerLocator createServerLocator() {
+		final Map&lt;String, Object&gt; connectionParams = new HashMap&lt;String, Object&gt;();
+		connectionParams.put( "port", "hornetq-host.com" );
+		connectionParams.put( "host", 5900 );
+
+		final TransportConfiguration transportConfiguration = new TransportConfiguration( NettyConnectorFactory.class.getName(), connectionParams );
+		final ServerLocator serverLocator = HornetQClient.createServerLocatorWithoutHA( new TransportConfiguration[] { transportConfiguration } );
+		return serverLocator;
+	}
+}</pre>
+That's it!

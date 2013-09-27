@@ -1,0 +1,48 @@
+---
+layout: post
+title: Spell checking with suggestions with Hibernate Search 4 and Lucene 3.6
+categories:
+- Hibernate
+- Java
+- Lucene
+tags:
+- Hibernate
+- Java
+- Lucene
+status: publish
+type: post
+published: true
+comments: true
+meta:
+  _edit_last: '2'
+---
+In latest releases of Hibernate Search 4 and Lucene 3.6 there was some changes in SpellChecker API's.
+Here is example of the new API that allows to use spell checking with suggested words:
+``` java
+public String[] getSuggestions(String txt){
+
+	String[] suggestions =  new String[]{};
+	FullTextSession fullTextSession = Search.getFullTextSession(sf.getCurrentSession());
+	SearchFactory searchFactory = fullTextSession.getSearchFactory();
+	IndexReader reader = searchFactory.getIndexReaderAccessor().open(MyEntity.class);
+
+	try {
+		FSDirectory spellCheckerDir = FSDirectory.open(new File("D:\lucene\spellchecker\com.site.model.MyEntity"));
+		SpellChecker spellChecker = new SpellChecker(spellCheckerDir);
+		
+		Dictionary dictionary = new LuceneDictionary(reader, "description");
+		IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_35, searchFactory.getAnalyzer("myAnalyzer"));
+		spellChecker.indexDictionary(dictionary, config, true);
+
+		suggestions = spellChecker.suggestSimilar(txt, 10);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	finally{
+		searchFactory.getIndexReaderAccessor().close(reader);
+	}
+	return suggestions;
+}
+```
+`sf.getCurrentSession()` gets standard Hibernate session. If you use `EntityManager`, there exists a method to obtain `FullTextSession`.
+The example creates new index directory dedicated to spell checking. It adds terms from MyEntity's `description` field to the index. `spellChecker.indexDictionary` adds the terms to the index, and optionally merges it with existing index.

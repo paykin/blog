@@ -1,0 +1,73 @@
+---
+layout: post
+title: Portlets with Wicket 1.5.x in Liferay portal
+categories:
+- Wicket
+tags:
+- liferay
+- portlet
+- wicket
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+  _wp_old_slug: wicket_liferay_portlet
+  _wpas_skip_2592522: '1'
+---
+After Wicket dropped support for portlets and moving it to wicketstuff the settings in XMLs are changed:
+
+portlet.xml should look like
+<pre class="brush:xml">&lt;portlet&gt;
+	&lt;description&gt;wickettest4&lt;/description&gt;
+	&lt;portlet-name&gt;wickettest4&lt;/portlet-name&gt;
+	&lt;display-name&gt;wickettest4&lt;/display-name&gt;
+	&lt;portlet-class&gt;org.apache.wicket.portlet.WicketPortlet&lt;/portlet-class&gt;
+	&lt;init-param&gt;
+		&lt;name&gt;wicketFilterPath&lt;/name&gt;
+		&lt;value&gt;/bla&lt;/value&gt;
+	&lt;/init-param&gt;
+	&lt;supports&gt;
+		&lt;mime-type&gt;text/html&lt;/mime-type&gt;
+		&lt;portlet-mode&gt;VIEW&lt;/portlet-mode&gt;
+	&lt;/supports&gt;
+	&lt;portlet-info&gt;
+		&lt;title&gt;wickettest4&lt;/title&gt;
+		&lt;keywords&gt;wickettest4&lt;/keywords&gt;
+	&lt;/portlet-info&gt;
+&lt;/portlet&gt;</pre>
+Note new portlet-class. Also, mime-type have to be text/html.
+<!--more-->
+web.xml also changed, notice filter class:
+<pre class="brush:xml">&lt;filter&gt;
+	&lt;filter-name&gt;wicket.wicket&lt;/filter-name&gt;
+	&lt;filter-class&gt;org.apache.wicket.portlet.PortletFilter&lt;/filter-class&gt;
+	&lt;init-param&gt;
+		&lt;param-name&gt;applicationClassName&lt;/param-name&gt;
+		&lt;param-value&gt;org.wicket.WicketApplication&lt;/param-value&gt;
+	&lt;/init-param&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+	&lt;filter-name&gt;wicket.wicket&lt;/filter-name&gt;
+	&lt;url-pattern&gt;/bla/*&lt;/url-pattern&gt;
+	&lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;
+	&lt;dispatcher&gt;INCLUDE&lt;/dispatcher&gt;
+	&lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;
+&lt;/filter-mapping&gt;</pre>
+And of course Maven dependencies also changed:
+<pre class="brush:xml">&lt;dependency&gt;
+	&lt;groupId&gt;org.apache.wicket&lt;/groupId&gt;
+	&lt;artifactId&gt;wicket-core&lt;/artifactId&gt;
+	&lt;version&gt;${wicket.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;org.apache.portals.bridges&lt;/groupId&gt;
+	&lt;artifactId&gt;portals-bridges-common&lt;/artifactId&gt;
+	&lt;version&gt;2.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+	&lt;groupId&gt;org.wicketstuff&lt;/groupId&gt;
+	&lt;artifactId&gt;wicketstuff-portlet&lt;/artifactId&gt;
+	&lt;version&gt;${wicket.version}&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+&nbsp;
