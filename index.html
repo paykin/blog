@@ -9,7 +9,7 @@
   <meta name="author" content="Dmitry Paykin">
 
   
-  <meta name="description" content="You can develop Liferay portlets with IntelliJ IDEA exactly as in Eclipse Liferay IDE. Follow simple steps: Create debug configuration in IntelliJ &hellip;">
+  <meta name="description" content="Vagrant enbles creating virtual machines easily, Puppet helps to setup Linux machine. In this example we will install Oracle database on Oracle &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/install-oracle-database-vagrant-puppet/">Installing Oracle Database in Vagrant VM Using Puppet</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-27T18:31:00+03:00" pubdate data-updated="true">Sep 27<span>th</span>, 2013</time>
+        
+         | <a href="/install-oracle-database-vagrant-puppet/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.vagrantup.com/">Vagrant</a> enbles creating virtual machines easily, <a href="http://puppetlabs.com/">Puppet</a> helps to setup Linux machine. In this example we will install Oracle database on Oracle Enterprise Linux Vagrant box using Puppet. Before we continue, Vagrant must be setup on your machine. There are a lot of tutorials on how to install Vagrant, one of the best is <a href="http://www.vagrantup.com/">Vagrant official site</a>. Also you need <a href="https://www.virtualbox.org/">VirtualBox</a> installed. Once you can see your Vagrant version (using <code>vagrant --version</code> command) and VirtualBox installed you can continue with this tutorial.
+So, in order to create new VM with Oracle database follow these steps:</p>
+
+<ol>
+<li><p>Download and unzip file from <a href="https://github.com/paykin/vagrant-oracle-11g/archive/master.zip">here</a> or clone it from my GitHub repo <code>https://github.com/paykin/vagrant-oracle-11g</code> to your hard disk.</p></li>
+<li><p>Download Oracle Database installation from <a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html">Oracle downloads site</a>. For this tutorial we need <strong>Oracle Database 11g Release 2 (11.2.0.1.0)</strong> for Linux 64bit (Linux x86-64). There are 2 files to download. You need to place them to <code>vagrant-oracle-11g/modules/oracle/files</code> directory. While it is downloading, proceed to next step.</p></li>
+<li><p>In <code>Vagrant</code> file you may set machine host name, amount of memory</p></li>
+<li><p>In <code>manifests/base.pp</code> you can set Oracle database parameters</p></li>
+<li><p>In command line, go to directory you extracted attached file and write <code>vagrant up</code>.</p></li>
+</ol>
+
+
+<p>That&rsquo;s it. Installation will take a while, on my machine it too about 10 minutes. When it finishes, you can connect to the machine via SSH, issuing <code>vagrant ssh</code> command. If you prefer using standard ssh, you can connect to it with <code>ssh vagrant@localhost -p 2222</code> command. Vagrant default root password is <code>vagrant</code>.
+In order to validate that everything works, you can run <code>sqlplus / as sysdba</code> and execute some simple query, say <code>SELECT SYSDATE FROM dual</code>. If you see current date &ndash; everything works ok. Also you can connect using SqlDeveloper or any othe client.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -665,105 +716,9 @@ It works because each enum in have method <code>valueOf(String stringValue)</cod
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/deploying-jdbc-jboss-maven-plugin/">Deploying JDBC Driver in JBoss Maven Plugin</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-25T00:00:00+03:00" pubdate data-updated="true">Sep 25<span>th</span>, 2011</time>
-        
-         | <a href="/deploying-jdbc-jboss-maven-plugin/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>With release of jboss-as maven plugin version 7.0.1.Final the new goal deploy-artifact is added. It allows to deploy additional artifacts to JBoss server, like JDBC DB driver JAR.
-After trying do deploy JDBC driver with jboss-as maven plugin using following code in pom.xml I received the <code>NullPointerException</code> in Maven build.
-Here is part of maven pom.xml used to deploy the driver to jboss:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.jboss.as.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>jboss-as-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>7.0.1.Final<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;executions&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;execution&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;id&gt;</span>deploy-driver-AS400<span class="nt">&lt;/id&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;goals&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;goal&gt;</span>deploy-artifact<span class="nt">&lt;/goal&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/goals&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;hostname&gt;</span>${jboss-hostname}<span class="nt">&lt;/hostname&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;groupId&gt;</span>com.ibm<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;artifactId&gt;</span>as400<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;fileName&gt;</span>jt400.jar<span class="nt">&lt;/fileName&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;name&gt;</span>jt400.jar<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/execution&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/executions&gt;</span>
-</span><span class='line'><span class="nt">&lt;/plugin&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>               <br/>
-In the plugin&rsquo;s manual at <a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html"><a href="http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html">http://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html</a></a> it said</p>
-
-<blockquote>The artifact must be already listed as a dependency in the projects pom.xml</blockquote>
-
-
-<p>but it do not tells in which scope the driver&rsquo;s JAR have to be: it have to be in <strong>compile</strong> or <strong>runtime</strong> scope in order to work. I had it in provided scope. After changing the scope of dependency it works fine.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/deploying-jdbc-jboss-maven-plugin/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -773,10 +728,14 @@ In the plugin&rsquo;s manual at <a href="http://docs.jboss.org/jbossas/7/plugins
   
     <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/categories/java'>Java (7)</a></li><li><a href='/categories/jboss'>JBoss (4)</a></li><li><a href='/categories/j2ee'>J2EE (3)</a></li><li><a href='/categories/jsf'>JSF (2)</a></li><li><a href='/categories/wicket'>Wicket (1)</a></li><li><a href='/categories/android'>Android (1)</a></li><li><a href='/categories/hibernate'>Hibernate (1)</a></li><li><a href='/categories/lucene'>Lucene (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/categories/java'>Java (7)</a></li><li><a href='/categories/jboss'>JBoss (4)</a></li><li><a href='/categories/j2ee'>J2EE (3)</a></li><li><a href='/categories/jsf'>JSF (2)</a></li><li><a href='/categories/wicket'>Wicket (1)</a></li><li><a href='/categories/hibernate'>Hibernate (1)</a></li><li><a href='/categories/lucene'>Lucene (1)</a></li><li><a href='/categories/android'>Android (1)</a></li><li><a href='/categories/oracle'>Oracle (1)</a></li><li><a href='/categories/vagrant'>Vagrant (1)</a></li></ul>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/install-oracle-database-vagrant-puppet/">Installing Oracle Database in Vagrant VM Using Puppet</a>
+      </li>
     
       <li class="post">
         <a href="/liferay-portlet-intellij-idea/">Liferay Portlets Deployment in IntelliJ IDEA</a>
@@ -792,10 +751,6 @@ In the plugin&rsquo;s manual at <a href="http://docs.jboss.org/jbossas/7/plugins
     
       <li class="post">
         <a href="/wicket_liferay_portlets/">Portlets With Wicket 1.5.x in Liferay Portal</a>
-      </li>
-    
-      <li class="post">
-        <a href="/add-datasource-programaticaly-cli-jboss-7/">Create Datasource Programmatically on JBoss 7</a>
       </li>
     
   </ul>

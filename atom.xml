@@ -4,7 +4,7 @@
   <title><![CDATA[Programming Notes]]></title>
   <link href="http://java.paykin.info/atom.xml" rel="self"/>
   <link href="http://java.paykin.info/"/>
-  <updated>2013-09-27T14:19:42+03:00</updated>
+  <updated>2013-09-28T17:16:12+03:00</updated>
   <id>http://java.paykin.info/</id>
   <author>
     <name><![CDATA[Dmitry Paykin]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Installing Oracle database in Vagrant VM using Puppet]]></title>
+    <link href="http://java.paykin.info/install-oracle-database-vagrant-puppet/"/>
+    <updated>2013-09-27T18:31:00+03:00</updated>
+    <id>http://java.paykin.info/install-oracle-database-vagrant-puppet</id>
+    <content type="html"><![CDATA[<p><a href="http://www.vagrantup.com/">Vagrant</a> enbles creating virtual machines easily, <a href="http://puppetlabs.com/">Puppet</a> helps to setup Linux machine. In this example we will install Oracle database on Oracle Enterprise Linux Vagrant box using Puppet. Before we continue, Vagrant must be setup on your machine. There are a lot of tutorials on how to install Vagrant, one of the best is <a href="http://www.vagrantup.com/">Vagrant official site</a>. Also you need <a href="https://www.virtualbox.org/">VirtualBox</a> installed. Once you can see your Vagrant version (using <code>vagrant --version</code> command) and VirtualBox installed you can continue with this tutorial.
+So, in order to create new VM with Oracle database follow these steps:</p>
+
+<ol>
+<li><p>Download and unzip file from <a href="https://github.com/paykin/vagrant-oracle-11g/archive/master.zip">here</a> or clone it from my GitHub repo <code>https://github.com/paykin/vagrant-oracle-11g</code> to your hard disk.</p></li>
+<li><p>Download Oracle Database installation from <a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html">Oracle downloads site</a>. For this tutorial we need <strong>Oracle Database 11g Release 2 (11.2.0.1.0)</strong> for Linux 64bit (Linux x86-64). There are 2 files to download. You need to place them to <code>vagrant-oracle-11g/modules/oracle/files</code> directory. While it is downloading, proceed to next step.</p></li>
+<li><p>In <code>Vagrant</code> file you may set machine host name, amount of memory</p></li>
+<li><p>In <code>manifests/base.pp</code> you can set Oracle database parameters</p></li>
+<li><p>In command line, go to directory you extracted attached file and write <code>vagrant up</code>.</p></li>
+</ol>
+
+
+<p>That&rsquo;s it. Installation will take a while, on my machine it too about 10 minutes. When it finishes, you can connect to the machine via SSH, issuing <code>vagrant ssh</code> command. If you prefer using standard ssh, you can connect to it with <code>ssh vagrant@localhost -p 2222</code> command. Vagrant default root password is <code>vagrant</code>.
+In order to validate that everything works, you can run <code>sqlplus / as sysdba</code> and execute some simple query, say <code>SELECT SYSDATE FROM dual</code>. If you see current date &ndash; everything works ok. Also you can connect using SqlDeveloper or any othe client.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Liferay portlets deployment in IntelliJ IDEA]]></title>
